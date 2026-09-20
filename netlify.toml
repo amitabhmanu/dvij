@@ -1,0 +1,39 @@
+# Netlify configuration (design §12.4).
+# Page images, art and PDFs are NOT in this repo. They are served from
+# PUBLIC_ASSET_BASE (option A: CDN bucket) or bundled at deploy time with
+# BUNDLE_ASSETS=1 from a local machine (option B). See design §12.3.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Content-hashed page images and bundled JS/CSS never change: cache forever.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/_assets/pages/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/_assets/pdf/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+    Content-Disposition = "attachment"
+
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
