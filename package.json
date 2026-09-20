@@ -20,7 +20,7 @@
     "@playwright/test": "^1.63.0",
     "pagefind": "^1.5.2",
     "sharp": "^0.35.4",
-    "typescript": "^7.0.2"
+    "typescript": "^6.0.3"
   },
   "dependencies": {
     "@astrojs/preact": "^6.0.5",

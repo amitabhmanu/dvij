@@ -21,8 +21,12 @@ Static Astro site for Netlify that publishes the comic (design:
 
 ```bash
 npm install
-pip install -r requirements.txt
+pip install -r pipeline/requirements.txt
 ```
+
+The Python packages are for the content pipeline only, which runs on your
+machine. `requirements.txt` is kept under `pipeline/` rather than at the repo
+root so Netlify does not install them on every deploy.
 
 ## Content pipeline
 
