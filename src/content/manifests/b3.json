@@ -45,8 +45,8 @@
   {
    "n": 38,
    "title": "Chapter 38",
-   "startPage": 3,
-   "confirmed": false
+   "startPage": 4,
+   "confirmed": true
   },
   {
    "n": 39,
@@ -64,7 +64,7 @@
    "n": 41,
    "title": "Chapter 41",
    "startPage": 14,
-   "confirmed": false
+   "confirmed": true
   },
   {
    "n": 42,

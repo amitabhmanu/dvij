@@ -40,8 +40,8 @@
   {
    "n": 51,
    "title": "Chapter 51",
-   "startPage": 4,
-   "confirmed": false
+   "startPage": 3,
+   "confirmed": true
   },
   {
    "n": 52,
@@ -53,19 +53,19 @@
    "n": 53,
    "title": "Chapter 53",
    "startPage": 6,
-   "confirmed": false
+   "confirmed": true
   },
   {
    "n": 54,
    "title": "Chapter 54",
    "startPage": 9,
-   "confirmed": false
+   "confirmed": true
   },
   {
    "n": 55,
    "title": "Chapter 55",
    "startPage": 12,
-   "confirmed": false
+   "confirmed": true
   },
   {
    "n": 56,
@@ -83,13 +83,13 @@
    "n": 58,
    "title": "Chapter 58",
    "startPage": 20,
-   "confirmed": false
+   "confirmed": true
   },
   {
    "n": 59,
    "title": "Chapter 59",
    "startPage": 23,
-   "confirmed": false
+   "confirmed": true
   },
   {
    "n": 60,

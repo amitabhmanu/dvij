@@ -1,0 +1,354 @@
+{
+ "b1-p001": {
+  "panels": [
+   [
+    0.0,
+    0.0,
+    1.0,
+    0.4978
+   ]
+  ],
+  "alt": [
+   "A hand-drawn map of the valley on aged parchment. Forested ridges ring a central plain: Gaumukh Hill and the Fort Ruins west, Nagadvaja Hill and Mount Dronagiri east, Naga Forest along the north. Between them lie the Village Bazaar and huts, Sheetal Lake, the Mahavidya Temples, Bhoothnath Temple, the Tavern, the Forest Officer's Bungalow and the Professor's Lodge, linked by dashed tracks and the Access Road. A compass rose sits in the lower right."
+  ]
+ },
+ "b1-p002": {
+  "alt": [
+   "A wolf stands silhouetted on a cliff edge beneath a full moon, ranges of mountains receding behind it.",
+   "A young man at the wheel of a car at night, eyes wide, pressing a folded cloth to his forehead. The windscreen beside him is spidered with cracks.",
+   "Seen from high above, a road coils down a forested mountainside in hairpin after hairpin, a single car's headlights drawing a thread of light through the dark.",
+   "Close on the driver mopping sweat from his face, one eye screwed shut. An inset panel shows a boulder sitting in the road ahead, lit by the headlamps.",
+   "The car strikes the boulder and sparks burst from the impact, the dark valley and a river far below.",
+   "A cutaway technical diagram of the car's drivetrain headed Chain Reaction of Failure, with six numbered callouts, repeated underneath as six small panels showing each part giving way in turn."
+  ]
+ },
+ "b1-p003": {
+  "alt": [
+   "The car stands skewed across the mountain road at night, front bumper torn loose and hanging, one headlamp still burning. Ridges fall away into the valley behind.",
+   "The car comes on down the road towards us, one headlight blazing, its grille punched inward.",
+   "A tall night panel. A shaggy figure hangs by one arm from a branch, black against the full moon. Below, at the foot of an enormous tree trunk, the crumpled car lies still.",
+   "The moment of impact: the driver is thrown out through the windscreen in a spray of glass, the car folding against the tree."
+  ]
+ },
+ "b1-p004": {
+  "alt": [
+   "Extreme close-up of an open eye, unfocused, with peeling plaster filling the rest of the frame.",
+   "The ceiling he is staring at: damp-stained plaster between dark beams, a four-blade fan hanging motionless.",
+   "He reaches out from the bed towards a glass of water, his right forearm in a plaster cast and his head wrapped in bandage.",
+   "He drinks clumsily, water spilling down his chin and bare chest.",
+   "He sits up on the edge of the bed. A large room with shuttered windows, an armchair and framed pictures - nothing like a hospital.",
+   "Seen from behind, he stands at an open window and stretches both arms wide into the green light outside.",
+   "Through an archway, a wide sunlit courtyard with a colonnade running round it and a planted square at its centre.",
+   "A study crowded to the ceiling with books, specimen jars and loose papers, a long-necked stringed instrument propped by the window and a bronze figure on a stand. He steps in through the open door, barefoot, his bandaged arm held close.",
+   "His own reflection in a window pane: a bearded face under a heavily bandaged head, eyes wide.",
+   "The study again, from the doorway. He lies collapsed face down on the floor among scattered papers and a toppled pot."
+  ]
+ },
+ "b1-p005": {
+  "panels": [
+   [
+    0.0,
+    0.0,
+    0.51,
+    0.32
+   ],
+   [
+    0.51,
+    0.0,
+    1.0,
+    0.14
+   ],
+   [
+    0.51,
+    0.14,
+    1.0,
+    0.32
+   ],
+   [
+    0.0,
+    0.32,
+    0.51,
+    0.64
+   ],
+   [
+    0.51,
+    0.32,
+    1.0,
+    0.64
+   ],
+   [
+    0.0,
+    0.64,
+    0.645,
+    0.81
+   ],
+   [
+    0.645,
+    0.64,
+    1.0,
+    0.81
+   ],
+   [
+    0.0,
+    0.81,
+    0.645,
+    1.0
+   ],
+   [
+    0.645,
+    0.81,
+    1.0,
+    1.0
+   ]
+  ],
+  "alt": [
+   "The lodge in high summer: a low tiled-roof house behind a parched lawn and a row of tall pale trunks, the sun burning white overhead. The Professor kneels in the dust settling a sapling into a bed of flowers.",
+   "Close on the Professor turning one leaf of the sapling between his fingers.",
+   "He lunges forward with his hand outstretched as a sandalled foot comes down on the sapling. STOMP bursts across the panel.",
+   "Over the Professor's shoulder: three men have walked into his compound. A heavy man with a moustache in a dark red lungi, and beside him a tall bare-chested ascetic in white, topknot bound, three lines of ash drawn across his forehead, one hand raised.",
+   "Two faces side by side. A stout man in white with a folded shawl, looking uneasy; and the ascetic, his face filling the frame, brows level and eyes fixed.",
+   "The ascetic and the Professor close together in profile, the ascetic's hand raised between them.",
+   "Villagers stand in a loose half circle under a spreading kadamba tree, where a dishevelled man has both arms flung up.",
+   "The ascetic turns his head to the Professor; the Professor looks back at him, mouth open.",
+   "The villagers hurl stones. The man under the tree is down on the ground among them."
+  ]
+ },
+ "b1-p006": {
+  "panels": [
+   [
+    0.0,
+    0.0,
+    0.31,
+    0.32
+   ],
+   [
+    0.31,
+    0.0,
+    0.65,
+    0.31
+   ],
+   [
+    0.65,
+    0.0,
+    1.0,
+    0.32
+   ],
+   [
+    0.0,
+    0.32,
+    0.3,
+    0.64
+   ],
+   [
+    0.3,
+    0.32,
+    0.49,
+    0.64
+   ],
+   [
+    0.49,
+    0.32,
+    1.0,
+    0.64
+   ],
+   [
+    0.0,
+    0.64,
+    1.0,
+    0.99
+   ]
+  ],
+  "alt": [
+   "The moustached man holds a rolled scroll out in both hands; beside him the ascetic stands bare-chested in white, the sun flaring behind the lodge roof.",
+   "The ascetic offers the scroll down to the Professor, who leans in with his hand out to take it.",
+   "The Professor unrolls the document and reads it at arm's length, the ascetic watching beside him.",
+   "The Professor holds the open sheet out, still reading, the ascetic close at his shoulder.",
+   "The moustached man pushes the scroll back at the Professor, shouting into his face.",
+   "The ascetic lays a hand on the Professor's shoulder and leans in to speak by his ear, his face filling the right of the frame.",
+   "Wide shot of the courtyard. The Professor walks away towards the steps of the lodge, his hat slung on his back; the ascetic, the moustached man and the stout man stand together watching him go."
+  ]
+ },
+ "b1-p007": {
+  "alt": [
+   "The Professor tips a bowl of water over the bandaged man's head. Splash! Splash!",
+   "In the study, the young man sits on the floor propped against a long-necked instrument while the Professor stands over him holding out a glass.",
+   "He drinks. In the foreground a pair of hands turns a dark bronze figure with a boar's head and several arms.",
+   "The book-lined study. The man sits on the floor at the left; the Professor stands in the middle of the room holding the bronze figure up to the light.",
+   "The man pushes himself upright, one hand pressed to his bandaged head, frowning.",
+   "The Professor holds up a battered leather book lettered De Rerum Veterum Mysteriis, a crate of loose manuscripts open beside him.",
+   "The Professor opens an old palm-leaf manuscript wide in both hands; the man sits below him, hand still at his head.",
+   "The Professor stands holding a small worn volume, talking down to the seated man.",
+   "Close on the Professor's face, one finger raised, mouth open mid-sentence.",
+   "Close on the man's face, eyes wide, sweat on his forehead.",
+   "The study again. The man has collapsed face down on the floor, a chair tipping over behind him, papers everywhere, the Professor lunging forward with both hands out."
+  ]
+ },
+ "b1-p008": {
+  "panels": [
+   [
+    0.0,
+    0.0,
+    0.27,
+    0.51
+   ],
+   [
+    0.27,
+    0.0,
+    1.0,
+    0.3
+   ],
+   [
+    0.27,
+    0.3,
+    1.0,
+    0.52
+   ],
+   [
+    0.0,
+    0.52,
+    0.65,
+    0.76
+   ],
+   [
+    0.65,
+    0.52,
+    1.0,
+    1.0
+   ],
+   [
+    0.0,
+    0.76,
+    0.65,
+    1.0
+   ]
+  ],
+  "alt": [
+   "Seen from behind, the man walks out along the veranda, head bandaged and his right forearm wrapped, into the glare of the dry garden.",
+   "The lodge from the road: a long white colonial house with a red tiled roof and a deep pillared veranda, seen through tall wrought-iron gates, its lawn burnt brown and potted plants set out along the drive.",
+   "He stands in the garden shading his eyes. Far down the drive, between the gateposts, a figure stands black against the low sun.",
+   "He starts back with a shout beside a low circular stone well. A young woman in a long printed kurta sits on the rim with her feet over the edge.",
+   "Close: he leans over the well's parapet, his bandaged forearm flat on the stone, looking down the shaft.",
+   "The two of them by the well, the lodge behind. He stands with a hand out, talking; she balances barefoot along the rim."
+  ]
+ },
+ "b1-p009": {
+  "alt": [
+   "He stands on the burnt lawn with a hand raised, explaining. She walks along the well's rim above him, looking away.",
+   "Close on his face, bandage round his head, looking up and answering.",
+   "Close on him again, her dark curls falling across the edge of the frame.",
+   "Close on her: a mass of dark curly hair, small gold earrings, watching him steadily.",
+   "He looks up at her from the grass while she stands barefoot on the rim of the well, the lodge and blue hills behind.",
+   "He bends over the well and looks down into the water. Behind him she walks away towards the veranda."
+  ]
+ },
+ "b1-p010": {
+  "alt": [
+   "From behind, he walks back towards the pillared veranda of the lodge.",
+   "The lodge kitchen. A stout cook in a white cap and a checked towel presses his palms together and bows; the young man stands at the worktop among jars and brass vessels, bright god-prints pinned to the wall behind.",
+   "The cook stands with a finger raised, explaining; the young man sits with his back to us, listening.",
+   "The two of them with glasses of tea among the brass pots, heads turned to each other.",
+   "Close on the cook's face, hand half over his mouth, eyes sliding sideways.",
+   "The two seated together, the cook talking with his free hand open, a small cramped balloon behind him.",
+   "A high view over the valley: forested ridges folding away on every side with the settlement small in the middle. A little inset map headed The Valley notes that it is ringed by the Himalayan range.",
+   "A montage around the cook, who mops his forehead: a steam train trailing smoke, a bus on a hill road, a white car on a mountain bend."
+  ]
+ },
+ "b1-p011": {
+  "panels": [
+   [
+    0.0,
+    0.0,
+    0.33,
+    0.3
+   ],
+   [
+    0.33,
+    0.0,
+    0.52,
+    0.29
+   ],
+   [
+    0.52,
+    0.0,
+    1.0,
+    0.29
+   ],
+   [
+    0.0,
+    0.29,
+    0.43,
+    0.56
+   ],
+   [
+    0.43,
+    0.29,
+    1.0,
+    0.56
+   ],
+   [
+    0.0,
+    0.56,
+    0.5,
+    0.73
+   ],
+   [
+    0.5,
+    0.55,
+    1.0,
+    0.73
+   ],
+   [
+    0.0,
+    0.73,
+    0.16,
+    1.0
+   ],
+   [
+    0.16,
+    0.73,
+    0.31,
+    1.0
+   ],
+   [
+    0.31,
+    0.73,
+    0.61,
+    1.0
+   ],
+   [
+    0.61,
+    0.73,
+    1.0,
+    1.0
+   ]
+  ],
+  "alt": [
+   "The cook talks with his eyes wide. Behind him hangs a painted forest scene: a tiger, a lion and horned figures half hidden among the trees.",
+   "Close on the cook's face, moustache, eyes turned anxiously to one side.",
+   "The young man stands in the kitchen doorway looking out at a wall of blue mountains.",
+   "A bare stony field under a white midday sun. Dozens of volunteers stoop in rows clearing stones from the ground.",
+   "Inside a grand cloth pavilion at the edge of the field, the Mahant reclines against a bolster in white robes, one hand raised in explanation. The moustached man stands behind his couch.",
+   "The moustached man tips a whisky bottle; the Mahant sits holding out a glass.",
+   "The moustached man drinks while the Mahant talks, one hand open.",
+   "A narrow panel: the moustached man draining his glass.",
+   "The Mahant turns, hand extended.",
+   "Close on the bottle pouring another measure into a glass on the low table.",
+   "Outside the pavilion, a working man stands with his brow furrowed, the tents and the sunlit site behind him."
+  ]
+ },
+ "b1-p012": {
+  "alt": [
+   "A grid of small frames labelled Night One, Dawn, Night Three, Dawn, Night Five, Dawn. In each night frame he thrashes in bed with a panther and a hooded cobra looming out of the dark above him; in each dawn frame he sits awake, and between them he reads by lamplight.",
+   "The lodge lawn. The Professor sits in a cane chair with the young woman beside him; the young man walks towards them across the burnt grass.",
+   "The three of them on the veranda, the young woman laughing, the young man's arm in its sling.",
+   "The Professor talks with his hand open; Bhavi sits beside him. Behind them the cook comes up the path carrying a brass jug.",
+   "The cook pours milk into steel tumblers held out by the Professor and the young man.",
+   "The Professor talking, the young man and Bhavi on either side of him listening.",
+   "The Professor raises one finger, naming him. Bhavi is on his left, Dvij on his right.",
+   "The three of them on the veranda with their tumblers.",
+   "Bhavi leans forward pointing, arguing across the Professor.",
+   "Dvij, the Professor and Bhavi sitting together, Bhavi looking away.",
+   "The Professor holds his tumbler in both hands and answers quietly, Dvij beside him."
+  ]
+ }
+}

@@ -106,7 +106,7 @@
    "n": 11,
    "title": "Chapter 11",
    "startPage": 17,
-   "confirmed": false
+   "confirmed": true
   },
   {
    "n": 12,
@@ -177,14 +177,14 @@
   {
    "n": 23,
    "title": "Chapter 23",
-   "startPage": 38,
-   "confirmed": false
+   "startPage": 39,
+   "confirmed": true
   },
   {
    "n": 24,
    "title": "Chapter 24",
    "startPage": 40,
-   "confirmed": false
+   "confirmed": true
   }
  ],
  "pages": [
@@ -212,23 +212,14 @@
      "box": [
       0.0,
       0.0,
-      0.9986,
+      1.0,
       0.4978
      ],
-     "alt": ""
-    },
-    {
-     "box": [
-      0.0,
-      0.5001,
-      0.9986,
-      0.9979
-     ],
-     "alt": ""
+     "alt": "A hand-drawn map of the valley on aged parchment. Forested ridges ring a central plain: Gaumukh Hill and the Fort Ruins west, Nagadvaja Hill and Mount Dronagiri east, Naga Forest along the north. Between them lie the Village Bazaar and huts, Sheetal Lake, the Mahavidya Temples, Bhoothnath Temple, the Tavern, the Forest Officer's Bungalow and the Professor's Lodge, linked by dashed tracks and the Access Road. A compass rose sits in the lower right."
     }
    ],
    "text": [],
-   "reviewed": false
+   "reviewed": true
   },
   {
    "n": 2,
@@ -257,7 +248,7 @@
       0.4009,
       0.2276
      ],
-     "alt": ""
+     "alt": "A wolf stands silhouetted on a cliff edge beneath a full moon, ranges of mountains receding behind it."
     },
     {
      "box": [
@@ -266,7 +257,7 @@
       0.9986,
       0.2062
      ],
-     "alt": ""
+     "alt": "A young man at the wheel of a car at night, eyes wide, pressing a folded cloth to his forehead. The windscreen beside him is spidered with cracks."
     },
     {
      "box": [
@@ -275,7 +266,7 @@
       0.9986,
       0.4646
      ],
-     "alt": ""
+     "alt": "Seen from high above, a road coils down a forested mountainside in hairpin after hairpin, a single car's headlights drawing a thread of light through the dark."
     },
     {
      "box": [
@@ -284,7 +275,7 @@
       0.4009,
       0.9979
      ],
-     "alt": ""
+     "alt": "Close on the driver mopping sweat from his face, one eye screwed shut. An inset panel shows a boulder sitting in the road ahead, lit by the headlamps."
     },
     {
      "box": [
@@ -293,7 +284,7 @@
       0.9986,
       0.749
      ],
-     "alt": ""
+     "alt": "The car strikes the boulder and sparks burst from the impact, the dark valley and a river far below."
     },
     {
      "box": [
@@ -302,7 +293,7 @@
       0.9986,
       0.9979
      ],
-     "alt": ""
+     "alt": "A cutaway technical diagram of the car's drivetrain headed Chain Reaction of Failure, with six numbered callouts, repeated underneath as six small panels showing each part giving way in turn."
     }
    ],
    "text": [
@@ -351,7 +342,7 @@
      "panel": 4
     }
    ],
-   "reviewed": false
+   "reviewed": true
   },
   {
    "n": 3,
@@ -380,7 +371,7 @@
       0.9986,
       0.3176
      ],
-     "alt": ""
+     "alt": "The car stands skewed across the mountain road at night, front bumper torn loose and hanging, one headlamp still burning. Ridges fall away into the valley behind."
     },
     {
      "box": [
@@ -389,7 +380,7 @@
       0.5409,
       0.6376
      ],
-     "alt": ""
+     "alt": "The car comes on down the road towards us, one headlight blazing, its grille punched inward."
     },
     {
      "box": [
@@ -398,7 +389,7 @@
       0.4274,
       0.9979
      ],
-     "alt": ""
+     "alt": "A tall night panel. A shaggy figure hangs by one arm from a branch, black against the full moon. Below, at the foot of an enormous tree trunk, the crumpled car lies still."
     },
     {
      "box": [
@@ -407,7 +398,7 @@
       0.9986,
       0.9979
      ],
-     "alt": ""
+     "alt": "The moment of impact: the driver is thrown out through the windscreen in a spray of glass, the car folding against the tree."
     }
    ],
    "text": [
@@ -445,7 +436,7 @@
      "panel": 3
     }
    ],
-   "reviewed": false
+   "reviewed": true
   },
   {
    "n": 4,
@@ -474,7 +465,7 @@
       0.4993,
       0.1541
      ],
-     "alt": ""
+     "alt": "Extreme close-up of an open eye, unfocused, with peeling plaster filling the rest of the frame."
     },
     {
      "box": [
@@ -483,7 +474,7 @@
       0.9986,
       0.1754
      ],
-     "alt": ""
+     "alt": "The ceiling he is staring at: damp-stained plaster between dark beams, a four-blade fan hanging motionless."
     },
     {
      "box": [
@@ -492,7 +483,7 @@
       0.3404,
       0.3532
      ],
-     "alt": ""
+     "alt": "He reaches out from the bed towards a glass of water, his right forearm in a plaster cast and his head wrapped in bandage."
     },
     {
      "box": [
@@ -501,7 +492,7 @@
       0.6619,
       0.3532
      ],
-     "alt": ""
+     "alt": "He drinks clumsily, water spilling down his chin and bare chest."
     },
     {
      "box": [
@@ -510,7 +501,7 @@
       0.9986,
       0.3532
      ],
-     "alt": ""
+     "alt": "He sits up on the edge of the bed. A large room with shuttered windows, an armchair and framed pictures - nothing like a hospital."
     },
     {
      "box": [
@@ -519,7 +510,7 @@
       0.2913,
       0.531
      ],
-     "alt": ""
+     "alt": "Seen from behind, he stands at an open window and stretches both arms wide into the green light outside."
     },
     {
      "box": [
@@ -528,7 +519,7 @@
       0.2913,
       0.7064
      ],
-     "alt": ""
+     "alt": "Through an archway, a wide sunlit courtyard with a colonnade running round it and a planted square at its centre."
     },
     {
      "box": [
@@ -537,7 +528,7 @@
       0.9986,
       0.7064
      ],
-     "alt": ""
+     "alt": "A study crowded to the ceiling with books, specimen jars and loose papers, a long-necked stringed instrument propped by the window and a bronze figure on a stand. He steps in through the open door, barefoot, his bandaged arm held close."
     },
     {
      "box": [
@@ -546,7 +537,7 @@
       0.4917,
       0.9695
      ],
-     "alt": ""
+     "alt": "His own reflection in a window pane: a bearded face under a heavily bandaged head, eyes wide."
     },
     {
      "box": [
@@ -555,7 +546,7 @@
       0.9986,
       0.9695
      ],
-     "alt": ""
+     "alt": "The study again, from the doorway. He lies collapsed face down on the floor among scattered papers and a toppled pot."
     }
    ],
    "text": [
@@ -659,7 +650,7 @@
      "panel": 9
     }
    ],
-   "reviewed": false
+   "reviewed": true
   },
   {
    "n": 5,
@@ -685,64 +676,82 @@
      "box": [
       0.0,
       0.0,
-      0.5069,
-      0.3176
+      0.51,
+      0.32
      ],
-     "alt": ""
+     "alt": "The lodge in high summer: a low tiled-roof house behind a parched lawn and a row of tall pale trunks, the sun burning white overhead. The Professor kneels in the dust settling a sapling into a bed of flowers."
     },
     {
      "box": [
-      0.5069,
+      0.51,
       0.0,
-      0.9986,
-      0.1422
+      1.0,
+      0.14
      ],
-     "alt": ""
+     "alt": "Close on the Professor turning one leaf of the sapling between his fingers."
     },
     {
      "box": [
-      0.5069,
-      0.1422,
-      0.9986,
-      0.3176
+      0.51,
+      0.14,
+      1.0,
+      0.32
      ],
-     "alt": ""
-    },
-    {
-     "box": [
-      0.0,
-      0.3176,
-      0.5106,
-      0.6353
-     ],
-     "alt": ""
-    },
-    {
-     "box": [
-      0.5106,
-      0.3176,
-      0.9986,
-      0.6353
-     ],
-     "alt": ""
+     "alt": "He lunges forward with his hand outstretched as a sandalled foot comes down on the sapling. STOMP bursts across the panel."
     },
     {
      "box": [
       0.0,
-      0.6353,
-      0.9986,
-      0.8059
+      0.32,
+      0.51,
+      0.64
      ],
-     "alt": ""
+     "alt": "Over the Professor's shoulder: three men have walked into his compound. A heavy man with a moustache in a dark red lungi, and beside him a tall bare-chested ascetic in white, topknot bound, three lines of ash drawn across his forehead, one hand raised."
+    },
+    {
+     "box": [
+      0.51,
+      0.32,
+      1.0,
+      0.64
+     ],
+     "alt": "Two faces side by side. A stout man in white with a folded shawl, looking uneasy; and the ascetic, his face filling the frame, brows level and eyes fixed."
     },
     {
      "box": [
       0.0,
-      0.8059,
-      0.9986,
-      0.9979
+      0.64,
+      0.645,
+      0.81
      ],
-     "alt": ""
+     "alt": "The ascetic and the Professor close together in profile, the ascetic's hand raised between them."
+    },
+    {
+     "box": [
+      0.645,
+      0.64,
+      1.0,
+      0.81
+     ],
+     "alt": "Villagers stand in a loose half circle under a spreading kadamba tree, where a dishevelled man has both arms flung up."
+    },
+    {
+     "box": [
+      0.0,
+      0.81,
+      0.645,
+      1.0
+     ],
+     "alt": "The ascetic turns his head to the Professor; the Professor looks back at him, mouth open."
+    },
+    {
+     "box": [
+      0.645,
+      0.81,
+      1.0,
+      1.0
+     ],
+     "alt": "The villagers hurl stones. The man under the tree is down on the ground among them."
     }
    ],
    "text": [
@@ -788,10 +797,10 @@
       0.8599
      ],
      "kind": "balloon",
-     "panel": 6
+     "panel": 7
     }
    ],
-   "reviewed": false
+   "reviewed": true
   },
   {
    "n": 6,
@@ -817,64 +826,64 @@
      "box": [
       0.0,
       0.0,
-      0.3064,
-      0.3176
+      0.31,
+      0.32
      ],
-     "alt": ""
+     "alt": "The moustached man holds a rolled scroll out in both hands; beside him the ascetic stands bare-chested in white, the sun flaring behind the lodge roof."
     },
     {
      "box": [
-      0.3064,
+      0.31,
       0.0,
-      0.6544,
-      0.3129
+      0.65,
+      0.31
      ],
-     "alt": ""
+     "alt": "The ascetic offers the scroll down to the Professor, who leans in with his hand out to take it."
     },
     {
      "box": [
-      0.6544,
+      0.65,
       0.0,
-      0.9986,
-      0.3176
+      1.0,
+      0.32
      ],
-     "alt": ""
-    },
-    {
-     "box": [
-      0.0,
-      0.3176,
-      0.2988,
-      0.6353
-     ],
-     "alt": ""
-    },
-    {
-     "box": [
-      0.2988,
-      0.3129,
-      0.7111,
-      0.6353
-     ],
-     "alt": ""
-    },
-    {
-     "box": [
-      0.4804,
-      0.3176,
-      0.9986,
-      0.6353
-     ],
-     "alt": ""
+     "alt": "The Professor unrolls the document and reads it at arm's length, the ascetic watching beside him."
     },
     {
      "box": [
       0.0,
-      0.6353,
-      0.9986,
-      0.9884
+      0.32,
+      0.3,
+      0.64
      ],
-     "alt": ""
+     "alt": "The Professor holds the open sheet out, still reading, the ascetic close at his shoulder."
+    },
+    {
+     "box": [
+      0.3,
+      0.32,
+      0.49,
+      0.64
+     ],
+     "alt": "The moustached man pushes the scroll back at the Professor, shouting into his face."
+    },
+    {
+     "box": [
+      0.49,
+      0.32,
+      1.0,
+      0.64
+     ],
+     "alt": "The ascetic lays a hand on the Professor's shoulder and leans in to speak by his ear, his face filling the right of the frame."
+    },
+    {
+     "box": [
+      0.0,
+      0.64,
+      1.0,
+      0.99
+     ],
+     "alt": "Wide shot of the courtyard. The Professor walks away towards the steps of the lodge, his hat slung on his back; the ascetic, the moustached man and the stout man stand together watching him go."
     }
    ],
    "text": [
@@ -956,7 +965,7 @@
      "panel": 6
     }
    ],
-   "reviewed": false
+   "reviewed": true
   },
   {
    "n": 7,
@@ -985,7 +994,7 @@
       0.2913,
       0.1896
      ],
-     "alt": ""
+     "alt": "The Professor tips a bowl of water over the bandaged man's head. Splash! Splash!"
     },
     {
      "box": [
@@ -994,7 +1003,7 @@
       0.6355,
       0.1944
      ],
-     "alt": ""
+     "alt": "In the study, the young man sits on the floor propped against a long-necked instrument while the Professor stands over him holding out a glass."
     },
     {
      "box": [
@@ -1003,7 +1012,7 @@
       0.9986,
       0.1944
      ],
-     "alt": ""
+     "alt": "He drinks. In the foreground a pair of hands turns a dark bronze figure with a boar's head and several arms."
     },
     {
      "box": [
@@ -1012,7 +1021,7 @@
       0.522,
       0.4693
      ],
-     "alt": ""
+     "alt": "The book-lined study. The man sits on the floor at the left; the Professor stands in the middle of the room holding the bronze figure up to the light."
     },
     {
      "box": [
@@ -1021,7 +1030,7 @@
       0.7149,
       0.4693
      ],
-     "alt": ""
+     "alt": "The man pushes himself upright, one hand pressed to his bandaged head, frowning."
     },
     {
      "box": [
@@ -1030,7 +1039,7 @@
       0.9986,
       0.4693
      ],
-     "alt": ""
+     "alt": "The Professor holds up a battered leather book lettered De Rerum Veterum Mysteriis, a crate of loose manuscripts open beside him."
     },
     {
      "box": [
@@ -1039,7 +1048,7 @@
       0.4993,
       0.6945
      ],
-     "alt": ""
+     "alt": "The Professor opens an old palm-leaf manuscript wide in both hands; the man sits below him, hand still at his head."
     },
     {
      "box": [
@@ -1048,7 +1057,7 @@
       0.9986,
       0.6945
      ],
-     "alt": ""
+     "alt": "The Professor stands holding a small worn volume, talking down to the seated man."
     },
     {
      "box": [
@@ -1057,7 +1066,7 @@
       0.3934,
       0.832
      ],
-     "alt": ""
+     "alt": "Close on the Professor's face, one finger raised, mouth open mid-sentence."
     },
     {
      "box": [
@@ -1066,7 +1075,7 @@
       0.3934,
       0.9979
      ],
-     "alt": ""
+     "alt": "Close on the man's face, eyes wide, sweat on his forehead."
     },
     {
      "box": [
@@ -1075,7 +1084,7 @@
       0.9986,
       0.9979
      ],
-     "alt": ""
+     "alt": "The study again. The man has collapsed face down on the floor, a chair tipping over behind him, papers everywhere, the Professor lunging forward with both hands out."
     }
    ],
    "text": [
@@ -1190,7 +1199,7 @@
      "panel": 10
     }
    ],
-   "reviewed": false
+   "reviewed": true
   },
   {
    "n": 8,
@@ -1216,55 +1225,55 @@
      "box": [
       0.0,
       0.0,
-      0.8624,
-      0.512
+      0.27,
+      0.51
      ],
-     "alt": ""
+     "alt": "Seen from behind, the man walks out along the veranda, head bandaged and his right forearm wrapped, into the glare of the dry garden."
     },
     {
      "box": [
-      0.2232,
-      0.3081,
-      0.9986,
-      0.5357
-     ],
-     "alt": ""
-    },
-    {
-     "box": [
-      0.8624,
+      0.27,
       0.0,
-      0.9986,
-      0.3081
+      1.0,
+      0.3
      ],
-     "alt": ""
+     "alt": "The lodge from the road: a long white colonial house with a red tiled roof and a deep pillared veranda, seen through tall wrought-iron gates, its lawn burnt brown and potted plants set out along the drive."
     },
     {
      "box": [
-      0.0,
-      0.512,
-      0.7149,
-      0.7633
+      0.27,
+      0.3,
+      1.0,
+      0.52
      ],
-     "alt": ""
+     "alt": "He stands in the garden shading his eyes. Far down the drive, between the gateposts, a figure stands black against the low sun."
     },
     {
      "box": [
       0.0,
-      0.7633,
-      0.6506,
-      0.9979
+      0.52,
+      0.65,
+      0.76
      ],
-     "alt": ""
+     "alt": "He starts back with a shout beside a low circular stone well. A young woman in a long printed kurta sits on the rim with her feet over the edge."
     },
     {
      "box": [
-      0.5182,
-      0.5357,
-      0.9986,
-      0.9979
+      0.65,
+      0.52,
+      1.0,
+      1.0
      ],
-     "alt": ""
+     "alt": "Close: he leans over the well's parapet, his bandaged forearm flat on the stone, looking down the shaft."
+    },
+    {
+     "box": [
+      0.0,
+      0.76,
+      0.65,
+      1.0
+     ],
+     "alt": "The two of them by the well, the lodge behind. He stands with a hand out, talking; she balances barefoot along the rim."
     }
    ],
    "text": [
@@ -1277,7 +1286,7 @@
       0.295
      ],
      "kind": "caption",
-     "panel": 0
+     "panel": 1
     },
     {
      "t": "He could see someone up ahead. Sun made the figure a dark silhouette surrounded by brilliance.",
@@ -1288,7 +1297,7 @@
       0.5258
      ],
      "kind": "caption",
-     "panel": 1
+     "panel": 2
     },
     {
      "t": "Whoa!!!",
@@ -1302,6 +1311,17 @@
      "panel": 3
     },
     {
+     "t": "That is a well! A very deep well!",
+     "bbox": [
+      0.8434,
+      0.5519,
+      0.9998,
+      0.5884
+     ],
+     "kind": "balloon",
+     "panel": 4
+    },
+    {
      "t": "Are you? You already died once.",
      "bbox": [
       0.272,
@@ -1310,7 +1330,7 @@
       0.8341
      ],
      "kind": "balloon",
-     "panel": 4
+     "panel": 5
     },
     {
      "t": "Aren't you afraid?",
@@ -1321,7 +1341,7 @@
       0.8585
      ],
      "kind": "balloon",
-     "panel": 4
+     "panel": 5
     },
     {
      "t": "You mean my accident? So you know about me?",
@@ -1332,21 +1352,10 @@
       0.8849
      ],
      "kind": "balloon",
-     "panel": 4
-    },
-    {
-     "t": "That is a well! A very deep well!",
-     "bbox": [
-      0.8434,
-      0.5519,
-      0.9998,
-      0.5884
-     ],
-     "kind": "balloon",
      "panel": 5
     }
    ],
-   "reviewed": false
+   "reviewed": true
   },
   {
    "n": 9,
@@ -1375,7 +1384,7 @@
       0.4652,
       0.3247
      ],
-     "alt": ""
+     "alt": "He stands on the burnt lawn with a hand raised, explaining. She walks along the well's rim above him, looking away."
     },
     {
      "box": [
@@ -1384,7 +1393,7 @@
       0.9986,
       0.3034
      ],
-     "alt": ""
+     "alt": "Close on his face, bandage round his head, looking up and answering."
     },
     {
      "box": [
@@ -1393,7 +1402,7 @@
       0.4728,
       0.6921
      ],
-     "alt": ""
+     "alt": "Close on him again, her dark curls falling across the edge of the frame."
     },
     {
      "box": [
@@ -1402,7 +1411,7 @@
       0.9986,
       0.6945
      ],
-     "alt": ""
+     "alt": "Close on her: a mass of dark curly hair, small gold earrings, watching him steadily."
     },
     {
      "box": [
@@ -1411,7 +1420,7 @@
       0.5712,
       0.9979
      ],
-     "alt": ""
+     "alt": "He looks up at her from the grass while she stands barefoot on the rim of the well, the lodge and blue hills behind."
     },
     {
      "box": [
@@ -1420,7 +1429,7 @@
       0.9986,
       0.9979
      ],
-     "alt": ""
+     "alt": "He bends over the well and looks down into the water. Behind him she walks away towards the veranda."
     }
    ],
    "text": [
@@ -1535,7 +1544,7 @@
      "panel": 4
     }
    ],
-   "reviewed": false
+   "reviewed": true
   },
   {
    "n": 10,
@@ -1564,7 +1573,7 @@
       0.3631,
       0.1944
      ],
-     "alt": ""
+     "alt": "From behind, he walks back towards the pillared veranda of the lodge."
     },
     {
      "box": [
@@ -1573,7 +1582,7 @@
       0.9986,
       0.2631
      ],
-     "alt": ""
+     "alt": "The lodge kitchen. A stout cook in a white cap and a checked towel presses his palms together and bows; the young man stands at the worktop among jars and brass vessels, bright god-prints pinned to the wall behind."
     },
     {
      "box": [
@@ -1582,7 +1591,7 @@
       0.5144,
       0.4836
      ],
-     "alt": ""
+     "alt": "The cook stands with a finger raised, explaining; the young man sits with his back to us, listening."
     },
     {
      "box": [
@@ -1591,7 +1600,7 @@
       0.9986,
       0.4836
      ],
-     "alt": ""
+     "alt": "The two of them with glasses of tea among the brass pots, heads turned to each other."
     },
     {
      "box": [
@@ -1600,7 +1609,7 @@
       0.5031,
       0.7372
      ],
-     "alt": ""
+     "alt": "Close on the cook's face, hand half over his mouth, eyes sliding sideways."
     },
     {
      "box": [
@@ -1609,7 +1618,7 @@
       0.9986,
       0.6756
      ],
-     "alt": ""
+     "alt": "The two seated together, the cook talking with his free hand open, a small cramped balloon behind him."
     },
     {
      "box": [
@@ -1618,7 +1627,7 @@
       0.4993,
       0.9979
      ],
-     "alt": ""
+     "alt": "A high view over the valley: forested ridges folding away on every side with the settlement small in the middle. A little inset map headed The Valley notes that it is ringed by the Himalayan range."
     },
     {
      "box": [
@@ -1627,7 +1636,7 @@
       0.9986,
       0.9979
      ],
-     "alt": ""
+     "alt": "A montage around the cook, who mops his forehead: a steam train trailing smoke, a bus on a hill road, a white car on a mountain bend."
     }
    ],
    "text": [
@@ -1753,7 +1762,7 @@
      "panel": 7
     }
    ],
-   "reviewed": false
+   "reviewed": true
   },
   {
    "n": 11,
@@ -1779,91 +1788,100 @@
      "box": [
       0.0,
       0.0,
-      0.3291,
-      0.2987
+      0.33,
+      0.3
      ],
-     "alt": ""
+     "alt": "The cook talks with his eyes wide. Behind him hangs a painted forest scene: a tiger, a lion and horned figures half hidden among the trees."
     },
     {
      "box": [
-      0.3291,
+      0.33,
       0.0,
-      0.522,
-      0.2916
+      0.52,
+      0.29
      ],
-     "alt": ""
+     "alt": "Close on the cook's face, moustache, eyes turned anxiously to one side."
     },
     {
      "box": [
-      0.522,
+      0.52,
       0.0,
-      0.9986,
-      0.2916
+      1.0,
+      0.29
      ],
-     "alt": ""
-    },
-    {
-     "box": [
-      0.0,
-      0.2916,
-      0.4842,
-      0.557
-     ],
-     "alt": ""
-    },
-    {
-     "box": [
-      0.4842,
-      0.2916,
-      0.9986,
-      0.557
-     ],
-     "alt": ""
+     "alt": "The young man stands in the kitchen doorway looking out at a wall of blue mountains."
     },
     {
      "box": [
       0.0,
-      0.557,
-      0.4993,
-      0.7253
+      0.29,
+      0.43,
+      0.56
      ],
-     "alt": ""
+     "alt": "A bare stony field under a white midday sun. Dozens of volunteers stoop in rows clearing stones from the ground."
     },
     {
      "box": [
-      0.4993,
-      0.5523,
-      0.9986,
-      0.7253
+      0.43,
+      0.29,
+      1.0,
+      0.56
      ],
-     "alt": ""
+     "alt": "Inside a grand cloth pavilion at the edge of the field, the Mahant reclines against a bolster in white robes, one hand raised in explanation. The moustached man stands behind his couch."
     },
     {
      "box": [
       0.0,
-      0.7253,
-      0.1589,
-      0.9979
+      0.56,
+      0.5,
+      0.73
      ],
-     "alt": ""
+     "alt": "The moustached man tips a whisky bottle; the Mahant sits holding out a glass."
     },
     {
      "box": [
-      0.1589,
-      0.7253,
-      0.6128,
-      0.9979
+      0.5,
+      0.55,
+      1.0,
+      0.73
      ],
-     "alt": ""
+     "alt": "The moustached man drinks while the Mahant talks, one hand open."
     },
     {
      "box": [
-      0.6128,
-      0.7253,
-      0.9986,
-      0.9979
+      0.0,
+      0.73,
+      0.16,
+      1.0
      ],
-     "alt": ""
+     "alt": "A narrow panel: the moustached man draining his glass."
+    },
+    {
+     "box": [
+      0.16,
+      0.73,
+      0.31,
+      1.0
+     ],
+     "alt": "The Mahant turns, hand extended."
+    },
+    {
+     "box": [
+      0.31,
+      0.73,
+      0.61,
+      1.0
+     ],
+     "alt": "Close on the bottle pouring another measure into a glass on the low table."
+    },
+    {
+     "box": [
+      0.61,
+      0.73,
+      1.0,
+      1.0
+     ],
+     "alt": "Outside the pavilion, a working man stands with his brow furrowed, the tents and the sunlit site behind him."
     }
    ],
    "text": [
@@ -1956,6 +1974,17 @@
      "panel": 5
     },
     {
+     "t": "Le’ts raise a toast to that!",
+     "bbox": [
+      0.3376,
+      0.7101,
+      0.4779,
+      0.7428
+     ],
+     "kind": "balloon",
+     "panel": 5
+    },
+    {
      "t": "The Wounded One will have to forget everything else and don a new avatar.",
      "bbox": [
       0.0437,
@@ -1967,17 +1996,6 @@
      "panel": 7
     },
     {
-     "t": "Le’ts raise a toast to that!",
-     "bbox": [
-      0.3376,
-      0.7101,
-      0.4779,
-      0.7428
-     ],
-     "kind": "balloon",
-     "panel": 8
-    },
-    {
      "t": "The common man knows the truth but is powerless. His silent disapproval speaks volumes.",
      "bbox": [
       0.702,
@@ -1986,10 +2004,10 @@
       0.9845
      ],
      "kind": "caption",
-     "panel": 9
+     "panel": 10
     }
    ],
-   "reviewed": false
+   "reviewed": true
   },
   {
    "n": 12,
@@ -2018,7 +2036,7 @@
       0.5106,
       0.32
      ],
-     "alt": ""
+     "alt": "A grid of small frames labelled Night One, Dawn, Night Three, Dawn, Night Five, Dawn. In each night frame he thrashes in bed with a panther and a hooded cobra looming out of the dark above him; in each dawn frame he sits awake, and between them he reads by lamplight."
     },
     {
      "box": [
@@ -2027,7 +2045,7 @@
       0.9986,
       0.2039
      ],
-     "alt": ""
+     "alt": "The lodge lawn. The Professor sits in a cane chair with the young woman beside him; the young man walks towards them across the burnt grass."
     },
     {
      "box": [
@@ -2036,7 +2054,7 @@
       0.9986,
       0.2892
      ],
-     "alt": ""
+     "alt": "The three of them on the veranda, the young woman laughing, the young man's arm in its sling."
     },
     {
      "box": [
@@ -2045,7 +2063,7 @@
       0.4842,
       0.4741
      ],
-     "alt": ""
+     "alt": "The Professor talks with his hand open; Bhavi sits beside him. Behind them the cook comes up the path carrying a brass jug."
     },
     {
      "box": [
@@ -2054,7 +2072,7 @@
       0.9986,
       0.4741
      ],
-     "alt": ""
+     "alt": "The cook pours milk into steel tumblers held out by the Professor and the young man."
     },
     {
      "box": [
@@ -2063,7 +2081,7 @@
       0.4842,
       0.6281
      ],
-     "alt": ""
+     "alt": "The Professor talking, the young man and Bhavi on either side of him listening."
     },
     {
      "box": [
@@ -2072,7 +2090,7 @@
       0.9986,
       0.6258
      ],
-     "alt": ""
+     "alt": "The Professor raises one finger, naming him. Bhavi is on his left, Dvij on his right."
     },
     {
      "box": [
@@ -2081,7 +2099,7 @@
       0.4842,
       0.7964
      ],
-     "alt": ""
+     "alt": "The three of them on the veranda with their tumblers."
     },
     {
      "box": [
@@ -2090,7 +2108,7 @@
       0.9986,
       0.8676
      ],
-     "alt": ""
+     "alt": "Bhavi leans forward pointing, arguing across the Professor."
     },
     {
      "box": [
@@ -2099,7 +2117,7 @@
       0.4842,
       0.9979
      ],
-     "alt": ""
+     "alt": "Dvij, the Professor and Bhavi sitting together, Bhavi looking away."
     },
     {
      "box": [
@@ -2108,7 +2126,7 @@
       0.9948,
       0.9979
      ],
-     "alt": ""
+     "alt": "The Professor holds his tumbler in both hands and answers quietly, Dvij beside him."
     }
    ],
    "text": [
@@ -2212,7 +2230,7 @@
      "panel": 8
     }
    ],
-   "reviewed": false
+   "reviewed": true
   },
   {
    "n": 13,

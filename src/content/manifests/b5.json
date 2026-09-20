@@ -69,7 +69,7 @@
   {
    "n": 69,
    "title": "Chapter 69",
-   "startPage": 11,
+   "startPage": 10,
    "confirmed": true
   },
   {
@@ -88,7 +88,7 @@
    "n": 72,
    "title": "Chapter 72",
    "startPage": 15,
-   "confirmed": false
+   "confirmed": true
   },
   {
    "n": 73,
@@ -123,8 +123,8 @@
   {
    "n": 78,
    "title": "Chapter 78",
-   "startPage": 26,
-   "confirmed": false
+   "startPage": 25,
+   "confirmed": true
   },
   {
    "n": 79,
@@ -136,7 +136,7 @@
    "n": 80,
    "title": "Epilogue",
    "startPage": 28,
-   "confirmed": false
+   "confirmed": true
   }
  ],
  "pages": [
