@@ -115,3 +115,42 @@ Environment variables:
 | `PUBLIC_ASSET_BASE` | Where page images, art and PDFs are served from. Default `/_assets` (bundled). Set to the CDN URL for hosting option A. |
 | `SITE_URL` | Canonical site URL (once the domain is chosen). |
 | `BUNDLE_ASSETS=1` | Copy `site-assets` into the build (option B). `build:local` sets it. |
+
+## Hosting the assets (Cloudflare R2)
+
+The 742 MB of page images, art and PDFs are build output, not source, so they
+are never in git. They live in a Cloudflare R2 bucket and the site reads them
+from `PUBLIC_ASSET_BASE`. R2 charges nothing for egress, which is what makes it
+a good fit for a comic: a reader going through all 171 pages pulls about 36 MB.
+
+One-time setup:
+
+1. Cloudflare dashboard -> R2 -> Create bucket, named `dvij-assets`, location
+   Automatic.
+2. That bucket -> Settings -> Public access. Either allow the `r2.dev` subdomain
+   (fine to start; Cloudflare rate-limits it and asks you not to use it for
+   production) or attach a custom domain such as `assets.yourdomain.com`, which
+   is the better option once the domain exists.
+3. R2 -> API -> Manage API tokens -> Create API token, permission **Object Read &
+   Write**, scoped to this bucket only. Copy the access key id and secret; the
+   secret is shown once.
+4. `cp .env.example .env` and fill in `R2_ACCOUNT_ID`, `R2_BUCKET`,
+   `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`. `.env` is gitignored.
+5. In Netlify -> Site configuration -> Environment variables, set
+   `PUBLIC_ASSET_BASE` to the bucket's public URL, with no trailing slash.
+   Changing it needs a redeploy, since Astro inlines it at build time.
+
+Then upload:
+
+```bash
+npm run upload -- --dry-run     # what it would send, and how much
+npm run upload                  # ~742 MB the first time
+npm run upload -- --only art    # just one folder
+```
+
+The script mirrors `site-assets/pages`, `art` and `pdf` into the bucket at the
+same paths, sets each object's content type, and caches the content-hashed
+images forever. It skips anything already in the bucket at the same size, so a
+re-run after an interrupted upload picks up where it stopped, and re-running
+after a partial re-encode only sends what changed. `--force` re-uploads
+everything.

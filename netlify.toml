@@ -1,7 +1,9 @@
 # Netlify configuration (design §12.4).
-# Page images, art and PDFs are NOT in this repo. They are served from
-# PUBLIC_ASSET_BASE (option A: CDN bucket) or bundled at deploy time with
-# BUNDLE_ASSETS=1 from a local machine (option B). See design §12.3.
+# Page images, art and PDFs are NOT in this repo. They are served from a
+# Cloudflare R2 bucket, set as the PUBLIC_ASSET_BASE environment variable in
+# the Netlify UI (design §12.3); R2 carries their cache headers, set at upload
+# time by pipeline/upload_assets.mjs. The /_assets rules below only apply to a
+# local BUNDLE_ASSETS=1 build.
 
 [build]
   command = "npm run build"
