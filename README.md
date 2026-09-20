@@ -112,7 +112,7 @@ Environment variables:
 
 | Variable | Purpose |
 |---|---|
-| `PUBLIC_ASSET_BASE` | Where page images, art and PDFs are served from. Default `/_assets` (bundled). Set to the CDN URL for hosting option A. |
+| `PUBLIC_ASSET_BASE` | Where page images, art and PDFs are served from. Set to the R2 bucket in `netlify.toml`; unset locally, where the dev server serves `../site-assets` at `/_assets`. |
 | `SITE_URL` | Canonical site URL (once the domain is chosen). |
 | `BUNDLE_ASSETS=1` | Copy `site-assets` into the build (option B). `build:local` sets it. |
 
@@ -136,9 +136,10 @@ One-time setup:
    secret is shown once.
 4. `cp .env.example .env` and fill in `R2_ACCOUNT_ID`, `R2_BUCKET`,
    `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`. `.env` is gitignored.
-5. In Netlify -> Site configuration -> Environment variables, set
-   `PUBLIC_ASSET_BASE` to the bucket's public URL, with no trailing slash.
-   Changing it needs a redeploy, since Astro inlines it at build time.
+5. Put the bucket's public URL in `netlify.toml` as `PUBLIC_ASSET_BASE`, with
+   no trailing slash. It is public by design and shows up in every built page,
+   so it belongs in the repo rather than in the Netlify UI. Astro inlines it at
+   build time, so changing it needs a redeploy.
 
 Then upload:
 
