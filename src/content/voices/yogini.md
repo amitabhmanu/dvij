@@ -6,6 +6,12 @@ tradition: The forest's own, liminal and tribal. Never explained.
 setting: The forests and edges of the valley, then the trek
 quote: an immaculate incarnation of Tripura Sundari
 firstQuote: Baba gestured for the yogini to enter the room which she did with reverence
+# The art never letters that line, so the lookup fell back to the chapter's first
+# page (B1 p40) and unveiled her two pages early. She first appears on B1 p42,
+# where the baba says "I see who has caught your attention".
+firstSeen:
+  book: 1
+  page: 42
 portrait:
   page: b3-p032
   match: Tripura Sundari

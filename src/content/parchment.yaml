@@ -7,6 +7,10 @@
 # solvedQuote: where the characters crack it. The step-by-step walkthrough of
 #   *their* solution is spoiler-gated to that page.
 # pipeline/link_parchment.py resolves both quotes to comic pages.
+# availablePage / solvedPage: an explicit "b4-p016" override, used only where the
+#   art abridges the manuscript so far that the quote no longer matches any page
+#   and the lookup would fall back to the chapter's first page. Each one below is
+#   checked against the printed page.
 # rect: region on the aged parchment (art/parchment.webp), x0 y0 x1 y1 (0-1).
 
 intro:
@@ -93,6 +97,7 @@ puzzles:
     rect: [0.03, 0.37, 0.51, 0.72]
     crop: puzzle-3
     availableQuote: "All I noticed was a coiled serpent"
+    availablePage: b4-p016   # art: "The next clue on the parchment looked like a coiled serpent."
     solvedQuote: "This is a Vedic altar"
     outcome: "A Vedic altar, and the ashram of Kritya Rishi higher up the path, the one place where Vedic rites are still practised."
     guide: "the round-nosed man"
@@ -148,6 +153,7 @@ puzzles:
     rect: [0.52, 0.31, 0.92, 0.74]
     crop: puzzle-4
     availableQuote: "All I can see are nine green eyes"
+    availablePage: b5-p012   # art: "Now, the next clue. What are these? Nine green eyes?"
     solvedQuote: "Each graha presides over a direction, and Budha has north"
     outcome: "The northern path from the Vedic altar, found precisely with a gnomon. Bhavi coloured the other copies differently, so the Mahant's men went south."
     stages:

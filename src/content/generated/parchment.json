@@ -209,6 +209,7 @@
    ],
    "crop": "puzzle-3",
    "availableQuote": "All I noticed was a coiled serpent",
+   "availablePage": "b4-p016",
    "solvedQuote": "This is a Vedic altar",
    "outcome": "A Vedic altar, and the ashram of Kritya Rishi higher up the path, the one place where Vedic rites are still practised.",
    "guide": "the round-nosed man",
@@ -309,9 +310,9 @@
    ],
    "available": {
     "book": 4,
-    "page": 15,
-    "pageId": "b4-p015",
-    "confidence": "chapter-only"
+    "page": 16,
+    "pageId": "b4-p016",
+    "confidence": "reviewed"
    },
    "solved": {
     "book": 4,
@@ -332,6 +333,7 @@
    ],
    "crop": "puzzle-4",
    "availableQuote": "All I can see are nine green eyes",
+   "availablePage": "b5-p012",
    "solvedQuote": "Each graha presides over a direction, and Budha has north",
    "outcome": "The northern path from the Vedic altar, found precisely with a gnomon. Bhavi coloured the other copies differently, so the Mahant's men went south.",
    "stages": [
@@ -414,9 +416,9 @@
    ],
    "available": {
     "book": 5,
-    "page": 11,
-    "pageId": "b5-p011",
-    "confidence": "chapter-only"
+    "page": 12,
+    "pageId": "b5-p012",
+    "confidence": "reviewed"
    },
    "solved": {
     "book": 5,

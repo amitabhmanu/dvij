@@ -7,6 +7,12 @@ tradition: Aghora and tantra, Bhairava Shaivism
 setting: His ashram in the Kaal Bhairava temple, beside the Bhootnath taal
 quote: Knowledge that hides in the darkness
 firstQuote: Kaal Bhairava temple is the abode of Keshav Bharan
+# That line names the temple, not the man. He first appears on B1 p40, where
+# "they waited in the adjunct room until Baba emerged from Samadhi"; p39 is the
+# approach across the lake.
+firstSeen:
+  book: 1
+  page: 40
 portrait:
   page: b1-p040
   match: darkness

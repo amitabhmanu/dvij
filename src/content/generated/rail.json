@@ -108,9 +108,9 @@
    "epic": "The dog changes hands here, not at the end. In the epic, the dog that walks with Yudhishthira to the last is Dharma, whom some tellings link with Yama.",
    "at": {
     "book": 5,
-    "page": 8,
-    "pageId": "b5-p008",
-    "confidence": "chapter-only"
+    "page": 9,
+    "pageId": "b5-p009",
+    "confidence": "reviewed"
    }
   },
   {
@@ -149,8 +149,8 @@
    "epic": "The party narrows to Dvij, Bhavi and the dog.",
    "at": {
     "book": 5,
-    "page": 26,
-    "pageId": "b5-p026",
+    "page": 25,
+    "pageId": "b5-p025",
     "confidence": "chapter-only"
    }
   },

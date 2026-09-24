@@ -21,7 +21,12 @@ CONTENT = SITE / "src" / "content"
 CORNER_BADGE = [0.9, 0.012, 0.985, 0.06]  # top-right corner of the page
 
 
-def page_ref(r: dict) -> dict:
+def page_ref(r: dict, override: str | None = None) -> dict:
+    """Resolved page, or an explicit pageId where the art abridges the quote away."""
+    if override:
+        book = int(override[1])
+        return {"book": book, "page": int(override.split("-p")[1]), "pageId": override,
+                "confidence": "reviewed"}
     return {"book": r["book"], "page": r["page"], "pageId": r["pageId"], "confidence": r["confidence"]}
 
 
@@ -43,8 +48,9 @@ def main() -> None:
     data["intro"]["page"] = page_ref(find(data["intro"]["quote"]))
     data["intro"]["kalashaPage"] = page_ref(find(data["intro"]["kalashaQuote"]))
     for p in data["puzzles"]:
-        avail, solved = find(p["availableQuote"]), find(p["solvedQuote"])
-        p["available"], p["solved"] = page_ref(avail), page_ref(solved)
+        avail = page_ref(find(p["availableQuote"]), p.get("availablePage"))
+        solved = page_ref(find(p["solvedQuote"]), p.get("solvedPage"))
+        p["available"], p["solved"] = avail, solved
         report.append(f"  {p['id']}: available B{avail['book']} p{avail['page']} ({avail['confidence']}), "
                       f"solved B{solved['book']} p{solved['page']} ({solved['confidence']})")
         # Over the matching lettering if the comic quotes it; otherwise a corner badge.

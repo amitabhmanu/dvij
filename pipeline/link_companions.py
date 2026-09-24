@@ -66,7 +66,11 @@ def main() -> None:
     # ---- rail ----
     rail = yaml.safe_load((CONTENT / "rail.yaml").read_text(encoding="utf-8"))
     for node in rail["nodes"]:
-        if node.get("quote"):
+        if node.get("page"):  # reviewed against the art; the quote is narration the art never lettered
+            pid = node.pop("page")
+            node["at"] = {"book": int(pid[1]), "page": int(pid.split("-p")[1]), "pageId": pid,
+                          "confidence": "reviewed"}
+        elif node.get("quote"):
             r = find(node["quote"])
             node["at"] = {"book": r["book"], "page": r["page"], "pageId": r["pageId"], "confidence": r["confidence"]}
     lit = [n for n in rail["nodes"] if n.get("at")]

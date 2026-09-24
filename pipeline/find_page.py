@@ -2,9 +2,13 @@
 
 1. Fuzzy-find the passage in the manuscript; the chapter it falls in comes from
    the table-of-contents bookmarks (_Toc...) that mark each chapter heading.
-2. Within that chapter's pages (site-assets/data/chapters.json), pick the page
-   whose lettering best matches the passage; comic captions are abridged, so
-   if nothing matches well, fall back to the chapter's first page.
+2. Within that chapter's pages, pick the page whose lettering best matches the
+   passage; comic captions are abridged, so if nothing matches well, fall back
+   to the chapter's first page.
+
+Chapter ranges come from site-assets/data/chapters.json with the reviewed
+corrections in src/content/corrections/chapters.json applied on top, so a
+lookup lands in the same chapter the reader sees in the manifests.
 
 Used to fill firstSeen, puzzle unlock points and rail anchors.
 Usage: python find_page.py "Anahata! I can hear the sound of the unstruck" ["another quote" ...]
@@ -18,7 +22,7 @@ from functools import lru_cache
 
 from rapidfuzz import fuzz
 
-from common import ASSETS, BOOK_DIR, BOOKS
+from common import ASSETS, BOOK_DIR, BOOKS, SITE
 
 PAGE_MATCH = 70  # partial_ratio needed to trust a page-level match
 
@@ -39,10 +43,15 @@ def manuscript() -> tuple[list[str], list[tuple[int, int]]]:
 
 
 @lru_cache
-def comic() -> tuple[list[dict], dict]:
+def comic() -> tuple[tuple[dict, ...], dict]:
     chapters = json.loads((ASSETS / "data" / "chapters.json").read_text())
+    fixed_path = SITE / "src" / "content" / "corrections" / "chapters.json"
+    fixed = json.loads(fixed_path.read_text(encoding="utf-8")) if fixed_path.exists() else {}
+    for c in chapters:
+        if str(c["n"]) in fixed:
+            c["startPage"] = fixed[str(c["n"])]
     text = json.loads((ASSETS / "data" / "text.json").read_text(encoding="utf-8"))
-    return chapters, text
+    return tuple(chapters), text
 
 
 def chapter_of(quote: str) -> tuple[int, int]:

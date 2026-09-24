@@ -2,7 +2,15 @@
 
 Static Astro site for Netlify that publishes the comic (design:
 `../twice-born-website-design.md`). Page images, art and PDFs are generated from
-`../book/` into `../site-assets/` and are never committed.
+`../book/` into `../site-assets/` and are never committed; they are served from a
+Cloudflare R2 bucket.
+
+**State:** all five books are in — 171 pages, 1,712 panels, every panel described,
+all 81 chapter starts confirmed. The companion layers are built: a Codex of 21
+entries, the Parchment's 5 puzzles, the Bhoodara caves, a journey rail of 10 beats,
+8 Council of Voices cards and 5 hidden Charvaka fragments, linked by 91 hotspots.
+Still open: the valley map and Real India layer, which need the place pairings
+confirmed, and the v2 AI features.
 
 ## Layout
 
@@ -53,7 +61,22 @@ Steps (see each script's docstring):
 
 Helper: `python pipeline/find_page.py "a manuscript quote"` → book, page and chapter where it appears in the comic.
 
-## Reviewing panels, alt text and chapters
+## Reviewing panels, descriptions and chapters
+
+**This pass is complete.** All 171 pages have been checked against the art: 1,712 panels,
+every one with a description, and all 81 chapter starts confirmed. Use the tool below to
+change any of it.
+
+| | Draft from the pipeline | After review |
+|---|---|---|
+| Panel boxes | 1,686 | 1,712 |
+| Panels described | 0 | 1,712 |
+| Chapter starts confirmed | 65 of 81 | 81 of 81 |
+
+Book 1 took almost all the corrections (20 pages of 42): its pages are montages with no
+gutters, so detection merged two drawings into one box again and again. Books 2-5 are on
+regular grids and needed five pages between them. Two pages also had their reading order
+wrong - B1 p21 and B4 p18, where interleaved columns scrambled the dialogue.
 
 ```bash
 npm run dev               # then open http://localhost:4321/dev/review
@@ -61,15 +84,46 @@ npm run dev               # then open http://localhost:4321/dev/review
 
 - Drag on empty space to draw a panel; drag a box to move it; drag its corner to resize; Delete removes it.
 - List order = reading order (↑/↓ to reorder).
-- Write alt text describing what is **drawn** in each panel.
-- "Set as start of" fixes a chapter's first page (16 low-confidence starts are flagged `?`).
+- Descriptions say what is **drawn**, not what is said - the page transcript already carries
+  the lettering, and a screen reader reads both. They also keep the book's own withholding:
+  he is "the young man" until the Professor names him Dvij on B1 p12.
+- "Set as start of" fixes a chapter's first page.
 - Ctrl+S saves the page to `src/content/corrections/`; `[` and `]` move between pages.
 
 Afterwards run `npm run manifests` to fold the corrections into the manifests.
 
+Corrections live in two files, both committed:
+
+| File | Shape |
+|---|---|
+| `src/content/corrections/panels.json` | `{"b1-p004": {"panels": [[x0,y0,x1,y1], …], "alt": ["…", …]}}` - omit `panels` to keep the detected boxes and only set descriptions |
+| `src/content/corrections/chapters.json` | `{"23": 39}` - chapter number to corrected start page |
+
 **Hotspots mode** (same page, "Hotspots" button): orange boxes are automatic links from the lettering;
 click one to switch it off. To add a link (e.g. on a drawn symbol rather than a word), pick a Codex entry
 and drag a box. Changes save to `src/content/hotspots/manual.json` immediately.
+
+## How companion content finds its page
+
+Puzzle starts, rail beats, Voice `firstSeen` values and fragments are all pinned to a
+comic page by `pipeline/find_page.py`: it locates a quoted passage in the manuscript,
+reads off its chapter, and picks the page in that chapter whose lettering matches best.
+Chapter ranges include the reviewed corrections from `corrections/chapters.json`.
+
+Where the art never lettered the passage, nothing matches and the lookup falls back to
+the chapter's first page - reported as `chapter-only`. That is usually close, but for a
+`firstSeen` it lifts the spoiler veil early. Four anchors were wrong and are now pinned
+explicitly, each with a comment saying what the art shows:
+
+| Where | Field |
+|---|---|
+| `content/parchment.yaml` | `availablePage: b4-p016` |
+| `content/rail.yaml` | `page: b5-p009` on the node |
+| `content/voices/*.md` | `firstSeen: {book, page}` in the front matter |
+
+An override resolves with confidence `reviewed`. Re-run `npm run codex`,
+`python pipeline/link_parchment.py` and `python pipeline/link_companions.py` after
+editing any of them, and they print each anchor's confidence.
 
 ## Codex entries
 

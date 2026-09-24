@@ -41,6 +41,7 @@ nodes:
   - id: yogini-leaves
     title: Yogini's gift
     quote: "And she left her dog as a gift to you, I suppose?"
+    page: b5-p009   # reviewed: the art asks "And left you the mutt?" here; p8 is the night she is still there
     party: { change: "Yogini leaves; the dog stays with Dvij", text: "The next morning Yogini has gone back of her own accord. Her dog stays, and from now on follows Dvij." }
     epic: "The dog changes hands here, not at the end. In the epic, the dog that walks with Yudhishthira to the last is Dharma, whom some tellings link with Yama."
 

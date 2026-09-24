@@ -19,7 +19,7 @@ test("a Voice card shows the figure, their line and where they appear", async ({
   await page.goto("/voices/tantric-baba/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("The tantric baba");
   await expect(page.locator("blockquote")).toContainText("Knowledge that hides in the darkness");
-  await expect(page.locator(".facts")).toContainText("Book 1, page 38");
+  await expect(page.locator(".facts")).toContainText("Book 1, page 40");
   await expect(page.locator(".portrait img")).toBeVisible();
 });
 

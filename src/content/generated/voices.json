@@ -7,7 +7,7 @@
   "portrait": {
    "file": "voice-mahant.webp",
    "w": 640,
-   "h": 942,
+   "h": 934,
    "page": "b1-p006",
    "fromLettering": true
   }
@@ -41,12 +41,12 @@
  "tantric-baba": {
   "firstSeen": {
    "book": 1,
-   "page": 38
+   "page": 40
   },
   "portrait": {
    "file": "voice-tantric-baba.webp",
    "w": 640,
-   "h": 519,
+   "h": 531,
    "page": "b1-p040",
    "fromLettering": true
   }
@@ -80,7 +80,7 @@
  "vedic-sage": {
   "firstSeen": {
    "book": 5,
-   "page": 11
+   "page": 10
   },
   "portrait": {
    "file": "voice-vedic-sage.webp",
@@ -93,7 +93,7 @@
  "yogini": {
   "firstSeen": {
    "book": 1,
-   "page": 40
+   "page": 42
   },
   "portrait": {
    "file": "voice-yogini.webp",
