@@ -13,6 +13,7 @@ related:
 - bija-mantras
 images:
 - codex-hierarchy
+diagram: tattvas
 source: endnote-11
 manuscriptAnchor: dly. Dvij stopped at a page then laid it out in front of them. The diagram was like a periodic table of the tattvas, where within each cell that contained a tattva, a unique letter from the alphabet was written under the name of the tattva.
 ---

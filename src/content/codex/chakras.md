@@ -16,6 +16,7 @@ related:
 - bija-mantras
 images:
 - codex-tattvas
+diagram: chakras
 source: endnote-8
 manuscriptAnchor: '? But it’s true. Each chakra has a specific shape, a colour, a presiding deity and many more properties attached to it. The underlying theory explains the hows and whys of it...much like chemistry explains the properties of basic elements.”'
 ---

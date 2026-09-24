@@ -11,6 +11,7 @@ related:
 - dikpalas
 images:
 - codex-lakshmi-symbol
+diagram: lakshmi-star
 source: endnote-5
 manuscriptAnchor: “Ashtalakshmis! Lakshmi rendered in the form of eight goddesses, ranging from most benevolent to most malevolent. That has always fascinated my feminine imagination. I know her symbol by heart.”
 ---

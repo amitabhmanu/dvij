@@ -8,6 +8,7 @@ related:
 - dikpalas
 images:
 - codex-gnomon
+diagram: gnomon
 source: endnote-13
 manuscriptAnchor: he shadow at dusk when the sun is in the west. Therefore that point marks east. Tomorrow at dawn, we will mark the exact spot where the stick’s shadow crosses the circle. That would mark east. Let us imagine for now that this is that spot.”
 ---

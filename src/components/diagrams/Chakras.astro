@@ -59,14 +59,14 @@ const petal = (i: number, n: number, long: boolean) =>
       const y = TOP + STEP * i;
       return (
         <g class="label" transform={`translate(${LABEL} ${y})`}>
-          <text class="name" y="-4">{n.name}</text>
-          <text class="where" y="11">{n.where}</text>
-          <text class="element" y="24">{n.element}</text>
+          <text class="d-name" y="-4">{n.name}</text>
+          <text class="d-sub" y="11">{n.where}</text>
+          <text class="d-note" y="24">{n.element}</text>
         </g>
       );
     })}
 
-    <text class="foot" x={SPINE} y={TOP + STEP * (NODES.length - 1) + 54} text-anchor="middle">kundalini rises ↑</text>
+    <text class="d-foot" x={SPINE} y={TOP + STEP * (NODES.length - 1) + 54} text-anchor="middle">kundalini rises ↑</text>
   </svg>
   <figcaption>
     The seven chakras, with each lotus drawn at its traditional petal count.
@@ -75,10 +75,6 @@ const petal = (i: number, n: number, long: boolean) =>
 </figure>
 
 <style>
-  .diagram { margin: 0 0 16px; background: var(--paper-2); border: 1px solid var(--paper-3); border-radius: var(--radius); padding: 14px 10px 10px; }
-  .diagram svg { display: block; }
-  figcaption { font-family: var(--font-ui); font-size: 0.78rem; line-height: 1.45; color: var(--ink-3); margin-top: 10px; }
-
   .spine { stroke: var(--paper-3); stroke-width: 7; stroke-linecap: round; }
   .rise { stroke: var(--ink-3); stroke-width: 1.2; stroke-dasharray: 3 5; fill: none; opacity: 0.85; }
   .tip { fill: var(--ink-3); }
@@ -86,11 +82,6 @@ const petal = (i: number, n: number, long: boolean) =>
   .petals { fill: var(--hue); stroke: var(--ink); stroke-width: 0.6; opacity: 0.92; }
   .core { fill: var(--paper); stroke: var(--ink); stroke-width: 1.3; }
   .count { font-family: var(--font-ui); font-size: 11px; font-weight: 600; fill: var(--ink-2); text-anchor: middle; }
-
-  .name { font-family: var(--font-text); font-size: 13.5px; font-weight: 600; fill: var(--ink); }
-  .where { font-family: var(--font-ui); font-size: 10px; fill: var(--ink-2); }
-  .element { font-family: var(--font-ui); font-size: 9.5px; fill: var(--ink-3); font-style: italic; }
-  .foot { font-family: var(--font-ui); font-size: 10px; fill: var(--ink-3); letter-spacing: 0.04em; }
 
   /* The book's colour per chakra, lifted for legibility on the dark parchment. */
   .hue-red { --hue: #c0392b; }

@@ -14,6 +14,7 @@ related:
 - matrikas
 images:
 - codex-directions
+diagram: directions
 source: endnote-4
 manuscriptAnchor: Bhavi scanned the index and flipped pages to stop at the one which revealed a brightly coloured diagram with medieval figures and symbols scattered in eight boxes around an empty central square.
 ---
