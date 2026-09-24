@@ -1,6 +1,6 @@
 # The Twice Born — Website Design
 
-Design for a static website, hosted on Netlify, that publishes the *Twice Born* comic and the interactive companion layers worked out in [twice-born-website-design-discussion.md](twice-born-website-design-discussion.md). This document supersedes the discussion record where they differ; §15 lists the corrections.
+Design for a static website, hosted on Netlify, that publishes the *Twice Born* comic and the interactive companion layers worked out in [twice-born-website-design-discussion.md](twice-born-website-design-discussion.md). This document supersedes the discussion record where they differ; §16 lists the corrections.
 
 ---
 
@@ -42,7 +42,7 @@ Everything the site needs already exists in this folder. Facts below were measur
 - **Each panel is a separate embedded image** with a known bounding box on the page (B2 p4 has 12). Boxes bleed past the page edge and overlap slightly under gutters.
 - Only Book 1 has a front page (p1, no lettering). Books 2–5 start directly on story pages.
 - The PDFs have **no chapter bookmarks** — their outlines are auto-generated from every text frame. Chapter → page mapping has to be derived (§4.4).
-- **Known defect in the source: B1 p1.** The page holds two images — the valley map across the top half, and a 1536 × 1024 PNG across the bottom half that is pure black (brightest pixel 1 of 255). It is in `book/B1.pdf` itself, so it is in the printed book and is not something the pipeline introduced; no other page has anything like it. The site drops it from that page's panel list so panel mode does not step into a black rectangle, but the page still displays as the map above a black field. Cropping the page would change how a printed page is shown, so that decision is the author's (§16).
+- **Known defect in the source: B1 p1.** The page holds two images — the valley map across the top half, and a 1536 × 1024 PNG across the bottom half that is pure black (brightest pixel 1 of 255). It is in `book/B1.pdf` itself, so it is in the printed book and is not something the pipeline introduced; no other page has anything like it. The site drops it from that page's panel list so panel mode does not step into a black rectangle, but the page still displays as the map above a black field. Cropping the page would change how a printed page is shown, so that decision is the author's (§17).
 
 ### 2.2 Companion material
 
@@ -303,7 +303,7 @@ The body holds the long form: tables, diagrams, cross-links.
 - **Other entries:** names the Professor explains in-line (Mahavidyas, Ashtadikpalas, Kaula, Charvaka, Soma, Bhoodara caves…) become further entries, written from the manuscript.
 - **Links:** cross-links make it a wiki rather than a flat glossary — for example, kundalini → chakras → tattvas → Samkhya.
 - **Recurring symbols:** each entry lists the pages it appears on ("this glyph also appears on B2 p5, B3 p9"). This fits the book, whose plot runs on recognising symbols.
-- **Script:** diacritics (IAST, e.g. *Bhārāti Kṛṣṇa*) and Devanagari must render, which affects the font choice (§11).
+- **Script:** diacritics (IAST, e.g. *Bhārāti Kṛṣṇa*) and Devanagari must render, which affects the font choice (§12).
 
 ### 6.2 Presentation
 | Trigger | Result |
@@ -441,7 +441,7 @@ Each chakra beat sits on the page where the art marks the rise, not where the ma
 
 - **The Mahant's card** is visually distinct (red rule, "Antagonist" tag). It reads as *how institutional religion gets weaponised*, not as one more equally valid voice.
 - **Hotspots:** each figure's line in the comic carries a `voice:` note that opens their card in the reader's drawer.
-- **v2:** each card gains a "Talk to …" button (§13).
+- **v2:** each card gains a "Talk to …" button (§14).
 
 ### 9.1 The Charvaka thread
 - **Idea:** Charvaka is a hidden, **recurring thread**, not a card. Readers collect it rather than being handed it, which echoes the book's theme of suppressed knowledge.
@@ -469,7 +469,7 @@ Each chakra beat sits on the page where the art marks the rise, not where the ma
 
 ---
 
-## 11. Visual Design
+## 12. Visual Design
 
 - **Identity:** vintage 1950s–60s Indian adventure comic, the same style lock as the character manifest. The site should feel like the book's world, not a generic webcomic host.
 - **Palette:** warm paper cream, sepia, terracotta, faded ink black, with a single saturated red-gold accent taken from Bhavi's costume. Define it as CSS custom properties, with a **night-reading theme** (deep ink background, softened paper) for the reader.
@@ -483,14 +483,14 @@ Each chakra beat sits on the page where the art marks the rise, not where the ma
 
 ---
 
-## 12. Technical Architecture
+## 13. Technical Architecture
 
-### 12.1 Stack
+### 13.1 Stack
 - **Astro, static output.** It produces one HTML page per comic page and codex entry, which is good for sharing and search. Content collections validate codex / voices / places schemas at build time.
 - **Islands:** reader, parchment, caves, journey rail, valley map. Preact or vanilla TypeScript; no heavy framework needed.
 - **Search:** [Pagefind](https://pagefind.app) indexes the built HTML at build time, including the hidden page transcripts and codex. It runs fully client-side, with no search backend.
 
-### 12.2 Repository layout
+### 13.2 Repository layout
 ```
 dvij/
 ├── book/                 final PDFs (source of truth; NOT in git)
@@ -517,14 +517,14 @@ dvij/
 │   ├── netlify/functions/   (v2 only)
 │   └── netlify.toml
 └── site-assets/          pipeline output: compressed PDFs, page images,
-                          art (NOT in git; uploaded to Cloudflare R2, §12.3)
+                          art (NOT in git; uploaded to Cloudflare R2, §13.3)
 ```
 
 The three documents in `site/docs/` are the only prose in the repo besides the
 README. Paths named in this document — `book/`, `images/`, `site-assets/` — are
 relative to `dvij/`, the project root, not to the repo root.
 
-### 12.3 Where the PDFs and page images live
+### 13.3 Where the PDFs and page images live
 The published binaries are the compressed PDFs (202 MB) and the page images rendered from them (547 MB), about 750 MB in all. They don't belong in git.
 
 | Option | How | Trade-off |
@@ -540,7 +540,7 @@ Until the domain exists the bucket's `r2.dev` URL works; after that it moves to 
 
 **jsDelivr was considered and rejected.** It would serve the page images — the largest is 1.7 MB, under its 20 MB per-file cap — but all five PDFs are 30–64 MB and exceed it, the files would have to live in a second GitHub repo as 547 MB of permanent history, and jsDelivr is a free service for open-source code rather than a host for a comic's artwork. If it throttled or blocked the repo, the art would go dark with no warning.
 
-### 12.4 Netlify configuration
+### 13.4 Netlify configuration
 - **Build:** `astro build && pagefind --site dist`, publishing `dist/`.
 - **Caching:** headers with `Cache-Control: public, max-age=31536000, immutable` for hashed assets.
 - **Redirects:** `/read/b1/ch/:n` → the chapter's start page, generated at build time from the manifests into `_redirects`.
@@ -549,9 +549,9 @@ Until the domain exists the bucket's `r2.dev` URL works; after that it moves to 
 
 ---
 
-## 13. v2 — AI Features
+## 14. v2 — AI Features
 
-### 13.1 Architecture
+### 14.1 Architecture
 - **Proxy:** a Netlify Function (TypeScript, official Anthropic SDK) sits between the site and the Claude API.
 - **API key:** kept in a Netlify environment variable. It never appears in client JavaScript.
 - **Streaming:** responses stream to the browser.
@@ -561,18 +561,18 @@ Until the domain exists the bucket's `r2.dev` URL works; after that it moves to 
 | **Ask the Codex** | Codex drawer and entry pages: "Ask about this" | Codex + manuscript |
 | **Talk to a Voice** | Council cards | Codex + manuscript + that figure's character sheet (doctrine, speech style, what they refuse to discuss) |
 
-### 13.2 Grounding & caching
+### 14.2 Grounding & caching
 - **Corpus:** the manuscript (~103k words) plus the codex fits comfortably in a single request's context window. Measure the exact size with the token-counting endpoint before committing.
 - **Prompt order:** the stable corpus goes first in the system prompt, marked for **prompt caching**. The figure-specific sheet and the user's question go after the cache breakpoint. Repeat requests then read the corpus from cache instead of paying full input price each time.
 - **Spoilers and caching:** trimming the corpus to the reader's exact progress would change the prompt prefix on every request and defeat caching. Instead, keep **five cache variants**, one per book boundary ("the text through the end of Book N"). Each reader gets the variant matching their `furthestRead`, which keeps spoiler safety without losing cache hits.
 - **Voices:** each figure is instructed to answer only from their doctrine and on-page dialogue, to stay in voice, and to decline to drift. The Mahant stays manipulative, never wise.
 
-### 13.3 Model
+### 14.3 Model
 - **Default:** `claude-opus-5`.
 - **Cost trade-off:** a cheaper model (e.g. `claude-sonnet-5` or `claude-haiku-4-5`) cuts cost for high-volume public chat, at some quality cost. That is your call once real traffic and a small evaluation set exist.
 - **Refusals:** handle the `refusal` stop reason, and enable the API's server-side model fallbacks.
 
-### 13.4 Cost & abuse controls
+### 14.4 Cost & abuse controls
 Because it is a public site, apply all of these:
 - per-IP rate limit (stored in Netlify Blobs)
 - maximum question length
@@ -585,11 +585,11 @@ If per-question cost is too high even with caching, fall back to **retrieval**: 
 
 ---
 
-## 14. Roadmap
+## 15. Roadmap
 
 | Phase | Deliverable | Status |
 |---|---|---|
-| 0 | Pipeline: **PDF compression + quality gate**, page images, text layer, draft panels, chapter map, manifests; dev review tool; asset hosting | **Done.** 1.9 GB → 202.5 MB, all gates passed; 171 pages at 4 widths × 2 formats; assets on R2 (§12.3) |
+| 0 | Pipeline: **PDF compression + quality gate**, page images, text layer, draft panels, chapter map, manifests; dev review tool; asset hosting | **Done.** 1.9 GB → 202.5 MB, all gates passed; 171 pages at 4 widths × 2 formats; assets on R2 (§13.3) |
 | 1 | **Reader MVP**: home, book picker, hybrid reader, panel mode, progress, search, PDF downloads; deploy publicly | **Done.** Live on Netlify |
 | — | **Review pass**: panel boxes checked, descriptions written from the art, chapter starts confirmed | **Done.** 171/171 pages, 1,712/1,712 panels, 81/81 chapters (§4.3, §4.4, §4.6) |
 | 2 | Codex (21 entries), drawer, hotspot authoring, spoiler policy | **Done.** 91 hotspots |
@@ -604,7 +604,7 @@ Phase 1 alone is a complete, shippable comic site. Each later phase adds a layer
 
 ---
 
-## 15. Corrections to the Discussion Document
+## 16. Corrections to the Discussion Document
 
 Verified against the manuscript and the PDFs:
 
@@ -619,13 +619,13 @@ Verified against the manuscript and the PDFs:
 
 ---
 
-## 16. Open Questions
+## 17. Open Questions
 
-**Settled:** public launch · no redraws · compressed PDFs are hosted and are the image source · working images unpublished except §4.7 · five parchment puzzles (§7.1) · assets on Cloudflare R2 (§12.3) · panel boxes, descriptions and chapter starts reviewed across all 171 pages (§4.3, §4.4, §4.6).
+**Settled:** public launch · no redraws · compressed PDFs are hosted and are the image source · working images unpublished except §4.7 · five parchment puzzles (§7.1) · assets on Cloudflare R2 (§13.3) · panel boxes, descriptions and chapter starts reviewed across all 171 pages (§4.3, §4.4, §4.6).
 
 **For you:**
 
-1. **Domain name** (you'll specify later). It also names the asset subdomain (§12.3), which is on the rate-limited `r2.dev` URL until then and should not carry launch traffic.
+1. **Domain name** (you'll specify later). It also names the asset subdomain (§13.3), which is on the rate-limited `r2.dev` URL until then and should not carry launch traffic.
 2. **Real India:** confirm or replace each pairing in [real-india-pairings.md](real-india-pairings.md), and source licensed photos. Blocks Phase 5.
 3. **B1 p1's black half** (§2.1): leave the page as printed, crop it to the map, or fix the source PDF?
 4. **Spot-check the chart pages.** The descriptions on the diagram pages state what each chart says, so a misreading is now in the site's accessible text. The ones worth checking: B2 p25–26, B3 p3–4, B4 p29–32, B5 p22.

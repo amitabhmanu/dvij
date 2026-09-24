@@ -13,6 +13,7 @@ const codex = defineCollection({
     summary: z.string(),
     related: z.array(z.string()).default([]),
     images: z.array(z.string()).default([]), // names from site-assets/art (without .webp)
+    diagram: z.string().optional(), // key in src/components/diagrams/index.ts
     source: z.string(), // endnote-N | manuscript | author
     firstSeen: z.object({ book: z.number().int(), page: z.number().int() }).optional(),
     manuscriptAnchor: z.string().optional(),

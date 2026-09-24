@@ -10,6 +10,12 @@ firstQuote: The professor paused and shifted his weight over to the other leg
 portrait:
   page: b4-p004
   match: Charvaka
+  # The panel holding that line is a montage of small framed scenes with balloons
+  # across it; on the card he appeared three times, small, and none read as a
+  # portrait. This box takes the close shot in the top row of the same page -
+  # "it could be anywhere, and yet it is nowhere" - glasses, moustache, finger
+  # raised, the lodge behind. The hotspot stays on the quoted line above.
+  box: [0.250, 0.002, 0.505, 0.199]
 excerpt: This very valley of ours, which in its microcosm… is a replica of the entire universe. As such, it could have been anywhere.
 codex:
 - charvaka

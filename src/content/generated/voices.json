@@ -58,8 +58,8 @@
   },
   "portrait": {
    "file": "voice-the-monk.webp",
-   "w": 640,
-   "h": 916,
+   "w": 425,
+   "h": 331,
    "page": "b5-p021",
    "fromLettering": true
   }
@@ -71,8 +71,8 @@
   },
   "portrait": {
    "file": "voice-the-professor.webp",
-   "w": 640,
-   "h": 444,
+   "w": 539,
+   "h": 665,
    "page": "b4-p004",
    "fromLettering": true
   }

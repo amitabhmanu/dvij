@@ -5,6 +5,7 @@ import VeilNotice from "../../components/VeilNotice.astro";
 import VeilScript from "../../components/VeilScript.astro";
 import { codexEntries, allHotspots, pageRef } from "../../lib/codex";
 import { artFile } from "../../lib/manifest";
+import { diagramFor } from "../../components/diagrams";
 
 export async function getStaticPaths() {
   const entries = await codexEntries();
