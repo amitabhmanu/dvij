@@ -1,9 +1,14 @@
 # The Twice Born — website
 
-Static Astro site for Netlify that publishes the comic (design:
-`../twice-born-website-design.md`). Page images, art and PDFs are generated from
-`../book/` into `../site-assets/` and are never committed; they are served from a
-Cloudflare R2 bucket.
+Static Astro site for Netlify that publishes the comic. Page images, art and PDFs
+are generated from `../book/` into `../site-assets/` and are never committed; they
+are served from a Cloudflare R2 bucket.
+
+| Document | What it is |
+|---|---|
+| [docs/twice-born-website-design.md](docs/twice-born-website-design.md) | The design. What the site is, how the pipeline works, what every layer does, and what is still open. Kept in step with the code |
+| [docs/real-india-pairings.md](docs/real-india-pairings.md) | Researched real-world counterparts for the valley's places, with confidence levels and sources. Awaiting your confirmation; blocks the Real India layer |
+| [docs/twice-born-website-design-discussion.md](docs/twice-born-website-design-discussion.md) | The original brainstorm the design was drawn from. Superseded where the two disagree - see design §15 |
 
 **State:** all five books are in — 171 pages, 1,712 panels, every panel described,
 all 81 chapter starts confirmed. The companion layers are built: a Codex of 21
