@@ -1,23 +1,29 @@
 ---
-// The eight guardians on their 3x3 grid, centre left empty. Names, directions
-// and weapons are exactly the table in src/content/codex/dikpalas.md. Drawn
-// north-up, and every cell states its own direction so the orientation cannot
-// be misread.
+// The eight guardians on their 3x3 grid, centre left empty. Cell positions
+// reproduce the book's own plate (images/artifacts/directions.jpg), which is
+// printed beside this diagram on the page. Names, directions and weapons are
+// the table in src/content/codex/dikpalas.md.
+//
+// The plate is not a compass. Its four cardinals sit where a north-up reading
+// expects them, but each corner sits one quarter-turn clockwise of the
+// direction it guards, which is why Ishana (NE) heads the top row and Vaayu
+// (NW) the bottom. The direction under each name is the one that deity rules,
+// per the table, not the compass point of the square it occupies.
 type Cell = { dir: string; name: string; weapon: string; maha?: boolean };
 
 const GRID: (Cell | null)[] = [
-  { dir: "NW", name: "Vaayu", weapon: "Ankusha" },
-  { dir: "N", name: "Kubera", weapon: "Gada", maha: true },
   { dir: "NE", name: "Ishana", weapon: "Trishula" },
+  { dir: "N", name: "Kubera", weapon: "Gada", maha: true },
+  { dir: "SE", name: "Agni", weapon: "Shakti" },
   { dir: "W", name: "Varuna", weapon: "Paasha", maha: true },
   null,
   { dir: "E", name: "Indra", weapon: "Vajra", maha: true },
-  { dir: "SW", name: "Nirrti", weapon: "Khadga" },
+  { dir: "NW", name: "Vaayu", weapon: "Ankusha" },
   { dir: "S", name: "Yama", weapon: "Danda", maha: true },
-  { dir: "SE", name: "Agni", weapon: "Shakti" },
+  { dir: "SW", name: "Nirrti", weapon: "Khadga" },
 ];
 
-const W = 88, H = 72, GAP = 4, X0 = 14, Y0 = 44;
+const W = 88, H = 72, GAP = 4, X0 = 14, Y0 = 16;
 const VB_H = Y0 + 3 * H + 2 * GAP + 40;
 const left = (c: number) => X0 + c * (W + GAP);
 const top = (r: number) => Y0 + r * (H + GAP);
@@ -27,13 +33,13 @@ const top = (r: number) => Y0 + r * (H + GAP);
   <svg viewBox={`0 0 300 ${VB_H}`} role="img" aria-labelledby="dik-t dik-d">
     <title id="dik-t">The eight dikpalas on a three-by-three grid</title>
     <desc id="dik-d">
-      A three-by-three grid drawn north-up. Each of the eight outer cells holds one
-      guardian of a direction with the weapon they carry: Vaayu northwest, Kubera north,
-      Ishana northeast, Varuna west, Indra east, Nirrti southwest, Yama south and Agni
-      southeast. The centre square is left empty.
+      A three-by-three grid laid out as the book's own plate has it, with the centre
+      square left empty. Top row: Ishana, guardian of the northeast; Kubera, north; Agni,
+      southeast. Middle row: Varuna, west; the empty centre; Indra, east. Bottom row:
+      Vaayu, northwest; Yama, south; Nirrti, southwest. The four cardinal guardians fall
+      where a north-up reading expects them, but each corner guardian sits one
+      quarter-turn clockwise of the direction it rules.
     </desc>
-
-    <text class="d-foot" x="150" y="26" text-anchor="middle">↑ north</text>
 
     {GRID.map((cell, i) => {
       const r = Math.floor(i / 3), c = i % 3;
@@ -59,9 +65,12 @@ const top = (r: number) => Y0 + r * (H + GAP);
     <text class="d-foot" x="150" y={VB_H - 14} text-anchor="middle">bold = the four Mahadikpalas</text>
   </svg>
   <figcaption>
-    The eight guardians, each on the direction they rule, with the weapon they carry.
-    Kubera, Yama, Indra and Varuna are the four Mahadikpalas. Brahma (zenith) and
-    Vishnu (nadir) have no square: they sit off the grid.
+    Laid out as the book's plate has it. The four Mahadikpalas fall where you would
+    expect — Kubera north at the top, Yama south at the foot, Indra east and Varuna
+    west — but the corners do not: each sits a quarter-turn clockwise of the direction
+    it guards, which is why Ishana (northeast) heads the top row. The direction under
+    each name is the one that deity rules. Brahma (zenith) and Vishnu (nadir) have no
+    square.
   </figcaption>
 </figure>
 
