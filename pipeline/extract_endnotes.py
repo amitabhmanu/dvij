@@ -6,6 +6,12 @@ Markdown paragraphs, Word tables become Markdown tables, and embedded images
 images/artifacts diagram. Each draft also records the manuscript sentence the
 endnote is attached to, so find_page.py can locate it in the comic.
 
+Devanagari in the notes is set in a legacy 8-bit font, so its runs hold Latin
+bytes rather than letters. Those runs are decoded by legacy_devanagari; a byte
+with no mapping is left as it stands and reported at the end, never passed off
+as text. Extracting without this produced "f, F, d, D, E" where the tattva
+table has क ख ग घ ङ.
+
 Output: src/content/codex/_drafts/NN-<slug>.md  (draft: true; edit, then move up)
 Usage: python extract_endnotes.py
 """
@@ -14,6 +20,7 @@ import zipfile
 import xml.etree.ElementTree as ET
 
 from common import BOOK_DIR, SITE
+from legacy_devanagari import decode, is_legacy
 
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 DOCX = BOOK_DIR / "The Twice Born.docx"
@@ -32,8 +39,39 @@ def slugify(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 
 
+# Legacy-font bytes this run of the script could not decode, as
+# {byte: an endnote title}. main() reports them; they are never silently kept.
+UNMAPPED: dict[str, str] = {}
+_current_note = "?"
+
+
+def run_font(r: ET.Element) -> str | None:
+    rpr = r.find(f"{W}rPr")
+    if rpr is None:
+        return None
+    fonts = rpr.find(f"{W}rFonts")
+    if fonts is None:
+        return None
+    return fonts.get(f"{W}ascii") or fonts.get(f"{W}hAnsi") or fonts.get(f"{W}cs")
+
+
 def text_of(el: ET.Element) -> str:
-    return re.sub(r"\s+", " ", "".join(t.text or "" for t in el.iter(f"{W}t"))).strip()
+    """Text of an element, run by run, decoding legacy Devanagari as it goes.
+
+    Run by run rather than straight over w:t, because the font that says how to
+    read the bytes lives on the run.
+    """
+    parts = []
+    for r in el.iter(f"{W}r"):
+        t = "".join(x.text or "" for x in r.iter(f"{W}t"))
+        if not t:
+            continue
+        if is_legacy(run_font(r)):
+            t, unknown = decode(t)
+            for byte in unknown:
+                UNMAPPED.setdefault(byte, _current_note)
+        parts.append(t)
+    return re.sub(r"\s+", " ", "".join(parts)).strip()
 
 
 def table_md(tbl: ET.Element) -> str:
@@ -84,7 +122,13 @@ def main() -> None:
     notes = [n for n in ET.fromstring(notes_xml).findall(f"{W}endnote")
              if n.get(f"{W}type") not in ("separator", "continuationSeparator") and text_of(n)]
     OUT.mkdir(parents=True, exist_ok=True)
+    global _current_note
+    # Selecting the notes above already ran text_of over all of them, with no
+    # title to attribute anything to. Drop that pass's findings; the titled loop
+    # below covers the same text and can say where each byte came from.
+    UNMAPPED.clear()
     for i, (note, title) in enumerate(zip(notes, TITLES), start=1):
+        _current_note = title
         slug = slugify(title)
         body = note_body(note)
         anchor = where.get(note.get(f"{W}id"), "").replace('"', "'")
@@ -95,6 +139,11 @@ def main() -> None:
         print(f"{i:02d} {title:34s} {len(body.split()):4d} words  tables={body.count(chr(10) + '|---')}")
     if len(notes) != len(TITLES):
         print(f"WARNING: {len(notes)} endnotes found, {len(TITLES)} titles defined")
+    if UNMAPPED:
+        print(f"\nWARNING: {len(UNMAPPED)} legacy-font byte(s) with no mapping in "
+              f"legacy_devanagari.WEBDUNIA. They are left as-is in the draft:")
+        for byte, where in sorted(UNMAPPED.items()):
+            print(f"  {byte!r} in {where}")
 
 
 if __name__ == "__main__":

@@ -1,68 +1,77 @@
 ---
-// The tattvas as a descent from subtle to gross. The seven groups and their five
-// members each are the book's own table in src/content/codex/tattvas.md, read
-// bottom-up so the subtlest sit at the top. The table also gives each cell a
-// Devanagari letter; those survive in the source only as legacy font bytes, so
-// they are left out here rather than printed as nonsense.
-const GROUPS = [
-  { name: "Shuddha-tattvas", members: ["Kriya", "Gyana", "Ichhna", "Shakti", "Shiva"] },
-  { name: "Kanchukas", members: ["Action", "Knowledge", "Desire", "Time", "Fate"] },
-  { name: "Antahkarnas", members: ["Prakriti", "Ahamkara", "Buddhi", "Manas", "Purusha"] },
-  { name: "Gyanendriyas", members: ["Smelling", "Tasting", "Seeing", "Feeling", "Hearing"] },
-  { name: "Karmendriyas", members: ["Excreting", "Sexing", "Grasping", "Moving", "Speaking"] },
-  { name: "Tanmatas", members: ["Scent", "Taste", "Sight", "Touch", "Sound"] },
-  { name: "Mahabhutas", members: ["Earth", "Water", "Fire", "Air", "Ether"] },
-];
+// The tattvas as the book's own "periodic table": seven groups of five, each
+// cell a tattva and the Devanagari letter assigned to it, read from the table
+// in src/content/codex/tattvas.md. Groups run subtlest first.
+//
+// The letters were set in a legacy font in the manuscript and are decoded by
+// pipeline/legacy_devanagari.py. One cell, the kanchuka of Fate, has no
+// recoverable letter; it shows a dash rather than a guess.
+type Cell = { name: string; letter: string | null };
+const GROUPS: { name: string; cells: Cell[] }[] = [
+  { name: "Shuddha-tattvas", cells: [["Kriya", "श"], ["Gyana", "ष"], ["Ichhna", "स"], ["Shakti", "ह"], ["Shiva", "क्ष"]] as any },
+  { name: "Kanchukas", cells: [["Action", "य"], ["Knowledge", "र"], ["Desire", "ल"], ["Time", "व"], ["Fate", null]] as any },
+  { name: "Antahkarnas", cells: [["Prakriti", "प"], ["Ahamkara", "फ"], ["Buddhi", "ब"], ["Manas", "भ"], ["Purusha", "म"]] as any },
+  { name: "Gyanendriyas", cells: [["Smelling", "त"], ["Tasting", "थ"], ["Seeing", "द"], ["Feeling", "ध"], ["Hearing", "न"]] as any },
+  { name: "Karmendriyas", cells: [["Excreting", "ट"], ["Sexing", "ठ"], ["Grasping", "ड"], ["Moving", "ढ"], ["Speaking", "ण"]] as any },
+  { name: "Tanmatas", cells: [["Scent", "च"], ["Taste", "छ"], ["Sight", "ज"], ["Touch", "झ"], ["Sound", "ञ"]] as any },
+  { name: "Mahabhutas", cells: [["Earth", "क"], ["Water", "ख"], ["Fire", "ग"], ["Air", "घ"], ["Ether", "ङ"]] as any },
+].map((g) => ({ name: g.name, cells: (g.cells as unknown as [string, string | null][]).map(([name, letter]) => ({ name, letter })) }));
 
-const X0 = 30, ROW = 44, Y0 = 32, GAP = 3;
-const VB_H = Y0 + GROUPS.length * ROW + 16;
-const AXIS_BOTTOM = Y0 + GROUPS.length * ROW - GAP;
+const CW = 55, CH = 38, X0 = 11, LABEL_H = 15, BLOCK = LABEL_H + CH + 9;
+const Y0 = 14;
+const VB_H = Y0 + GROUPS.length * BLOCK + 18;
 ---
 
 <figure class="diagram">
   <svg viewBox={`0 0 300 ${VB_H}`} role="img" aria-labelledby="tat-t tat-d">
-    <title id="tat-t">The tattvas, from subtle to gross</title>
+    <title id="tat-t">The periodic table of the tattvas</title>
     <desc id="tat-d">
-      Seven groups of five principles stacked as a descent. From the top: Shuddha-tattvas,
-      Kanchukas, Antahkarnas, Gyanendriyas, Karmendriyas, Tanmatas and Mahabhutas, the
-      five gross elements, at the bottom.
+      Seven groups of five principles, subtlest first, each with the Devanagari letter
+      the book assigns it. Shuddha-tattvas take the sibilants, the kanchukas the
+      semivowels, and the five pentads below them take the five vargas in turn, ending
+      with the gross elements on ka-varga. The kanchuka of Fate has no recoverable
+      letter and shows a dash.
     </desc>
 
-    <defs>
-      <marker id="tat-tip" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-        <path d="M 0 0 L 10 5 L 0 10 z" class="axis-tip" />
-      </marker>
-    </defs>
-    <line class="axis" x1="15" y1={Y0} x2="15" y2={AXIS_BOTTOM} marker-end="url(#tat-tip)" />
-    <text class="axis-label" transform={`translate(11 ${(Y0 + AXIS_BOTTOM) / 2}) rotate(-90)`} text-anchor="middle">
-      subtle → gross
-    </text>
-
     {GROUPS.map((g, i) => {
-      const y = Y0 + i * ROW;
+      const y = Y0 + i * BLOCK;
       return (
         <g>
-          <rect class="band" x={X0} y={y} width={300 - X0 - 8} height={ROW - GAP} rx="3" />
-          <rect class="tab" x={X0} y={y} width="4" height={ROW - GAP} style={`fill-opacity:${0.28 + i * 0.1}`} />
-          <text class="g-name" x={X0 + 12} y={y + 17}>{g.name}</text>
-          <text class="g-members" x={X0 + 12} y={y + 32}>{g.members.join(" · ")}</text>
+          <rect class="swatch" x={X0} y={y - 9} width="4" height="10" style={`fill-opacity:${0.3 + i * 0.1}`} />
+          <text class="g-name" x={X0 + 10} y={y}>{g.name}</text>
+          {g.cells.map((c, k) => {
+            const x = X0 + k * (CW + 1);
+            return (
+              <g>
+                <rect class={c.letter ? "cell" : "cell gap"} x={x} y={y + 6} width={CW} height={CH} rx="3" />
+                <text class={c.letter ? "letter" : "letter missing"} x={x + CW / 2} y={y + 27} text-anchor="middle">
+                  {c.letter ?? "—"}
+                </text>
+                <text class="c-name" x={x + CW / 2} y={y + 39} text-anchor="middle">{c.name}</text>
+              </g>
+            );
+          })}
         </g>
       );
     })}
+
+    <text class="d-foot" x="150" y={VB_H - 5} text-anchor="middle">subtle above · gross below</text>
   </svg>
   <figcaption>
-    Samkhya's principles as a descent: the subtlest at the top, the five gross
-    elements at the bottom. Each cell in the book's table also carries a
-    Devanagari letter, which is why the professor calls it a periodic table.
+    The book's own table: each tattva with its Devanagari letter. The groups take the
+    alphabet in order — sibilants for the shuddha-tattvas, semivowels for the
+    kanchukas, then a varga per pentad down to the gross elements on <span class="dv">क ख ग घ ङ</span>.
+    Fate's letter is not recoverable from the manuscript, so it shows a dash.
   </figcaption>
 </figure>
 
 <style>
-  .band { fill: var(--paper); stroke: var(--paper-3); stroke-width: 1; }
-  .tab { fill: var(--sepia); }
-  .g-name { font-family: var(--font-text); font-size: 11.5px; font-weight: 700; fill: var(--ink); }
-  .g-members { font-family: var(--font-ui); font-size: 9px; fill: var(--ink-2); }
-  .axis { stroke: var(--ink-3); stroke-width: 1.2; }
-  .axis-tip { fill: var(--ink-3); }
-  .axis-label { font-family: var(--font-ui); font-size: 9px; letter-spacing: 0.06em; fill: var(--ink-3); }
+  .cell { fill: var(--paper); stroke: var(--paper-3); stroke-width: 1; }
+  .gap { stroke-dasharray: 3 3; }
+  .letter { font-family: var(--font-deva); font-size: 17px; fill: var(--ink); }
+  .missing { fill: var(--ink-3); font-size: 13px; }
+  .c-name { font-family: var(--font-ui); font-size: 7.2px; fill: var(--ink-3); }
+  .g-name { font-family: var(--font-text); font-size: 11px; font-weight: 700; fill: var(--ink-2); }
+  .swatch { fill: var(--sepia); }
+  .dv { font-family: var(--font-deva); }
 </style>

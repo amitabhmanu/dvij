@@ -37,10 +37,10 @@ Each is linked to one of the elements (*tattvas*) of Samkhya philosophy, as the 
 
 | Chakra | Location | Nerve Plexus | Shape of Mandala | No of Petals | Colour of Tattva | Function | Presiding Deity | Bija Akshara | Loka | Animal |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Muladhara | Base of spinal column | Sacro coccygeal | Square | 4 | Red | Gandha | Ganesha | jk | Bhu | Elephant with 7 trunks |
-| Swadhishthana | Origin of reproductive system | Prostatic | Crescent | 6 | Orange | Ras | Brahma | Jk | Bhuvah | Crocodile |
-| Manipura | Navel / nabhi sthana | Solar | Triangle | 10 | Yellow | Rupa | Shankara | hk | Swah | Ram |
-| Anahata | Heart | Cardiac | Hexagonal | 12 | Green / pink | Sparsha | Shankara | gk | Mahar | Antelope |
-| Vishuddha | Base of throat | Laryngeal | Round | 16 | Blue | Shabda | Maheshwara | nk | Janah | Elephant |
-| Ajna | Between eyes | Cavernous | Round | 2 | Deep blue | Sankalpa / vikalpa | Sadashiva | Qpk | Tapo | - |
+| Muladhara | Base of spinal column | Sacro coccygeal | Square | 4 | Red | Gandha | Ganesha | लं | Bhu | Elephant with 7 trunks |
+| Swadhishthana | Origin of reproductive system | Prostatic | Crescent | 6 | Orange | Ras | Brahma | वं | Bhuvah | Crocodile |
+| Manipura | Navel / nabhi sthana | Solar | Triangle | 10 | Yellow | Rupa | Shankara | रं | Swah | Ram |
+| Anahata | Heart | Cardiac | Hexagonal | 12 | Green / pink | Sparsha | Shankara | यं | Mahar | Antelope |
+| Vishuddha | Base of throat | Laryngeal | Round | 16 | Blue | Shabda | Maheshwara | हं | Janah | Elephant |
+| Ajna | Between eyes | Cavernous | Round | 2 | Deep blue | Sankalpa / vikalpa | Sadashiva | ॐ | Tapo | - |
 | Sahasrara | Top of mind | Pineal gland | Round | 1000 | Purple | - | - | - | - | - |

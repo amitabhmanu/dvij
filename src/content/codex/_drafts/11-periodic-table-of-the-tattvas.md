@@ -13,16 +13,16 @@ The Periodic Table of the Tattvas maps the elements of the Samkhya system to the
 
 | Mahabhutas | Earth | Water | Fire | Air | Ether |
 |---|---|---|---|---|---|
-|  | f | F | d | D | E |
+|  | क | ख | ग | घ | ङ |
 | Tanmatas | Scent | Taste | Sight | Touch | Sound |
-|  | a | A | s | S | @ |
+|  | च | छ | ज | झ | ञ |
 | Karmendriyas | Excreting | Sexing | Grasping | Moving | Speaking |
-|  | x | X | z | Z | K |
+|  | ट | ठ | ड | ढ | ण |
 | Gyanendriyas | Smelling | Tasting | Seeing | Feeling | Hearing |
-|  | ; | : | = | " | l |
+|  | त | थ | द | ध | न |
 | Antahkarnas | Prakriti | Ahamkara | Buddhi | Manas | Purusha |
-|  | v | V | c | C | b |
+|  | प | फ | ब | भ | म |
 | Kanchukas | Action | Knowledge | Desire | Time | Fate |
-|  | g | h | j | J | B |
+|  | य | र | ल | व | B |
 | Shuddha-tattvas | Kriya | Gyana | Ichhna | Shakti | Shiva |
-|  | N | M | m | n | G |
+|  | श | ष | स | ह | क्ष |
