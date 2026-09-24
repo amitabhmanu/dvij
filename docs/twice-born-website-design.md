@@ -212,6 +212,7 @@ Anchors verified against the art during the review pass, with the errors it foun
 |---|---|---|---|
 | Puzzle 3 starts | B4 p15 | **B4 p16** | the art letters "The next clue on the parchment looked like a coiled serpent" on p16; p15 is the chapter's first page |
 | Puzzle 4 starts | B5 p11 | **B5 p12** | "Nine green eyes" is on p12; p11 is where Dvij only tells her to work on it |
+| Rail, svadhishthana | B4 p15 | **B4 p17** | p15 was the chapter's first page; p16 finds the temple, p17 is the moment - the kiss, then the dream of light rising from the base of the spine |
 | Rail, Yogini's gift | B5 p8 | **B5 p9** | "And left you the mutt?" is on p9; on p8 she is still there |
 | Yogini's `firstSeen` | B1 p40 | **B1 p42** | her line is narration the art never lettered; she first appears on p42, so her card was unveiling two pages early |
 | Tantric baba's `firstSeen` | B1 p38 | **B1 p40** | his `firstQuote` names the temple, not the man. p38 is the tunnel, p39 the approach across the lake; he appears on p40, "emerged from Samadhi" |
@@ -220,7 +221,7 @@ Each override is an explicit page id in the content file, next to the quote and 
 
 **Still `chapter-only`, and checked to be right anyway:** puzzles 2 and 5 (B3 p24, B5 p21), and the rail's Kurup and Ponga beats (B4 p23, B5 p25).
 
-**One judgement call left open:** the rail's svadhishthana beat sits on B4 p15, the chapter's first page. The manuscript line is narration the art never lettered. The natural visual anchor is **B4 p17**, where the kiss is followed by the dream of light rising from the base of the spine — which is how manipura, anahata and ajna are anchored, each on the page that draws the moment. Moving it is the author's call (§16).
+Every chakra beat is now anchored the same way — on the page that draws the moment, not on the page where the manuscript narrates it. Muladhara, manipura, anahata, vishuddha and ajna each land where the art marks the rise; svadhishthana was the one exception and no longer is.
 
 ---
 
@@ -387,15 +388,17 @@ Ten beats, authored in `site/src/content/rail.yaml` and located in the comic by 
 | Beat | Comic | Kundalini | The party | Teacher |
 |---|---|---|---|---|
 | At the base of a bottomless pit | B3 p34 | **Muladhara** | | The tantric baba's teaching, recalled |
-| The ancient temple of the forest | B4 p15 | **Svadhishthana** | | Kaula, "the left path" |
+| The ancient temple of the forest | B4 p17 | **Svadhishthana** | | Kaula, "the left path" |
 | A feast at Vidgati's shrine | B4 p23 | **Manipura** | | The round-nosed man: "live joyously" |
-| Kurup is gone | B4 p23 | | **Kurup defects** to the Mahant | |
+| Kurup is gone | B4 p23 | | **Kurup leaves** for the Mahant | |
 | The field of fireflies | B5 p8 | **Anahata** | | |
-| Yogini's gift | B5 p8 | | **Yogini leaves**; the dog passes to Dvij | |
+| Yogini's gift | B5 p9 | | **Yogini leaves**; the dog passes to Dvij | |
 | Chanting at the Vedic ashram | B5 p16 | **Vishuddha?** (only asked) | | The sage: "That you are" |
-| Ponga's work is done | B5 p26 | | **Ponga sits down** | The monk: "You have to look within" |
+| Ponga's work is done | B5 p25 | | **Ponga sits down** | The monk: "You have to look within" |
 | Towards infinity | B5 p29 | **Ajna** | **Bhavi stays**; the dog follows | |
 | Sahasrara | — | **never lit** | | |
+
+Each chakra beat sits on the page where the art marks the rise, not where the manuscript narrates it (§4.8). The pages above are generated from `rail.yaml`; if you move a beat, `link_companions.py` reprints them all.
 
 ### 8.2 Presentation
 - **Rail (built):** a slim vertical rail beside the reader, off by default, behind a **Journey** button (or the `j` key) that appears from B3 p34 on. Chakra beats use the traditional chakra colours; other beats are small diamonds. Tapping a beat opens a card with all three lenses and a link to the page.
@@ -625,15 +628,14 @@ Verified against the manuscript and the PDFs:
 1. **Domain name** (you'll specify later). It also names the asset subdomain (§12.3), which is on the rate-limited `r2.dev` URL until then and should not carry launch traffic.
 2. **Real India:** confirm or replace each pairing in [real-india-pairings.md](real-india-pairings.md), and source licensed photos. Blocks Phase 5.
 3. **B1 p1's black half** (§2.1): leave the page as printed, crop it to the map, or fix the source PDF?
-4. **The svadhishthana rail beat** (§4.8): leave it on B4 p15, or move it to B4 p17 where the art draws the light rising?
-5. **Spot-check the chart pages.** The descriptions on the diagram pages state what each chart says, so a misreading is now in the site's accessible text. The ones worth checking: B2 p25–26, B3 p3–4, B4 p29–32, B5 p22.
-6. **Review the authored companion text**: 21 Codex entries, 5 puzzle chains, 8 Voice cards, 10 rail beats. The quotes are the book's; the framing is not.
-7. **Voice portraits.** Three of the eight are loose automatic crops — the Mahant's is visibly the wrong figure. Each can be replaced with a hand-picked `portrait: {page, box}`.
-8. **Covers for Books 2–5**, for the book picker and share cards. Only Book 1 has a front page.
+4. **Spot-check the chart pages.** The descriptions on the diagram pages state what each chart says, so a misreading is now in the site's accessible text. The ones worth checking: B2 p25–26, B3 p3–4, B4 p29–32, B5 p22.
+5. **Review the authored companion text**: 21 Codex entries, 5 puzzle chains, 8 Voice cards, 10 rail beats. The quotes are the book's; the framing is not.
+6. **Voice portraits.** Three of the eight are loose automatic crops — the Mahant's is visibly the wrong figure. Each can be replaced with a hand-picked `portrait: {page, box}`.
+7. **Covers for Books 2–5**, for the book picker and share cards. Only Book 1 has a front page.
 
 **Still to decide:**
 
-9. **Spoiler default:** veil by default (current behaviour), or reveal by default with an opt-in veil?
-10. **State the patterns or let readers discover them?** Should the kundalini / Mahabharata patterns be named up front, or left for readers to find via the rail?
-11. **Analytics:** none, Netlify Analytics, or a privacy-friendly script?
-12. **PDF downloads:** free and unrestricted, or behind a simple "read online first" flow? The site is public either way.
+8. **Spoiler default:** veil by default (current behaviour), or reveal by default with an opt-in veil?
+9. **State the patterns or let readers discover them?** Should the kundalini / Mahabharata patterns be named up front, or left for readers to find via the rail?
+10. **Analytics:** none, Netlify Analytics, or a privacy-friendly script?
+11. **PDF downloads:** free and unrestricted, or behind a simple "read online first" flow? The site is public either way.

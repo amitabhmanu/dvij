@@ -14,6 +14,10 @@ nodes:
   - id: svadhishthana
     title: The ancient temple of the forest
     quote: "his kundalini must have risen to the next level...that of svadhishthana"
+    page: b4-p017   # reviewed: the art never letters that line. p15 was the chapter's
+                    # first page; p16 finds the temple; p17 is the moment - the kiss in
+                    # the shrine doorway, then Dvij asleep under a column of light
+                    # rising from the base of the spine.
     chakra: { name: Svadhishthana, where: "the sacral chakra, beneath the loins", state: lit }
     teacher: { voice: tantric-baba, text: "The Kaula rites, 'the left path', follow the body in a spiritual universe." }
     note: "After what happened at the ancient temple hidden in the forest, Dvij is sure his kundalini has risen a level."
