@@ -1,5 +1,5 @@
 // Uploads site-assets/{pages,art,pdf} to the Cloudflare R2 bucket the site
-// reads from (design §13.3, hosting option A). R2 speaks S3, so this is the
+// reads from (design §14.3, hosting option A). R2 speaks S3, so this is the
 // AWS SDK pointed at an R2 endpoint.
 //
 // The page images and art carry a content hash in their filenames, so they are

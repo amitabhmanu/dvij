@@ -1,6 +1,6 @@
 # The Twice Born — Website Design
 
-Design for a static website, hosted on Netlify, that publishes the *Twice Born* comic and the interactive companion layers worked out in [twice-born-website-design-discussion.md](twice-born-website-design-discussion.md). This document supersedes the discussion record where they differ; §16 lists the corrections.
+Design for a static website, hosted on Netlify, that publishes the *Twice Born* comic and the interactive companion layers worked out in [twice-born-website-design-discussion.md](twice-born-website-design-discussion.md). This document supersedes the discussion record where they differ; §17 lists the corrections.
 
 ---
 
@@ -42,7 +42,7 @@ Everything the site needs already exists in this folder. Facts below were measur
 - **Each panel is a separate embedded image** with a known bounding box on the page (B2 p4 has 12). Boxes bleed past the page edge and overlap slightly under gutters.
 - Only Book 1 has a front page (p1, no lettering). Books 2–5 start directly on story pages.
 - The PDFs have **no chapter bookmarks** — their outlines are auto-generated from every text frame. Chapter → page mapping has to be derived (§4.4).
-- **Known defect in the source: B1 p1.** The page holds two images — the valley map across the top half, and a 1536 × 1024 PNG across the bottom half that is pure black (brightest pixel 1 of 255). It is in `book/B1.pdf` itself, so it is in the printed book and is not something the pipeline introduced; no other page has anything like it. The site drops it from that page's panel list so panel mode does not step into a black rectangle, but the page still displays as the map above a black field. Cropping the page would change how a printed page is shown, so that decision is the author's (§17).
+- **Known defect in the source: B1 p1.** The page holds two images — the valley map across the top half, and a 1536 × 1024 PNG across the bottom half that is pure black (brightest pixel 1 of 255). It is in `book/B1.pdf` itself, so it is in the printed book and is not something the pipeline introduced; no other page has anything like it. The site drops it from that page's panel list so panel mode does not step into a black rectangle, but the page still displays as the map above a black field. Cropping the page would change how a printed page is shown, so that decision is the author's (§18).
 
 ### 2.2 Companion material
 
@@ -74,6 +74,8 @@ Deep-linkable URLs are built in from day one — cheap now, expensive to retrofi
 | `/caves/` | The Bhoodara caves pi puzzle |
 | `/journey/` | The trek rail — chakra, party, and teacher lenses |
 | `/voices/` · `/voices/<slug>` | Council of Voices |
+| `/bestiary/` · `/bestiary/<slug>` | Bestiary — the book's mythological creatures (§11) |
+| `/avadhana/` | The Memory Hall — the recitation technique Dvij learns (§12) |
 | `/valley/` | Valley map, with the Real India layer |
 | `/search/` | Full-text search across comic text and codex |
 | `/about/` | About the book and author |
@@ -303,7 +305,7 @@ The body holds the long form: tables, diagrams, cross-links.
 - **Other entries:** names the Professor explains in-line (Mahavidyas, Ashtadikpalas, Kaula, Charvaka, Soma, Bhoodara caves…) become further entries, written from the manuscript.
 - **Links:** cross-links make it a wiki rather than a flat glossary — for example, kundalini → chakras → tattvas → Samkhya.
 - **Recurring symbols:** each entry lists the pages it appears on ("this glyph also appears on B2 p5, B3 p9"). This fits the book, whose plot runs on recognising symbols.
-- **Script:** diacritics (IAST, e.g. *Bhārāti Kṛṣṇa*) and Devanagari must render, which affects the font choice (§12).
+- **Script:** diacritics (IAST, e.g. *Bhārāti Kṛṣṇa*) and Devanagari must render, which affects the font choice (§13).
 
 ### 6.2 Presentation
 | Trigger | Result |
@@ -375,6 +377,7 @@ Notes:
   4. Find the way back out through the same eight chambers in reverse.
 - **Modes:** in Guided mode the exits are numbered. In Hard mode you count them yourself.
 - **Unlocking:** the page opens once the reader reaches B2 p26.
+- **Where the verse comes from:** the decode step hands the reader the katapayadi table but not the technique that made the verse stick. That is §12, which unlocks earlier and links forward into this page.
 
 ---
 
@@ -441,7 +444,7 @@ Each chakra beat sits on the page where the art marks the rise, not where the ma
 
 - **The Mahant's card** is visually distinct (red rule, "Antagonist" tag). It reads as *how institutional religion gets weaponised*, not as one more equally valid voice.
 - **Hotspots:** each figure's line in the comic carries a `voice:` note that opens their card in the reader's drawer.
-- **v2:** each card gains a "Talk to …" button (§14).
+- **v2:** each card gains a "Talk to …" button (§15).
 
 ### 9.1 The Charvaka thread
 - **Idea:** Charvaka is a hidden, **recurring thread**, not a card. Readers collect it rather than being handed it, which echoes the book's theme of suppressed knowledge.
@@ -469,7 +472,163 @@ Each chakra beat sits on the page where the art marks the rise, not where the ma
 
 ---
 
-## 12. Visual Design
+## 11. The Bestiary (Layer 5) — planned, not started
+
+The valley is full of creatures. Most are spoken of rather than met: the cook warns of nagas and yakshas in the forest, Viraat reels off banmanus, pichhal peris, pishachas, kimpurushas and kinnars as the van climbs into the dark, Bhavi explains the boulder field with a rakshasa riding a mountain, and vyalas are carved on the temple steps. A section where a reader can browse them, see them, and read what tradition says about them is the last of the book-world layers.
+
+### 11.1 What is in the book
+
+Gathered from the lettering and the reviewed panel descriptions. "Named" means the word is in a caption or balloon; "drawn" means the art shows the creature, whether or not it is named.
+
+| Creature | Named at | Drawn at | Note |
+|---|---|---|---|
+| **Vyala** | b1-p039 (×2) | b1-p039, b3-p022 | The strongest entry: the book defines them itself — "composite creatures controlling cosmic energy" — and draws them twice, as elephant-headed lions on high plinths, then in close-up as a lion-faced guardian with horns and a carved mane |
+| **Naga** | b1-p011 | b2-p003 (a golden figure reclining on a serpent couch) | Three different things share the name in this book — see §11.5 |
+| **Yaksha** | b1-p011 | b1-p011 (the painted forest scene behind the cook: a tiger, a lion and horned figures half hidden among the trees) | |
+| **Rakshasa — Vraktaasura** | b1-p030 | b1-p030 (horned, riding a mountain through the sky as Indra looses the vajra) | Named, with his own myth, on the page |
+| **Giants** | b1-p030 | b1-p030 (heaving boulders over the fort walls) | The scattered boulders are their work — or a meteor's. The page argues both |
+| **Banmanus** | b1-p018 | b1-p018 (huge shaggy man-figures in the dark forest) | |
+| **Pishacha** | b1-p018 | b1-p018 (crouching ghouls) | |
+| **Kimpurusha / Kinnara** | b1-p018 | b1-p018 (a horse-headed being) | Two names in one breath; one entry or two is an authoring call |
+| **Pichhal peri** | b1-p018 | — | The backwards-footed woman of North Indian folklore; the book only names her |
+| **Bhoot / Pret** | b1-p036, b1-p039, b3-p034 | — | "Bhoots, prets prey on unsuspecting souls, not forlorn ones." The abandoned Forest Officer's bungalow is a *bhoot* bungalow, and the Kaal Bhairava temple floats on *Bhootnath* taal |
+| **Gandharva** | b4-p017 | — | Bhavi's aside: "you are what my uncle would call 'a gandharva's incarnation'" |
+| **Apsara** | b5-p028 | — | Bhavi recalls the stories of the apsara and the ascetic rishi |
+| **Ashtomi** | b4-p019 | b4-p019 (the hillside ablaze with flowering trees that Kurup points at) | A race, not a beast: "they survive by smelling flowers… any unpleasant smell causes instant death" |
+
+Thirteen entries, the same order of magnitude as the Codex's 21. More will surface while the entries are written; the table above is what a first pass over all 171 pages of lettering and panel descriptions found, and `pipeline/find_page.py` locates any further ones in the manuscript.
+
+### 11.2 Editorial stance — the book debunks its own monsters
+
+This layer cannot be a straight monster manual, because the book will not let it be one. The creature roll-call on b1-p018 is answered in the very next balloon:
+
+> Age-old legends, fabricated to scare children from straying into forests. Now used by Mahant to scare peasants from escaping.
+
+The same move happens on b1-p030, where the giants' boulders become an asteroid, and again on b3-p034, where the yogini's line about bhoots and prets is a correction rather than a warning. So each entry carries three registers, in this order:
+
+1. **In the book** — the panel, the quote, the page link. What is actually on the page.
+2. **In tradition** — where the creature comes from, what it is in the texts and in folk telling.
+3. **And yet** — who in the book doubts it, and why. This is the Charvaka thread (§9.1) running through the bestiary, and it is what keeps the section honest with the story.
+
+A reader who works through the bestiary should come away with the Professor's habit of mind, not with a list of monsters.
+
+### 11.3 Mechanics
+
+Reuses the Codex machinery end to end (§6) rather than inventing a parallel one:
+
+- **Collection:** `src/content/bestiary/<id>.md`, a second Astro content collection with the Codex schema (`title`, `aliases`, `summary`, `related`, `images`, `source`, `firstSeen`) plus `class` (naga · yaksha-class · rakshasa-class · bhoot-class · composite-carving · race), `appearance` (what it looks like, for the gallery caption) and `alsoKnownAs`.
+- **A separate collection, not a Codex flag.** The two differ in presentation — the Codex is a text wiki, the bestiary an image-first gallery — and keeping the aliases in their own namespace is what makes the disambiguation in §11.5 tractable. The cost is a second collection to author and validate. `related:` links cross the two freely, so a creature can point at `codex:kaula` and back.
+- **Hotspot target:** a new `beast:` prefix in the existing scheme (§6.3). One mechanism still serves every layer.
+- **Auto-linking:** a `link_bestiary.py` alongside `link_codex.py`, with a per-entry `exclude` list of contexts that must not fire (§11.5). The earliest mention sets `firstSeen`, so the same spoiler veil applies (§5.5).
+- **Validation:** `validate_content.py` gains the collection, its images and its hotspot targets.
+
+### 11.4 Images
+
+Three sources, in order of preference:
+
+1. **Crops from the comic itself.** Eight of the thirteen are drawn — everything above except pichhal peri, bhoot/pret, gandharva, apsara and the Ashtomis, whose panel shows the flowering hillside rather than the race itself — and every panel already has a reviewed box, so a `portrait: {page, box}` crop works exactly as the Voice portraits do (§9) — `link_companions.py` already has the cropping code. No licensing to chase, and the gallery then looks like the book instead of like a stock-photo wall.
+2. **`images/artifacts/` diagrams**, where one illustrates an entry.
+3. **Public-domain or CC photographs of the real carvings** for the "in tradition" register — vyalas and makaras on temple plinths are photographed everywhere. Licence and credit recorded per image, the same discipline the Real India layer needs (§10).
+
+The five entries with no art (pichhal peri, bhoot/pret, gandharva, apsara, Ashtomi) get a typographic card rather than a placeholder image. A quiet gap is better than a stand-in that contradicts the book's own pictures.
+
+### 11.5 Disambiguation — where auto-linking will go wrong
+
+Every one of these is a real string in the manifests, and each would otherwise produce a false hotspot:
+
+| Word | The trap |
+|---|---|
+| **Naga** | *Naga hill* (b1-p039), the *Naga tribesmen* in the smoky frames (b2-p002) and the serpent-being are three different things |
+| **Makara, Simha, Mina, Vrishabha** | Zodiac signs on the star chart (b3-p025) and the zodiac-body table (b5-p022), not creatures |
+| **Matsya** | One of the five M's — madya, matsya, mamsa, mudra, maithuna (b4-p017) — not the avatar |
+| **Yogini** | A character in the party throughout, not the class of deity |
+| **Varaha** | The *Varaha Purana* (b4-p030), cited as a text |
+| **Nandi, Hanuman** | Deities and their images, not bestiary creatures. They belong in the Codex; the bestiary `related:` links across |
+
+### 11.6 Site map
+
+| URL | Page |
+|---|---|
+| `/bestiary/` | Gallery index — a card per creature, filterable by `class`, veiled by `firstSeen` |
+| `/bestiary/<slug>` | One creature: the three registers, its panels, its Codex cross-links |
+
+Whether it earns its own nav entry or sits under the Codex is a presentation call to make once the gallery exists.
+
+---
+
+## 12. The Memory Hall (Avadhana) — planned, not started
+
+Dvij walks out of a labyrinth nobody returns from because of a party trick he watched at a foundation ceremony. That is the book's best argument for its own subject matter, and the site currently only shows the *end* of it: `/caves/` hands the reader the verse and the katapayadi table, and the technique that made the verse stick — the thing the Professor actually explained — is never taught. This section teaches it, and it is the most naturally interactive material in the book, because the technique *is* a procedure.
+
+### 12.1 What the book shows
+
+| Page | What is on it |
+|---|---|
+| **b2-p008** | The avadhan show at the ceremony. Caption: "numerous people throwing challenging questions at an expert who responded rapidly… The expert formed verses at will, tracking all questions." The Professor names it: "**Avadhan.** That's what this is called. Many people ask questions. Expert has to remember all of them, then respond to each in verses following rules of rasa and alankara." Then the technique: "**Techniques of memorization!** The entire Vedas handed down orally through millenniums! Students learned **forward sequence, backward, skipping syllables** — remember it forever!" |
+| **b2-p008, drawn** | Two panels do the teaching. One shows the expert seated inside **a ring of ten numbered questioners**. The next is a held-up **chart**: *1. Forward sequence*, one to ten with arrows; *2. Backward sequence*, ten to one; *3. Skipping syllables*, with alternate numbers dropped |
+| **b2-p025** | The payoff, three books' worth of setup later: "Professor explained their memorization technique to me. **I tried it on a shloka and it worked.**" — "This shloka gave you some magical powers?" — "**No**, but it did help me remember the value of pi" |
+| **b2-p026** | The digits become the route through the caves (§7.4, built) |
+| **b5-p009–p010** | The same thing in its own setting: the udgatrus' Samaveda chanting, and "they are shrauta texts, **preserved by oral recitation**" |
+
+So the book supplies the technique, the drawn chart, the worked application and the reason to care — and the site already owns the last link in that chain.
+
+### 12.2 The real technique, and why it is worth a section
+
+The chart on b2-p008 is a simplified drawing of the Vedic **pāṭhas**: the recitation schemes that carried the Veda for millennia without writing. The ladder runs
+
+| Pāṭha | Pattern over words 1 2 3 … |
+|---|---|
+| *saṃhitā* | the line as it is spoken |
+| *pada* | 1 · 2 · 3 — each word alone |
+| *krama* | 1‑2, 2‑3, 3‑4 |
+| *jaṭā* | 1‑2 2‑1 1‑2, 2‑3 3‑2 2‑3 |
+| *ghana* | 1‑2 2‑1 1‑2‑3 3‑2‑1 1‑2‑3, 2‑3 3‑2 2‑3‑4 4‑3‑2 2‑3‑4 |
+
+The book's "forward, backward, skipping syllables" is exactly *krama*, *jaṭā* and the interleaving of *ghana*, drawn for a reader who is not going to be given the Sanskrit names.
+
+The hook for a modern reader is that **this is an error-correcting code**. Every word is recited inside several different neighbourhoods, so a syllable that drifts in one pass contradicts itself in another and the mistake is audible. An oral tradition solved redundancy checking a long time before checksums, and a browser can demonstrate it in about fifteen seconds: corrupt one word and let the reader watch the *ghana* pattern light up in three places at once. That demonstration is the section's centrepiece, and nothing else on the site does it.
+
+### 12.3 What the reader does
+
+Three pieces, in the book's own order.
+
+**a. The pāṭha ladder.** One verse, shown as word chips in Devanagari with IAST beneath. The reader builds each pattern by placing chips, climbing *pada → krama → jaṭā → ghana*; the app checks each utterance against the rule and shows where a wrong chip breaks the interlock. Patterns are **generated from the word list by rule**, not typed out per verse, so a verse is pure data and any verse can be dropped in. Then the corruption demo of §12.2.
+
+**b. The avadhana ring.** The drawn panel, made playable: questioners around a circle, each handing over one short item, delivered out of order and interleaved with an interrupting task — because that interleaving is what makes it *avadhāna* and not a memory game. The reader then answers in the original order. Start at four, build to ten, which is the ring the book draws. (Eight is *aṣṭāvadhāna*; a hundred is *śatāvadhāna*. The book's ten sits between them, and the entry can say so.) The Professor being shushed mid-explanation on the same page is the obvious model for the interrupting task.
+
+**c. The verse that pays off.** *gopī bhāgya madhuvrāta…* is already on the site, so the chain closes: drill it in the Hall, decode it with the katapayadi table, walk the caves on the digits. Note for whoever builds it — **the two halves read the verse differently.** The pāṭhas segment it into *words*; the katapayadi decode reads it by *consonant*. Same verse, two segmentations, and the UI has to keep them visibly apart or it will teach a muddle. The decode step stays where it is, in `Caves.tsx`; the Hall links to it rather than duplicating it.
+
+### 12.4 Retention, claimed honestly
+
+The manuscript's claim is strong — the shloka "got stuck in my mind permanently" — and the site can *test* it instead of repeating it. On a later visit, once at a day and once at a week, the Hall offers a single optional recall check and reports the plain result, including a failure. One interval, no streaks, no scores, no nagging.
+
+This matters for the same reason §11.2 does: Dvij is asked point-blank whether the shloka gave him magical powers and says **no**. A memory section that oversells itself would be the one page on the site the book itself contradicts.
+
+### 12.5 Mechanics
+
+- **Page:** `/avadhana/`, a new island `src/islands/Memory.tsx`, in the shape of `Caves.tsx` — phases, `localStorage` progress (§5.3), Guided and Hard modes.
+- **Content:** `src/content/memory.yaml` — `{id, title, verse: [{deva, iast, gloss}], source, note}`, plus the ring drill's item pools. Verses are data; the pāṭha generator is code.
+- **Unlocking:** the existing `availableQuote` mechanism (§4.8) pinned to **b2-p008**, where the Professor explains it. That is earlier than the caves' b2-p026, so the site's order matches the book's: learn it, then use it.
+- **Codex:** two entries to write — `avadhana` and `vedic-pathas` — with aliases (`avadhan`, `avadhana`, `krama`, `jata`, `ghana`, `patha`, `shrauta`). `link_codex.py` then auto-links the b2-p008 balloons and the b5-p010 caption, and `firstSeen` lands on b2-p008 by itself.
+- **Validation:** `validate_content.py` gains the verse file and the new page reference.
+- **Script:** Devanagari and IAST at chip size, side by side. §13 already flags the font requirement; here it becomes load-bearing rather than decorative.
+- **Accessibility:** chip placement needs a keyboard path and sensible announcements, and the recall check must not be the only way through (§5.6).
+
+### 12.6 Audio — the gap worth naming
+
+This is an **oral** technique. A silent trainer teaches the permutation pattern but not the thing itself, which is a sound. Three options: ship v1 silent, with the patterns set in Devanagari and IAST; add CC-licensed recordings of ghanapāṭha recitation with credit recorded per file; or record a reciter. Speech synthesis is not an option — TTS mangles Sanskrit prosody and would teach a wrong reading, which is worse than silence.
+
+Recommendation: silent v1, recordings as a follow-up, because the pattern is what carries the section and a bad reading would undermine it. This is an open question (§18).
+
+### 12.7 Site map
+
+| URL | Page |
+|---|---|
+| `/avadhana/` | The Memory Hall — the pāṭha ladder, the avadhana ring, the link into the caves |
+
+---
+
+## 13. Visual Design
 
 - **Identity:** vintage 1950s–60s Indian adventure comic, the same style lock as the character manifest. The site should feel like the book's world, not a generic webcomic host.
 - **Palette:** warm paper cream, sepia, terracotta, faded ink black, with a single saturated red-gold accent taken from Bhavi's costume. Define it as CSS custom properties, with a **night-reading theme** (deep ink background, softened paper) for the reader.
@@ -483,14 +642,14 @@ Each chakra beat sits on the page where the art marks the rise, not where the ma
 
 ---
 
-## 13. Technical Architecture
+## 14. Technical Architecture
 
-### 13.1 Stack
+### 14.1 Stack
 - **Astro, static output.** It produces one HTML page per comic page and codex entry, which is good for sharing and search. Content collections validate codex / voices / places schemas at build time.
 - **Islands:** reader, parchment, caves, journey rail, valley map. Preact or vanilla TypeScript; no heavy framework needed.
 - **Search:** [Pagefind](https://pagefind.app) indexes the built HTML at build time, including the hidden page transcripts and codex. It runs fully client-side, with no search backend.
 
-### 13.2 Repository layout
+### 14.2 Repository layout
 ```
 dvij/
 ├── book/                 final PDFs (source of truth; NOT in git)
@@ -517,14 +676,14 @@ dvij/
 │   ├── netlify/functions/   (v2 only)
 │   └── netlify.toml
 └── site-assets/          pipeline output: compressed PDFs, page images,
-                          art (NOT in git; uploaded to Cloudflare R2, §13.3)
+                          art (NOT in git; uploaded to Cloudflare R2, §14.3)
 ```
 
 The three documents in `site/docs/` are the only prose in the repo besides the
 README. Paths named in this document — `book/`, `images/`, `site-assets/` — are
 relative to `dvij/`, the project root, not to the repo root.
 
-### 13.3 Where the PDFs and page images live
+### 14.3 Where the PDFs and page images live
 The published binaries are the compressed PDFs (202 MB) and the page images rendered from them (547 MB), about 750 MB in all. They don't belong in git.
 
 | Option | How | Trade-off |
@@ -540,7 +699,7 @@ Until the domain exists the bucket's `r2.dev` URL works; after that it moves to 
 
 **jsDelivr was considered and rejected.** It would serve the page images — the largest is 1.7 MB, under its 20 MB per-file cap — but all five PDFs are 30–64 MB and exceed it, the files would have to live in a second GitHub repo as 547 MB of permanent history, and jsDelivr is a free service for open-source code rather than a host for a comic's artwork. If it throttled or blocked the repo, the art would go dark with no warning.
 
-### 13.4 Netlify configuration
+### 14.4 Netlify configuration
 - **Build:** `astro build && pagefind --site dist`, publishing `dist/`.
 - **Caching:** headers with `Cache-Control: public, max-age=31536000, immutable` for hashed assets.
 - **Redirects:** `/read/b1/ch/:n` → the chapter's start page, generated at build time from the manifests into `_redirects`.
@@ -549,9 +708,9 @@ Until the domain exists the bucket's `r2.dev` URL works; after that it moves to 
 
 ---
 
-## 14. v2 — AI Features
+## 15. v2 — AI Features
 
-### 14.1 Architecture
+### 15.1 Architecture
 - **Proxy:** a Netlify Function (TypeScript, official Anthropic SDK) sits between the site and the Claude API.
 - **API key:** kept in a Netlify environment variable. It never appears in client JavaScript.
 - **Streaming:** responses stream to the browser.
@@ -561,18 +720,18 @@ Until the domain exists the bucket's `r2.dev` URL works; after that it moves to 
 | **Ask the Codex** | Codex drawer and entry pages: "Ask about this" | Codex + manuscript |
 | **Talk to a Voice** | Council cards | Codex + manuscript + that figure's character sheet (doctrine, speech style, what they refuse to discuss) |
 
-### 14.2 Grounding & caching
+### 15.2 Grounding & caching
 - **Corpus:** the manuscript (~103k words) plus the codex fits comfortably in a single request's context window. Measure the exact size with the token-counting endpoint before committing.
 - **Prompt order:** the stable corpus goes first in the system prompt, marked for **prompt caching**. The figure-specific sheet and the user's question go after the cache breakpoint. Repeat requests then read the corpus from cache instead of paying full input price each time.
 - **Spoilers and caching:** trimming the corpus to the reader's exact progress would change the prompt prefix on every request and defeat caching. Instead, keep **five cache variants**, one per book boundary ("the text through the end of Book N"). Each reader gets the variant matching their `furthestRead`, which keeps spoiler safety without losing cache hits.
 - **Voices:** each figure is instructed to answer only from their doctrine and on-page dialogue, to stay in voice, and to decline to drift. The Mahant stays manipulative, never wise.
 
-### 14.3 Model
+### 15.3 Model
 - **Default:** `claude-opus-5`.
 - **Cost trade-off:** a cheaper model (e.g. `claude-sonnet-5` or `claude-haiku-4-5`) cuts cost for high-volume public chat, at some quality cost. That is your call once real traffic and a small evaluation set exist.
 - **Refusals:** handle the `refusal` stop reason, and enable the API's server-side model fallbacks.
 
-### 14.4 Cost & abuse controls
+### 15.4 Cost & abuse controls
 Because it is a public site, apply all of these:
 - per-IP rate limit (stored in Netlify Blobs)
 - maximum question length
@@ -585,18 +744,20 @@ If per-question cost is too high even with caching, fall back to **retrieval**: 
 
 ---
 
-## 15. Roadmap
+## 16. Roadmap
 
 | Phase | Deliverable | Status |
 |---|---|---|
-| 0 | Pipeline: **PDF compression + quality gate**, page images, text layer, draft panels, chapter map, manifests; dev review tool; asset hosting | **Done.** 1.9 GB → 202.5 MB, all gates passed; 171 pages at 4 widths × 2 formats; assets on R2 (§13.3) |
+| 0 | Pipeline: **PDF compression + quality gate**, page images, text layer, draft panels, chapter map, manifests; dev review tool; asset hosting | **Done.** 1.9 GB → 202.5 MB, all gates passed; 171 pages at 4 widths × 2 formats; assets on R2 (§14.3) |
 | 1 | **Reader MVP**: home, book picker, hybrid reader, panel mode, progress, search, PDF downloads; deploy publicly | **Done.** Live on Netlify |
 | — | **Review pass**: panel boxes checked, descriptions written from the art, chapter starts confirmed | **Done.** 171/171 pages, 1,712/1,712 panels, 81/81 chapters (§4.3, §4.4, §4.6) |
 | 2 | Codex (21 entries), drawer, hotspot authoring, spoiler policy | **Done.** 91 hotspots |
 | 3 | Parchment of Puzzles (Guided + Hard), Bhoodara caves | **Done.** 5 puzzles |
 | 4 | Journey rail (three lenses), Council of Voices, Charvaka thread | **Done.** 10 beats, 8 voices, 5 fragments |
 | 5 | Valley map + Real India layer | **Blocked** on pairings confirmed + photos ([real-india-pairings.md](real-india-pairings.md)) |
-| 6 (v2) | Ask the Codex, Talk to a Voice | Not started; needs a cost review |
+| 6 | **Bestiary** — 13 creature entries, gallery, `beast:` hotspots (§11) | **Not started.** Ready to author: the roll-call is gathered and 8 of 13 can be illustrated from the comic art |
+| 7 | **Memory Hall** — pāṭha ladder, avadhana ring, recall check (§12) | **Not started.** The pattern generator is the whole build; verses are data. Audio undecided |
+| 8 (v2) | Ask the Codex, Talk to a Voice | Not started; needs a cost review |
 
 Phase 1 alone is a complete, shippable comic site. Each later phase adds a layer without reworking earlier ones, because they all share the manifest + hotspot + `firstSeen` pattern.
 
@@ -604,7 +765,7 @@ Phase 1 alone is a complete, shippable comic site. Each later phase adds a layer
 
 ---
 
-## 16. Corrections to the Discussion Document
+## 17. Corrections to the Discussion Document
 
 Verified against the manuscript and the PDFs:
 
@@ -614,28 +775,30 @@ Verified against the manuscript and the PDFs:
 4. **Vishuddha is posed as a question**, not stated like the other chakras (§8.1).
 5. **Kurup does fit the epic's "fall through a flaw" pattern**, which strengthens the Mahabharata reading rather than weakening it (§8.3).
 6. **The unit is book / part, not "issue".** There are 5 books and 24 parts (§2.1).
-7. **Layer numbering:** the discussion's §10 mixes section and layer numbers. This document uses Layer 1 = Codex, 2 = Parchment, 3 = Voices, 4 = Real India, with the kundalini and Mahaprasthanika material as lenses on one rail.
+7. **Layer numbering:** the discussion's §10 mixes section and layer numbers. This document uses Layer 1 = Codex, 2 = Parchment, 3 = Voices, 4 = Real India, 5 = Bestiary, with the kundalini and Mahaprasthanika material as lenses on one rail.
 8. **Paged vs. scroll is settled:** portrait multi-panel pages favour the hybrid paged reader (§1, §5).
 
 ---
 
-## 17. Open Questions
+## 18. Open Questions
 
-**Settled:** public launch · no redraws · compressed PDFs are hosted and are the image source · working images unpublished except §4.7 · five parchment puzzles (§7.1) · assets on Cloudflare R2 (§13.3) · panel boxes, descriptions and chapter starts reviewed across all 171 pages (§4.3, §4.4, §4.6).
+**Settled:** public launch · no redraws · compressed PDFs are hosted and are the image source · working images unpublished except §4.7 · five parchment puzzles (§7.1) · assets on Cloudflare R2 (§14.3) · panel boxes, descriptions and chapter starts reviewed across all 171 pages (§4.3, §4.4, §4.6).
 
 **For you:**
 
-1. **Domain name** (you'll specify later). It also names the asset subdomain (§13.3), which is on the rate-limited `r2.dev` URL until then and should not carry launch traffic.
+1. **Domain name** (you'll specify later). It also names the asset subdomain (§14.3), which is on the rate-limited `r2.dev` URL until then and should not carry launch traffic.
 2. **Real India:** confirm or replace each pairing in [real-india-pairings.md](real-india-pairings.md), and source licensed photos. Blocks Phase 5.
 3. **B1 p1's black half** (§2.1): leave the page as printed, crop it to the map, or fix the source PDF?
 4. **Spot-check the chart pages.** The descriptions on the diagram pages state what each chart says, so a misreading is now in the site's accessible text. The ones worth checking: B2 p25–26, B3 p3–4, B4 p29–32, B5 p22.
 5. **Review the authored companion text**: 21 Codex entries, 5 puzzle chains, 8 Voice cards, 10 rail beats. The quotes are the book's; the framing is not.
 6. **Voice portraits.** Three of the eight are loose automatic crops — the Mahant's is visibly the wrong figure. Each can be replaced with a hand-picked `portrait: {page, box}`.
 7. **Covers for Books 2–5**, for the book picker and share cards. Only Book 1 has a front page.
+8. **Bestiary (§11).** Confirm the 13 creatures in §11.1 — add any the scan missed, drop any you do not want a page for — and say whether *kimpurusha* and *kinnara* are one entry or two. The "in tradition" register is written from outside the book, so it needs the same review as the Codex framing (item 5). Blocks Phase 6.
+9. **Memory Hall audio (§12.6).** The technique is oral. Silent v1, CC-licensed ghanapatha recordings with credit, or a reciter you record? And which verse the ladder drills besides *gopī bhāgya* — one is enough to ship, but a second makes the pattern generator prove itself.
 
 **Still to decide:**
 
-8. **Spoiler default:** veil by default (current behaviour), or reveal by default with an opt-in veil?
-9. **State the patterns or let readers discover them?** Should the kundalini / Mahabharata patterns be named up front, or left for readers to find via the rail?
-10. **Analytics:** none, Netlify Analytics, or a privacy-friendly script?
-11. **PDF downloads:** free and unrestricted, or behind a simple "read online first" flow? The site is public either way.
+10. **Spoiler default:** veil by default (current behaviour), or reveal by default with an opt-in veil?
+11. **State the patterns or let readers discover them?** Should the kundalini / Mahabharata patterns be named up front, or left for readers to find via the rail?
+12. **Analytics:** none, Netlify Analytics, or a privacy-friendly script?
+13. **PDF downloads:** free and unrestricted, or behind a simple "read online first" flow? The site is public either way.

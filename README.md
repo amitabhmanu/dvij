@@ -8,14 +8,16 @@ are served from a Cloudflare R2 bucket.
 |---|---|
 | [docs/twice-born-website-design.md](docs/twice-born-website-design.md) | The design. What the site is, how the pipeline works, what every layer does, and what is still open. Kept in step with the code |
 | [docs/real-india-pairings.md](docs/real-india-pairings.md) | Researched real-world counterparts for the valley's places, with confidence levels and sources. Awaiting your confirmation; blocks the Real India layer |
-| [docs/twice-born-website-design-discussion.md](docs/twice-born-website-design-discussion.md) | The original brainstorm the design was drawn from. Superseded where the two disagree - see design §16 |
+| [docs/twice-born-website-design-discussion.md](docs/twice-born-website-design-discussion.md) | The original brainstorm the design was drawn from. Superseded where the two disagree - see design §17 |
 
 **State:** all five books are in — 171 pages, 1,712 panels, every panel described,
 all 81 chapter starts confirmed. The companion layers are built: a Codex of 21
 entries, the Parchment's 5 puzzles, the Bhoodara caves, a journey rail of 10 beats,
 8 Council of Voices cards and 5 hidden Charvaka fragments, linked by 91 hotspots.
 Still open: the valley map and Real India layer, which need the place pairings
-confirmed, and the v2 AI features.
+confirmed; the **Bestiary** of the book's mythological creatures, gathered but not
+yet written (design §11); the **Memory Hall**, an interactive version of the
+recitation technique Dvij learns at the ceremony (design §12); and the v2 AI features.
 
 ## Layout
 
