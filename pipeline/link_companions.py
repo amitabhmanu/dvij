@@ -2,6 +2,9 @@
 
 - rail.yaml nodes: `quote` -> comic page (find_page.py)
 - voices/*.md: `quote` -> firstSeen; `portrait` {page, match} -> the panel
+  holding that line, cropped as the card image. `box` overrides the panel;
+  `from` takes the crop from a different page, for figures whose quoted line
+  is spoken about them rather than by them. The hotspot always stays on `page`.
   holding that lettering is cropped from the page master into
   site-assets/art/voice-<id>.webp, and a `voice:` hotspot is placed over the line
 - fragments.yaml: {page, match} -> a `fragment:` hotspot over that lettering
@@ -87,19 +90,24 @@ def main() -> None:
             first = {**front["firstSeen"]}
         else:
             first = find(front.get("firstQuote") or front["quote"])
-        pid = front["portrait"]["page"]
+        pid = front["portrait"]["page"]                       # where the hotspot goes
+        src = front["portrait"].get("from") or pid            # where the crop comes from
         unit = unit_matching(text.get(pid, []), front["portrait"].get("match", ""))
-        panels = manifest_panels(pid)
-        box = front["portrait"].get("box") or (panel_for(unit["bbox"], panels) if unit else None) or max(
-            panels, key=lambda p: (p[2] - p[0]) * (p[3] - p[1]))
-        portrait = crop_portrait(pid, box, f"voice-{vid}")
+        box = front["portrait"].get("box")
+        if not box:
+            panels = manifest_panels(src)
+            box = (panel_for(unit["bbox"], panels) if unit and src == pid else None) or max(
+                panels, key=lambda p: (p[2] - p[0]) * (p[3] - p[1]))
+        portrait = crop_portrait(src, box, f"voice-{vid}")
         voices[vid] = {"firstSeen": {"book": first["book"], "page": first["page"]},
-                       "portrait": {**portrait, "page": pid, "fromLettering": bool(unit)}}
+                       "portrait": {**portrait, "page": src, "fromLettering": bool(unit)}}
         if unit:
             hotspots.append({"id": f"voice-{vid}", "page": pid, "rect": unit["bbox"],
                              "targets": [f"voice:{vid}"], "label": front["name"]})
-        print(f"voice {vid:18s} first B{first['book']} p{first['page']:<3} portrait {pid} "
-              f"{'(panel of the line)' if unit else '(largest panel: no lettering match)'}")
+        how = ("explicit box" if front["portrait"].get("box") else
+               "panel of the line" if unit else "largest panel: no lettering match")
+        print(f"voice {vid:18s} first B{first['book']} p{first['page']:<3} portrait {src} "
+              f"({how}{', note on ' + pid if src != pid else ''})")
     (CONTENT / "generated" / "voices.json").write_text(json.dumps(voices, indent=1), encoding="utf-8")
 
     # ---- fragments ----

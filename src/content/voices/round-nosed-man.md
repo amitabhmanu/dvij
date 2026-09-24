@@ -8,6 +8,11 @@ quote: While life is yours, live joyously
 portrait:
   page: b4-p022
   match: live joyously
+  # His line floats over the feast, so the panel holding it is the whole hall -
+  # on the card he was one figure among thirty. This box takes him from the
+  # Samkhya panel lower on the same page, seated against the carved wall he is
+  # explaining: round face, rudraksha, the orange shawl.
+  box: [0.800, 0.603, 0.999, 0.755]
 excerpt: While life is yours, live joyously.
 codex:
 - tattvas

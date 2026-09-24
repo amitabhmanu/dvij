@@ -32,8 +32,8 @@
   },
   "portrait": {
    "file": "voice-round-nosed-man.webp",
-   "w": 640,
-   "h": 398,
+   "w": 421,
+   "h": 513,
    "page": "b4-p022",
    "fromLettering": true
   }
@@ -98,8 +98,8 @@
   "portrait": {
    "file": "voice-yogini.webp",
    "w": 640,
-   "h": 179,
-   "page": "b3-p032",
+   "h": 540,
+   "page": "b1-p042",
    "fromLettering": true
   }
  }

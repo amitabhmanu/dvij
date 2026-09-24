@@ -15,6 +15,13 @@ firstSeen:
 portrait:
   page: b3-p032
   match: Tripura Sundari
+  # She never speaks, so her "line" is Bhavi's description of her - and B3 p32
+  # is a room she is not in. The note belongs there, on the line that says who
+  # she is, but the picture cannot: every panel on that page is Dvij and Bhavi.
+  # `from` takes the crop from her first appearance instead, standing in the
+  # baba's firelight, looking straight out of the panel.
+  from: b1-p042
+  box: [0.560, 0.012, 0.999, 0.244]
 excerpt: (She speaks only in her own tribal language.)
 codex:
 - mahavidyas
