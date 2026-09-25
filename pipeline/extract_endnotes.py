@@ -18,6 +18,7 @@ Usage: python extract_endnotes.py
 import re
 import zipfile
 import xml.etree.ElementTree as ET
+from collections import Counter
 
 from common import BOOK_DIR, SITE
 from legacy_devanagari import decode, is_legacy, is_unmapped_legacy
@@ -42,6 +43,8 @@ def slugify(s: str) -> str:
 # Legacy-font bytes this run of the script could not decode, as
 # {byte: an endnote title}. main() reports them; they are never silently kept.
 UNMAPPED: dict[str, str] = {}
+# Table cells that hold only a picture, as a list of endnote titles.
+IMAGE_CELLS: list[str] = []
 _current_note = "?"
 
 
@@ -79,8 +82,22 @@ def text_of(el: ET.Element) -> str:
     return re.sub(r"\s+", " ", "".join(parts)).strip()
 
 
+def cell_md(tc: ET.Element) -> str:
+    """One table cell. A cell holding only a picture has no text to give.
+
+    The Nakshatras table keeps its Devanagari syllables this way - 27 cells that
+    are each an image - so returning "" would quietly drop a whole column. The
+    cell is marked instead, and main() says how many there were.
+    """
+    text = text_of(tc).replace("|", "/")
+    if not text and any(el.tag.endswith("}drawing") or el.tag.endswith("}pict") for el in tc.iter()):
+        IMAGE_CELLS.append(_current_note)
+        return "<!-- image -->"
+    return text
+
+
 def table_md(tbl: ET.Element) -> str:
-    rows = [[text_of(c).replace("|", "/") for c in tr.findall(f"{W}tc")] for tr in tbl.findall(f"{W}tr")]
+    rows = [[cell_md(c) for c in tr.findall(f"{W}tc")] for tr in tbl.findall(f"{W}tr")]
     rows = [r for r in rows if any(r)]
     if not rows:
         return ""
@@ -132,6 +149,7 @@ def main() -> None:
     # title to attribute anything to. Drop that pass's findings; the titled loop
     # below covers the same text and can say where each byte came from.
     UNMAPPED.clear()
+    IMAGE_CELLS.clear()
     for i, (note, title) in enumerate(zip(notes, TITLES), start=1):
         _current_note = title
         slug = slugify(title)
@@ -144,6 +162,10 @@ def main() -> None:
         print(f"{i:02d} {title:34s} {len(body.split()):4d} words  tables={body.count(chr(10) + '|---')}")
     if len(notes) != len(TITLES):
         print(f"WARNING: {len(notes)} endnotes found, {len(TITLES)} titles defined")
+    if IMAGE_CELLS:
+        print("\nNOTE: table cells holding only a picture, so the draft has no text for them:")
+        for title, n in Counter(IMAGE_CELLS).items():
+            print(f"  {n} cell(s) in {title}")
     if UNMAPPED:
         print(f"\nWARNING: {len(UNMAPPED)} legacy-font run(s) with no mapping. They are "
               f"left as the source has them; see legacy_devanagari.py:")

@@ -25,30 +25,30 @@ Each nakshatra has a symbol, a ruling planet, and syllables of the Devanagari al
 
 | Nakshatra | Symbols | Lord | Letters of the Devanagri |
 |---|---|---|---|
-| Ashwini | Horse's head | Ketu |  |
-| Bharani | Yoni | Venus |  |
-| Krittika | Spear | Sun |  |
-| Rohini | Chariot, temple, banyan tree | Moon |  |
-| Mrigshira | Deer's head | Mars |  |
-| Aridra | Teardrop, diamond, human head | Rahu |  |
-| Punarvasu | Bow & quiver | Jupiter |  |
-| Pushya | Cow's udder, arrow & circle | Saturn |  |
-| Ashlesha | Serpent | Mercury |  |
-| Magha | Royal throne | Ketu |  |
-| Purva Phalguni | Front legs of bed, hammock, fig tree | Venus |  |
-| Uttara Phalguni | Four legs of bed, hammock | Sun |  |
-| Hasta | Hand or fist | Moon |  |
-| Chitra | Bright jewel, pearl | Mars |  |
-| Swati | Shoot of plant, coral | Rahu |  |
-| Vishakha | Triumphal arch, potter's wheel | Jupiter |  |
-| Anuradha | Triumphal arch, lotus | Saturn |  |
-| Jyeshtha | Circular amulet, umbrella, earring | Mercury |  |
-| Moola | Bunch of roots, elephant goad | Ketu |  |
-| Purva Ashadha | Elephant tusk, fan, winnow basket | Venus |  |
-| Uttara Ashadha | Elephant tusk, small bed | Sun |  |
-| Shravana | Ear, three footprints | Moon |  |
-| Dhanishta | Drum, flute | Mars |  |
-| Satabhisha | Empty circle, thousand flowers or stars | Rahu |  |
-| Purva Bhadrapada | Sword, man with two faces, front legs of funeral cot | Jupiter |  |
-| Uttara Bhadrapada | Twins, back legs of funeral cot | Saturn |  |
-| Revati | Snake in water, pair of fish, drum | Mercury |  |
+| Ashwini | Horse's head | Ketu | चु चे चो ला |
+| Bharani | Yoni | Venus | ली लू ले पो |
+| Krittika | Spear | Sun | अ इ उ ए |
+| Rohini | Chariot, temple, banyan tree | Moon | ओ वा वी वु |
+| Mrigshira | Deer's head | Mars | वे वो का की |
+| Aridra | Teardrop, diamond, human head | Rahu | कु ध ड छ |
+| Punarvasu | Bow & quiver | Jupiter | के को हा ही |
+| Pushya | Cow's udder, arrow & circle | Saturn | हु हे हो ड |
+| Ashlesha | Serpent | Mercury | डी डू डे डो |
+| Magha | Royal throne | Ketu | मा मी मू मे |
+| Purva Phalguni | Front legs of bed, hammock, fig tree | Venus | नो टा टी टू |
+| Uttara Phalguni | Four legs of bed, hammock | Sun | टे टो पा पी |
+| Hasta | Hand or fist | Moon | पू ष ण ठ |
+| Chitra | Bright jewel, pearl | Mars | पे पो रा री |
+| Swati | Shoot of plant, coral | Rahu | रु रे रो ता |
+| Vishakha | Triumphal arch, potter's wheel | Jupiter | ती तू ते तो |
+| Anuradha | Triumphal arch, lotus | Saturn | ना नी नू ने |
+| Jyeshtha | Circular amulet, umbrella, earring | Mercury | नो या यी यू |
+| Moola | Bunch of roots, elephant goad | Ketu | ये यो भा भी |
+| Purva Ashadha | Elephant tusk, fan, winnow basket | Venus | भू धा फा दा |
+| Uttara Ashadha | Elephant tusk, small bed | Sun | भे भो जा जी |
+| Shravana | Ear, three footprints | Moon | खी खू खे खो |
+| Dhanishta | Drum, flute | Mars | गा गी गु गे |
+| Satabhisha | Empty circle, thousand flowers or stars | Rahu | गो सा सी सू |
+| Purva Bhadrapada | Sword, man with two faces, front legs of funeral cot | Jupiter | से सो दा दी |
+| Uttara Bhadrapada | Twins, back legs of funeral cot | Saturn | दू थ झ त्र |
+| Revati | Snake in water, pair of fish, drum | Mercury | दे दो च ची |
