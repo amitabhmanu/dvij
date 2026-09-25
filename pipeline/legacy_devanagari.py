@@ -21,6 +21,15 @@ against the manuscript's
 which fixes k = anusvara and g J h j n = य व र ल ह. Those five are VERIFIED:
 they are read from the printed page, not inferred.
 
+The manuscript's own prose confirms three of these independently. Book 4 has
+"Look for kaala. There, you can see...it is mapped to the letter व", and the
+table's kanchuka of Time - kaala - is J; "See if व is the bija akshara of any
+of the chakras" agrees with Jk reading वं at svadhishthana. A third passage,
+"the consonants of our alphabets are grouped into seven vargas - the म varga,
+the त varga and so on", carries b and ;, and both land on letters that do name
+a varga. That last pair was derived rather than read, so the prose is what
+promotes it.
+
 Structure, from the endnote's own table. "The Periodic Table of the Tattvas"
 lays the 36 tattvas over the matrika in the canonical order - the five pentads
 onto the five vargas, the kanchukas onto the semivowels, the shuddha-tattvas
@@ -56,12 +65,15 @@ WEBDUNIA: dict[str, str] = {
     # is verified is the cell, not a split into Qp + k; decoding it as om plus
     # an anusvara would put a mark there the printed page does not have.
     "Qpk": "ॐ",        # V  om
+    # --- confirmed by the manuscript's prose ("the म varga, the त varga") ---
+    ";": "त",         # V  ta
+    "b": "म",         # V  ma
     # --- derived from the varga scheme ---
     "f": "क", "F": "ख", "d": "ग", "D": "घ", "E": "ङ",
     "a": "च", "A": "छ", "s": "ज", "S": "झ", "@": "ञ",
     "x": "ट", "X": "ठ", "z": "ड", "Z": "ढ", "K": "ण",
-    ";": "त", ":": "थ", "=": "द", '"': "ध", "l": "न",
-    "v": "प", "V": "फ", "c": "ब", "C": "भ", "b": "म",
+    ":": "थ", "=": "द", '"': "ध", "l": "न",
+    "v": "प", "V": "फ", "c": "ब", "C": "भ",
     "N": "श", "M": "ष", "m": "स",
     "G": "क्ष",  # ksha
 }

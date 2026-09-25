@@ -25,6 +25,7 @@ from rapidfuzz import fuzz
 from common import ASSETS, BOOK_DIR, BOOKS, SITE
 
 PAGE_MATCH = 70  # partial_ratio needed to trust a page-level match
+DEVANAGARI = re.compile(r"[ऀ-ॿ]")
 
 
 @lru_cache
@@ -71,6 +72,16 @@ def chapter_of(quote: str) -> tuple[int, int]:
 
 
 def find(quote: str) -> dict:
+    # manuscript() strips tags with a regex, which throws away the font a run was
+    # set in, so the handful of Devanagari passages in the docx reach it as the
+    # legacy bytes described in legacy_devanagari.py - "the letter व" reads as
+    # "the letter J". A quote carrying Devanagari therefore cannot match, and
+    # would otherwise fail quietly as a low-confidence fall back to the chapter's
+    # first page. Say so instead.
+    if DEVANAGARI.search(quote):
+        print("WARNING: this quote contains Devanagari, which the manuscript stores as "
+              "legacy font bytes. The match will be unreliable; search on the surrounding "
+              "English instead.", file=sys.stderr)
     chapter, ms_score = chapter_of(quote)
     chapters, text = comic()
     ch = next(c for c in chapters if c["n"] == chapter)
