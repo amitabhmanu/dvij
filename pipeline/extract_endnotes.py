@@ -20,7 +20,7 @@ import zipfile
 import xml.etree.ElementTree as ET
 
 from common import BOOK_DIR, SITE
-from legacy_devanagari import decode, is_legacy
+from legacy_devanagari import decode, is_legacy, is_unmapped_legacy
 
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 DOCX = BOOK_DIR / "The Twice Born.docx"
@@ -66,10 +66,15 @@ def text_of(el: ET.Element) -> str:
         t = "".join(x.text or "" for x in r.iter(f"{W}t"))
         if not t:
             continue
-        if is_legacy(run_font(r)):
+        font = run_font(r)
+        if is_legacy(font):
             t, unknown = decode(t)
             for byte in unknown:
                 UNMAPPED.setdefault(byte, _current_note)
+        elif is_unmapped_legacy(font):
+            # A legacy font with no mapping. Decoding it against Webdunia's
+            # tables would invent letters, so the bytes stand and are reported.
+            UNMAPPED.setdefault(f"{t} [{font}]", _current_note)
         parts.append(t)
     return re.sub(r"\s+", " ", "".join(parts)).strip()
 
@@ -140,8 +145,8 @@ def main() -> None:
     if len(notes) != len(TITLES):
         print(f"WARNING: {len(notes)} endnotes found, {len(TITLES)} titles defined")
     if UNMAPPED:
-        print(f"\nWARNING: {len(UNMAPPED)} legacy-font byte(s) with no mapping in "
-              f"legacy_devanagari.WEBDUNIA. They are left as-is in the draft:")
+        print(f"\nWARNING: {len(UNMAPPED)} legacy-font run(s) with no mapping. They are "
+              f"left as the source has them; see legacy_devanagari.py:")
         for byte, where in sorted(UNMAPPED.items()):
             print(f"  {byte!r} in {where}")
 

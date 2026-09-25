@@ -113,6 +113,23 @@ def decode(text: str) -> tuple[str, list[str]]:
 # against the run's ascii/hAnsi/cs font name.
 LEGACY_FONTS = {"webdunia"}
 
+# Legacy Devanagari fonts in this manuscript that have no mapping yet. Their
+# bytes are NOT sent through decode() - the tables above are Webdunia's and
+# would mis-read them - but a caller can ask, so the runs get reported rather
+# than passed off as text. Pooja carries the nakshatra syllables in the body
+# ("Her sounds are ली लू ले लो", stored as yh yw ys iks); the same syllables are
+# pictures in the Nakshatras endnote, which is where a mapping could be
+# anchored if one is ever wanted.
+UNMAPPED_LEGACY_FONTS = {"pooja"}
+
+
+def _name(font: str | None) -> str:
+    return font.strip().lower() if font else ""
+
 
 def is_legacy(font: str | None) -> bool:
-    return bool(font) and font.strip().lower() in LEGACY_FONTS
+    return _name(font) in LEGACY_FONTS
+
+
+def is_unmapped_legacy(font: str | None) -> bool:
+    return _name(font) in UNMAPPED_LEGACY_FONTS
