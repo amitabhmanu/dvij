@@ -46,7 +46,7 @@
   "portrait": {
    "file": "voice-tantric-baba.webp",
    "w": 640,
-   "h": 531,
+   "h": 593,
    "page": "b1-p040",
    "fromLettering": true
   }
@@ -84,8 +84,8 @@
   },
   "portrait": {
    "file": "voice-vedic-sage.webp",
-   "w": 640,
-   "h": 492,
+   "w": 353,
+   "h": 523,
    "page": "b5-p010",
    "fromLettering": true
   }

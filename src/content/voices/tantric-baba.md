@@ -16,6 +16,12 @@ firstSeen:
 portrait:
   page: b1-p040
   match: darkness
+  # The panel holding that line is the three of them across the fire, so the card
+  # gave equal weight to Dvij and Bhavi. This box takes the close shot higher on
+  # the same page: ash stripes, matted hair, beard, rudraksha, lit by the fire.
+  # A wedge of his speech balloon stays in the top-left corner; moving past it
+  # would cut into his face.
+  box: [0.690, 0.190, 1.000, 0.370]
 excerpt: Knowledge that hides in the darkness… they fail to reach elevated levels, for what they seek is pleasure and not knowledge.
 codex:
 - kaula

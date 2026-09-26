@@ -8,6 +8,12 @@ quote: This ashram is like an island of purity that floats in a boundless ocean 
 portrait:
   page: b5-p010
   match: apaurusheya
+  # Every panel on this page is the same wide two-shot - Dvij at the left, the
+  # sage at the right, a vision above - and the card cropped to the balloon in
+  # the middle. This box takes the sage alone from the ashwamedha panel: white
+  # beard, vertical tilak, rudraksha. He is never drawn closer than this on the
+  # page, so it is 353px wide; the hotspot stays on his line above.
+  box: [0.285, 0.535, 0.452, 0.690]
 excerpt: In the end, you are one with Brahman, which is the ultimate reality… That day you shall exclaim 'Aham Brahmasmi'.
 codex:
 - navagrahas
