@@ -191,7 +191,7 @@ These are best left fictional. The layer is stronger if some places stay *nowher
 
 1. **Accept or replace each pairing.** Pay particular attention to the composites (Bhoodara, Kaal Bhairava) and to the medium-confidence pairings.
 2. **Anything you actually had in mind while writing.** Your own sources override these suggestions.
-3. **Photos.** For each accepted pairing, use your own photo or a freely licensed one (Wikimedia Commons is the main source), and record the licence and credit in `places.json`.
+3. **Photos.** For each accepted pairing, use your own photo or a freely licensed one, and record the licence and credit in `places.json`. A shortlist of free candidates, one or more per pairing, is in [real-india-images.md](real-india-images.md).
 
 ---
 
