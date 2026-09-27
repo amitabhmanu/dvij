@@ -20,6 +20,17 @@
    "b4-p021"
   ]
  },
+ "avadhana": {
+  "firstSeen": {
+   "book": 2,
+   "page": 8
+  },
+  "firstSeenFrom": "lettering",
+  "mentions": [
+   "b2-p008",
+   "b2-p025"
+  ]
+ },
  "bacteriophages": {
   "firstSeen": {
    "book": 2,
@@ -173,6 +184,19 @@
    "b4-p031"
   ]
  },
+ "nagas": {
+  "firstSeen": {
+   "book": 1,
+   "page": 11
+  },
+  "firstSeenFrom": "lettering",
+  "mentions": [
+   "b1-p011",
+   "b1-p042",
+   "b2-p002",
+   "b4-p005"
+  ]
+ },
  "nakshatras": {
   "firstSeen": {
    "book": 3,
@@ -245,6 +269,19 @@
    "b1-p021",
    "b1-p022",
    "b5-p022"
+  ]
+ },
+ "vedic-pathas": {
+  "firstSeen": {
+   "book": 2,
+   "page": 8
+  },
+  "firstSeenFrom": "lettering",
+  "mentions": [
+   "b2-p008",
+   "b2-p025",
+   "b5-p009",
+   "b5-p010"
   ]
  }
 }

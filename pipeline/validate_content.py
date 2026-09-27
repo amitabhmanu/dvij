@@ -1,6 +1,8 @@
 """Check that companion content is internally consistent (plan Phase 2).
 
 - every Codex `related` id and image exists
+- every Bestiary entry's codex links, kin, art pages and exclusions resolve
+- every Memory Hall anchor, verse and ring pool is usable
 - every hotspot's page exists and every target resolves (codex:<id> for now)
 - every firstSeen (override or computed) points at a real page
 - manual hotspot removals refer to real automatic hotspots
@@ -48,6 +50,38 @@ def main() -> int:
         elif not (entries[eid].get("firstSeen") or links[eid]["firstSeen"]):
             errors.append(f"codex/{eid}: no firstSeen (not mentioned in the lettering and no anchor match)")
 
+    beasts = {}
+    for path in sorted((CONTENT / "bestiary").glob("*.md")):
+        front = yaml.safe_load(path.read_text(encoding="utf-8").split("---", 2)[1])
+        beasts[path.stem] = front
+        for field in ("title", "summary", "appearance", "class", "source"):
+            if not front.get(field):
+                errors.append(f"bestiary/{path.name}: missing {field}")
+        for r in front.get("related", []):
+            if r not in entries:
+                errors.append(f"bestiary/{path.stem}: related codex '{r}' does not exist")
+        for spec in [front.get("art")] + (front.get("alsoOn") or []):
+            if spec and spec["page"] not in pages:
+                errors.append(f"bestiary/{path.stem}: art page {spec['page']} does not exist")
+            if spec and spec.get("box") is None and spec.get("panel") is None:
+                errors.append(f"bestiary/{path.stem}: art on {spec['page']} needs a box or a panel index")
+        for x in front.get("exclude", []):
+            if x not in pages:
+                errors.append(f"bestiary/{path.stem}: exclude page '{x}' does not exist")
+    for bid, b in beasts.items():
+        for k in b.get("kin", []):
+            if k not in beasts:
+                errors.append(f"bestiary/{bid}: kin '{k}' does not exist")
+
+    beast_links = json.loads((CONTENT / "generated" / "bestiary-links.json").read_text(encoding="utf-8"))
+    for bid in beasts:
+        if bid not in beast_links:
+            errors.append(f"bestiary/{bid}: not linked yet (run link_bestiary.py)")
+        elif not beast_links[bid]["firstSeen"]:
+            errors.append(f"bestiary/{bid}: no firstSeen (not named in the lettering, no art and no override)")
+        elif beast_links[bid]["art"] and beast_links[bid]["art"]["file"].removesuffix(".webp") not in art:
+            errors.append(f"bestiary/{bid}: card image not in site-assets/art (run link_bestiary.py)")
+
     voices = {}
     for path in sorted((CONTENT / "voices").glob("*.md")):
         front = yaml.safe_load(path.read_text(encoding="utf-8").split("---", 2)[1])
@@ -76,6 +110,30 @@ def main() -> int:
         if f["page"] not in pages:
             errors.append(f"fragment {fid}: page {f['page']} does not exist")
 
+    memory = json.loads((CONTENT / "generated" / "memory.json").read_text(encoding="utf-8"))
+    for name, a in memory["anchors"].items():
+        if a["pageId"] not in pages:
+            errors.append(f"memory anchor {name}: page {a['pageId']} does not exist")
+    seen_verses = set()
+    for v in memory["verses"]:
+        if v["id"] in seen_verses:
+            errors.append(f"memory verse {v['id']}: duplicate id")
+        seen_verses.add(v["id"])
+        if len(v["words"]) < 3:
+            errors.append(f"memory verse {v['id']}: needs at least 3 words for the patterns to differ")
+        for w in v["words"]:
+            for field in ("deva", "iast", "gloss"):
+                if not w.get(field):
+                    errors.append(f"memory verse {v['id']}: a word is missing {field}")
+        if v.get("codex") and v["codex"] not in entries:
+            errors.append(f"memory verse {v['id']}: codex '{v['codex']}' does not exist")
+        if v.get("at") and v["at"] not in pages:
+            errors.append(f"memory verse {v['id']}: page {v['at']} does not exist")
+    if len(memory["ring"]["items"]) < 10:
+        errors.append("memory ring: needs at least 10 items for the full ring the book draws")
+
+    memory_hs = json.loads((CONTENT / "hotspots" / "memory.json").read_text(encoding="utf-8"))
+    beast_hs = json.loads((CONTENT / "hotspots" / "bestiary.json").read_text(encoding="utf-8"))
     companion_hs = json.loads((CONTENT / "hotspots" / "companions.json").read_text(encoding="utf-8"))
     auto = json.loads((CONTENT / "hotspots" / "auto.json").read_text(encoding="utf-8"))
     puzzle_hs = json.loads((CONTENT / "hotspots" / "puzzles.json").read_text(encoding="utf-8"))
@@ -93,11 +151,11 @@ def main() -> int:
         if p["crop"] not in art:
             errors.append(f"parchment {p['id']}: crop '{p['crop']}' not in site-assets/art")
     manual = json.loads((CONTENT / "hotspots" / "manual.json").read_text(encoding="utf-8"))
-    auto_ids = {h["id"] for h in auto + puzzle_hs + companion_hs}
+    auto_ids = {h["id"] for h in auto + puzzle_hs + companion_hs + beast_hs + memory_hs}
     for rid in manual.get("remove", []):
         if rid not in auto_ids:
             errors.append(f"hotspots/manual.json: removes unknown hotspot '{rid}'")
-    for h in auto + puzzle_hs + companion_hs + manual.get("add", []):
+    for h in auto + puzzle_hs + companion_hs + beast_hs + memory_hs + manual.get("add", []):
         if h["page"] not in pages:
             errors.append(f"hotspot {h['id']}: page {h['page']} does not exist")
         x0, y0, x1, y1 = h["rect"]
@@ -113,17 +171,23 @@ def main() -> int:
                 errors.append(f"hotspot {h['id']}: target {t} does not exist")
             elif kind == "fragment" and ref not in frags:
                 errors.append(f"hotspot {h['id']}: target {t} does not exist")
-            elif kind not in ("codex", "puzzle", "voice", "place", "fragment"):
+            elif kind == "beast" and ref not in beasts:
+                errors.append(f"hotspot {h['id']}: target {t} does not exist")
+            elif kind == "memory" and ref != "avadhana":
+                errors.append(f"hotspot {h['id']}: target {t} does not exist")
+            elif kind not in ("codex", "puzzle", "voice", "place", "fragment", "beast", "memory"):
                 errors.append(f"hotspot {h['id']}: unknown target kind '{kind}'")
 
-    total = len(auto) + len(puzzle_hs) + len(companion_hs) - len(manual.get("remove", [])) + len(manual.get("add", []))
+    total = (len(auto) + len(puzzle_hs) + len(companion_hs) + len(beast_hs) + len(memory_hs)
+             - len(manual.get("remove", [])) + len(manual.get("add", [])))
     if errors:
         print(f"{len(errors)} problem(s):")
         for e in errors:
             print("  -", e)
         return 1
-    print(f"OK: {len(entries)} codex entries, {len(parchment['puzzles'])} puzzles, {len(voices)} voices, "
-          f"{len(rail['nodes'])} rail beats, {len(frags)} fragments, {total} hotspots, all references resolve.")
+    print(f"OK: {len(entries)} codex entries, {len(beasts)} creatures, {len(parchment['puzzles'])} puzzles, "
+          f"{len(memory['verses'])} memory verses, {len(voices)} voices, {len(rail['nodes'])} rail beats, "
+          f"{len(frags)} fragments, {total} hotspots, all references resolve.")
     return 0
 
 

@@ -11,13 +11,12 @@ are served from a Cloudflare R2 bucket.
 | [docs/twice-born-website-design-discussion.md](docs/twice-born-website-design-discussion.md) | The original brainstorm the design was drawn from. Superseded where the two disagree - see design §17 |
 
 **State:** all five books are in — 171 pages, 1,712 panels, every panel described,
-all 81 chapter starts confirmed. The companion layers are built: a Codex of 21
-entries, the Parchment's 5 puzzles, the Bhoodara caves, a journey rail of 10 beats,
-8 Council of Voices cards and 5 hidden Charvaka fragments, linked by 91 hotspots.
-Still open: the valley map and Real India layer, which need the place pairings
-confirmed; the **Bestiary** of the book's mythological creatures, gathered but not
-yet written (design §11); the **Memory Hall**, an interactive version of the
-recitation technique Dvij learns at the ceremony (design §12); and the v2 AI features.
+all 81 chapter starts confirmed. The companion layers are built: a Codex of 24
+entries, a Bestiary of 14 creatures, the Parchment's 5 puzzles, the Bhoodara caves,
+the Memory Hall, a journey rail of 10 beats, 8 Council of Voices cards and 5 hidden
+Charvaka fragments, linked by 115 hotspots. Still open: the valley map and Real India
+layer, which need the place pairings confirmed; audio for the Memory Hall, which
+ships silent (design §12.6); and the v2 AI features.
 
 ## Layout
 
@@ -27,8 +26,12 @@ recitation technique Dvij learns at the ceremony (design §12); and the v2 AI fe
 | `src/content/manifests/` | Per-book manifests the site reads (generated, committed) |
 | `src/content/corrections/` | Your review edits: panel boxes, alt text, chapter starts (committed) |
 | `src/content/codex/` | Codex (glossary) entries, one Markdown file each |
+| `src/content/bestiary/` | Bestiary entries — the book's creatures, one Markdown file each |
+| `src/content/memory.yaml` | The Memory Hall: anchors, verses and the avadhana ring's items |
 | `src/content/generated/codex-links.json` | Where each Codex entry appears in the comic (generated) |
-| `src/content/hotspots/` | `auto.json` (generated links from the lettering), `manual.json` (your additions/removals) |
+| `src/content/generated/bestiary-links.json` | Where each creature is named or drawn, and its card crop (generated) |
+| `src/content/generated/memory.json` | The Memory Hall's content with its anchors resolved to pages (generated) |
+| `src/content/hotspots/` | `auto.json` (generated links from the lettering), `bestiary.json`, `memory.json`, `puzzles.json`, `companions.json`, `manual.json` (your additions/removals) |
 | `src/islands/` | Interactive components (reader, dev review tool) |
 | `integrations/local-assets.mjs` | Serves `../site-assets` at `/_assets` in dev; bundles it on `build:local` |
 
@@ -62,9 +65,11 @@ Steps (see each script's docstring):
 8. `extract_endnotes.py` — manuscript endnotes → draft glossary entries.
 9. `build_manifests.py` — merges all of the above plus `src/content/corrections/`.
 10. `link_codex.py` — finds every balloon/caption that mentions a Codex entry (by its `aliases`) and makes it a hotspot; the earliest mention becomes the entry's spoiler position (`firstSeen`).
-11. `link_parchment.py` — resolves each puzzle's "starts" and "solved" quotes (in `src/content/parchment.yaml`) to comic pages, and adds a "Puzzle" badge hotspot where each puzzle begins.
-12. `link_companions.py` — locates the Journey rail beats, crops each Voice's portrait from the panel where they speak, and places the `voice:` and hidden `fragment:` hotspots. `--sheet` also writes a portrait contact sheet.
-13. `validate_content.py` — checks every Codex link, image, hotspot, puzzle answer, voice, rail beat, fragment and page reference resolves (`npm run validate`).
+11. `link_bestiary.py` — the same alias scan for the Bestiary, with per-entry exclusions, plus the creature card crops and the `beast:` hotspots. `--sheet` writes a contact sheet of the cards.
+12. `link_memory.py` — pins the Memory Hall's anchors to the lettering that carries them and places the `memory:` hotspot.
+13. `link_parchment.py` — resolves each puzzle's "starts" and "solved" quotes (in `src/content/parchment.yaml`) to comic pages, and adds a "Puzzle" badge hotspot where each puzzle begins.
+14. `link_companions.py` — locates the Journey rail beats, crops each Voice's portrait from the panel where they speak, and places the `voice:` and hidden `fragment:` hotspots. `--sheet` also writes a portrait contact sheet.
+15. `validate_content.py` — checks every Codex, Bestiary and Memory Hall link, image, hotspot, puzzle answer, voice, rail beat, fragment and page reference resolves (`npm run validate`).
 
 Helper: `python pipeline/find_page.py "a manuscript quote"` → book, page and chapter where it appears in the comic.
 
@@ -137,10 +142,32 @@ editing any of them, and they print each anchor's confidence.
 Each entry is `src/content/codex/<id>.md` with frontmatter: `title`, `aliases` (words that
 auto-link it in the comic), `summary` (shown in the reader's drawer), `related`, `images`
 (names in `site-assets/art`), `source`, and optionally `firstSeen: {book, page}` to override the
-computed spoiler position. After adding or editing aliases, run `npm run codex` then `npm run validate`.
+computed spoiler position. An image of real people or a real place also takes `imageAlt` and
+`imageCredit`, so its description and its source are on the page rather than assumed. After adding or editing aliases, run `npm run codex` then `npm run validate`.
 
 Spoilers: an entry is blurred for readers who haven't reached its `firstSeen` page, unless they
 choose "Show everything". Progress lives in the reader's browser only.
+
+## Bestiary
+
+Each creature is `src/content/bestiary/<id>.md`. It takes the Codex fields plus:
+
+| Field | What it does |
+|---|---|
+| `class` | One of `nature-spirit` `wild-folk` `demon` `restless-dead` `serpent` `carving` `legendary-race`; drives the gallery filter |
+| `appearance` | What it looks like, used as the card caption and the image's alt text |
+| `exclude` | Page ids where this entry's aliases must **not** fire (e.g. a zodiac sign that shares a creature's name) |
+| `art` | `{page, box}` or `{page, panel}` — the crop taken from the page master as the card image |
+| `alsoOn` | More `{page, box}` marks for places the creature is **drawn but never named**, which no alias scan can find |
+| `kin` | Other creatures; `related` links to Codex entries |
+
+The body is three sections by convention — **In the book**, **In tradition**, **And yet** —
+the last being who in the story doubts the creature. Run `npm run bestiary` after editing,
+then `npm run validate`. `python pipeline/link_bestiary.py --sheet` writes
+`site-assets/data/bestiary-cards.png` so the crops can be checked at a glance.
+
+New card images mean new files in `site-assets/art/`, so they need `npm run upload -- --only art`
+before they appear on the deployed site.
 
 ## Puzzles
 
@@ -149,6 +176,22 @@ chain of multiple-choice `stages` (prompt, choices, answer, hint, explanation, o
 transcribed from the characters' reasoning in the manuscript. After editing it, run
 `python pipeline/link_parchment.py` then `npm run validate`. A puzzle opens for readers at its
 `availableQuote` page; the guided walkthrough opens at its `solvedQuote` page.
+
+## The Memory Hall
+
+`src/content/memory.yaml` holds the recitation trainer at `/avadhana/`: the anchors that pin it
+to the comic, the verses the ladder drills, and the avadhana ring's items.
+
+A verse is just a word list — `{deva, iast, gloss}` each — because the recitation patterns are
+**generated by rule** in `src/lib/pathas.ts` (`pada`, `krama`, `jaṭā`, `ghana`). Adding a verse
+needs no code. Note that `words` is the *pada* split, which is not the syllable split the
+katapayadi decode uses in `Caves.tsx`: same verse, two different readings, deliberately kept apart.
+
+The `anchors` are comic lettering rather than manuscript prose, so each gives a page id and a
+fragment to match inside it; `link_memory.py` fails loudly if a fragment no longer matches.
+Run `npm run memory` after editing, then `npm run validate`.
+
+The Hall ships **silent** (design §12.6).
 
 ## Companion layers
 

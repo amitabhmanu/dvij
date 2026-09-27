@@ -230,6 +230,11 @@ body.reader-body { background: var(--reader-bg); color: var(--reader-text); over
 .reader .fragment-card { font-style: normal; }
 .reader .fragment-card .count { font: 600 0.85rem var(--font-ui); color: var(--sepia); }
 
+/* Creature cards show the crop from the art itself, so it gets the dark plate
+   the gallery uses rather than the Codex diagrams' white one. */
+.reader .beast-card img { max-height: 200px; width: auto; background: #15110d; padding: 0; border-radius: 4px; }
+.reader .beast-card .small { font: 700 0.68rem var(--font-ui); text-transform: uppercase; letter-spacing: 0.1em; margin: -2px 0 8px; }
+
 /* ---- journey rail ---- */
 .reader .journey-rail {
   position: absolute; z-index: 6; left: 10px; top: 64px; bottom: 96px; width: 44px;

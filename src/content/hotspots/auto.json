@@ -17,6 +17,23 @@
   "auto": true
  },
  {
+  "id": "auto-b1-p011-1",
+  "page": "b1-p011",
+  "rect": [
+   0.0768,
+   0.0659,
+   0.302,
+   0.1184
+  ],
+  "targets": [
+   "codex:nagas"
+  ],
+  "terms": [
+   "Nagas"
+  ],
+  "auto": true
+ },
+ {
   "id": "auto-b1-p021-12",
   "page": "b1-p021",
   "rect": [
@@ -221,6 +238,23 @@
   "auto": true
  },
  {
+  "id": "auto-b1-p042-1",
+  "page": "b1-p042",
+  "rect": [
+   0.4421,
+   0.0039,
+   0.6504,
+   0.0525
+  ],
+  "targets": [
+   "codex:nagas"
+  ],
+  "terms": [
+   "Naga tribal"
+  ],
+  "auto": true
+ },
+ {
   "id": "auto-b2-p002-2",
   "page": "b2-p002",
   "rect": [
@@ -240,6 +274,23 @@
   "auto": true
  },
  {
+  "id": "auto-b2-p002-3",
+  "page": "b2-p002",
+  "rect": [
+   0.4155,
+   0.2724,
+   0.5779,
+   0.3102
+  ],
+  "targets": [
+   "codex:nagas"
+  ],
+  "terms": [
+   "Nagas"
+  ],
+  "auto": true
+ },
+ {
   "id": "auto-b2-p002-4",
   "page": "b2-p002",
   "rect": [
@@ -249,9 +300,11 @@
    0.4955
   ],
   "targets": [
+   "codex:nagas",
    "codex:shaivite-renunciation"
   ],
   "terms": [
+   "Nagas",
    "aghori"
   ],
   "auto": true
@@ -274,6 +327,40 @@
   "auto": true
  },
  {
+  "id": "auto-b2-p008-0",
+  "page": "b2-p008",
+  "rect": [
+   0.5596,
+   0.0194,
+   0.8354,
+   0.0836
+  ],
+  "targets": [
+   "codex:avadhana"
+  ],
+  "terms": [
+   "Avadhan"
+  ],
+  "auto": true
+ },
+ {
+  "id": "auto-b2-p008-2",
+  "page": "b2-p008",
+  "rect": [
+   0.374,
+   0.3428,
+   0.6766,
+   0.4133
+  ],
+  "targets": [
+   "codex:vedic-pathas"
+  ],
+  "terms": [
+   "memorization"
+  ],
+  "auto": true
+ },
+ {
   "id": "auto-b2-p009-4",
   "page": "b2-p009",
   "rect": [
@@ -287,6 +374,40 @@
   ],
   "terms": [
    "navaratnas"
+  ],
+  "auto": true
+ },
+ {
+  "id": "auto-b2-p025-3",
+  "page": "b2-p025",
+  "rect": [
+   0.0002,
+   0.3307,
+   0.1406,
+   0.3634
+  ],
+  "targets": [
+   "codex:avadhana"
+  ],
+  "terms": [
+   "avadhan"
+  ],
+  "auto": true
+ },
+ {
+  "id": "auto-b2-p025-4",
+  "page": "b2-p025",
+  "rect": [
+   0.5431,
+   0.3219,
+   0.7508,
+   0.3703
+  ],
+  "targets": [
+   "codex:vedic-pathas"
+  ],
+  "terms": [
+   "memorization"
   ],
   "auto": true
  },
@@ -682,6 +803,57 @@
   ],
   "terms": [
    "Charvaka"
+  ],
+  "auto": true
+ },
+ {
+  "id": "auto-b4-p005-0",
+  "page": "b4-p005",
+  "rect": [
+   0.3314,
+   0.0481,
+   0.5297,
+   0.0942
+  ],
+  "targets": [
+   "codex:nagas"
+  ],
+  "terms": [
+   "Nagas"
+  ],
+  "auto": true
+ },
+ {
+  "id": "auto-b4-p005-2",
+  "page": "b4-p005",
+  "rect": [
+   0.0002,
+   0.38,
+   0.1417,
+   0.413
+  ],
+  "targets": [
+   "codex:nagas"
+  ],
+  "terms": [
+   "Nagas"
+  ],
+  "auto": true
+ },
+ {
+  "id": "auto-b4-p005-5",
+  "page": "b4-p005",
+  "rect": [
+   0.5178,
+   0.4324,
+   0.9822,
+   0.4604
+  ],
+  "targets": [
+   "codex:nagas"
+  ],
+  "terms": [
+   "Nagas"
   ],
   "auto": true
  },
@@ -1088,6 +1260,41 @@
   ],
   "terms": [
    "Anahata"
+  ],
+  "auto": true
+ },
+ {
+  "id": "auto-b5-p009-10",
+  "page": "b5-p009",
+  "rect": [
+   0.5108,
+   0.7657,
+   0.9893,
+   0.7937
+  ],
+  "targets": [
+   "codex:vedic-pathas"
+  ],
+  "terms": [
+   "Samaveda"
+  ],
+  "auto": true
+ },
+ {
+  "id": "auto-b5-p010-1",
+  "page": "b5-p010",
+  "rect": [
+   0.6588,
+   0.15,
+   0.8761,
+   0.2006
+  ],
+  "targets": [
+   "codex:vedic-pathas"
+  ],
+  "terms": [
+   "shrauta",
+   "oral recitation"
   ],
   "auto": true
  },

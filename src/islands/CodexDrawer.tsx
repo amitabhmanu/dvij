@@ -4,6 +4,7 @@
 // entry lives at /codex/<id>/.
 import { useEffect, useRef, useState } from "preact/hooks";
 import type { CodexSummary } from "../lib/codex";
+import type { BeastSummary } from "../lib/bestiary";
 import type { Fragment, VoiceSummary } from "../lib/companions";
 import { findFragment, FRAGMENT_COUNT } from "../lib/fragments";
 import { isVeiled } from "../lib/spoilers";
@@ -11,6 +12,10 @@ import { isVeiled } from "../lib/spoilers";
 let cache: Promise<CodexSummary[]> | null = null;
 const loadCodex = () =>
   (cache ??= fetch("/data/codex.json").then((r) => r.json()).catch(() => { cache = null; return []; }));
+
+let beastCache: Promise<BeastSummary[]> | null = null;
+const loadBestiary = () =>
+  (beastCache ??= fetch("/data/bestiary.json").then((r) => r.json()).catch(() => { beastCache = null; return []; }));
 
 let companionCache: Promise<{ voices: VoiceSummary[]; fragments: Fragment[] }> | null = null;
 const loadCompanions = () =>
@@ -26,9 +31,13 @@ export default function CodexDrawer({ targets, label, onClose }: Props) {
   const puzzles = targets.filter((t) => t.startsWith("puzzle:")).map((t) => t.slice(7));
   const voiceIds = targets.filter((t) => t.startsWith("voice:")).map((t) => t.slice(6));
   const fragmentIds = targets.filter((t) => t.startsWith("fragment:")).map((t) => t.slice(9));
+  const beastIds = targets.filter((t) => t.startsWith("beast:")).map((t) => t.slice(6));
+  const memoryIds = targets.filter((t) => t.startsWith("memory:")).map((t) => t.slice(7));
+  const [beasts, setBeasts] = useState<BeastSummary[] | null>(null);
   const [companions, setCompanions] = useState<{ voices: VoiceSummary[]; fragments: Fragment[] } | null>(null);
   const [found, setFound] = useState<string[]>([]);
   useEffect(() => {
+    if (beastIds.length) loadBestiary().then(setBeasts);
     if (voiceIds.length || fragmentIds.length) loadCompanions().then(setCompanions);
     if (fragmentIds.length) fragmentIds.forEach((id) => setFound(findFragment(id)));
   }, []);
@@ -42,7 +51,7 @@ export default function CodexDrawer({ targets, label, onClose }: Props) {
   return (
     <aside class="codex-drawer" role="dialog" aria-label="Codex" onPointerUp={(e) => e.stopPropagation()}>
       <header>
-        <span class="eyebrow">{ids.length ? "Codex" : puzzles.length ? "Puzzle" : voiceIds.length ? "Council of Voices" : "A fragment"}</span>
+        <span class="eyebrow">{ids.length ? "Codex" : beastIds.length ? "Bestiary" : memoryIds.length ? "The Memory Hall" : puzzles.length ? "Puzzle" : voiceIds.length ? "Council of Voices" : "A fragment"}</span>
         <button type="button" ref={closeRef} class="close" onClick={onClose} aria-label="Close">×</button>
       </header>
       {voiceIds.map((id) => {
@@ -71,6 +80,26 @@ export default function CodexDrawer({ targets, label, onClose }: Props) {
           </article>
         ) : <p class="muted" key={id}>Loading…</p>;
       })}
+      {beastIds.map((id) => {
+        const b = beasts?.find((x) => x.id === id);
+        return b ? (
+          <article key={id} class="beast-card">
+            {b.image && <img src={b.image} alt="" loading="lazy" />}
+            <h2>{b.title}</h2>
+            <p class="muted small">{b.classLabel}</p>
+            <p>{b.summary}</p>
+            <p class="more"><a href={`/bestiary/${b.id}/`}>What it is, and who doubts it →</a></p>
+          </article>
+        ) : <p class="muted" key={id}>Loading…</p>;
+      })}
+      {memoryIds.map((id) => (
+        <article key={id} class="memory-card">
+          <h2>The technique he is describing</h2>
+          <p>Forward, backward, interleaved — the recitation patterns that carried the Veda without writing. Dvij
+            tries them on one shloka and it sticks.</p>
+          <p class="more"><a href="/avadhana/">Learn it yourself →</a></p>
+        </article>
+      ))}
       {puzzles.map((id) => (
         <article key={id} class="puzzle-card">
           <h2>{label ?? "A puzzle"}</h2>

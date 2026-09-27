@@ -1,7 +1,7 @@
 """Run the whole content pipeline in order (design §4, plan Phase 0).
 
 Each step is idempotent; slow steps skip work that is already done.
-Usage: python run_all.py [--from compress|render|variants|text|panels|chapters|art|endnotes|manifests|codex|parchment|companions|validate]
+Usage: python run_all.py [--from compress|render|variants|text|panels|chapters|art|endnotes|manifests|codex|bestiary|memory|parchment|companions|validate]
 """
 import argparse
 import subprocess
@@ -20,6 +20,8 @@ STEPS = [
     ("endnotes", [sys.executable, "extract_endnotes.py"]),
     ("manifests", [sys.executable, "build_manifests.py"]),
     ("codex", [sys.executable, "link_codex.py"]),
+    ("bestiary", [sys.executable, "link_bestiary.py"]),
+    ("memory", [sys.executable, "link_memory.py"]),
     ("parchment", [sys.executable, "link_parchment.py"]),
     ("companions", [sys.executable, "link_companions.py"]),
     ("validate", [sys.executable, "validate_content.py"]),

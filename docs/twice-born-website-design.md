@@ -377,7 +377,7 @@ Notes:
   4. Find the way back out through the same eight chambers in reverse.
 - **Modes:** in Guided mode the exits are numbered. In Hard mode you count them yourself.
 - **Unlocking:** the page opens once the reader reaches B2 p26.
-- **Where the verse comes from:** the decode step hands the reader the katapayadi table but not the technique that made the verse stick. That is §12, which unlocks earlier and links forward into this page.
+- **Where the verse comes from:** the decode step hands the reader the katapayadi table but not the technique that made the verse stick. That is the Memory Hall (§12), which unlocks earlier at b2-p008 and links forward into this page.
 
 ---
 
@@ -472,93 +472,105 @@ Each chakra beat sits on the page where the art marks the rise, not where the ma
 
 ---
 
-## 11. The Bestiary (Layer 5) — planned, not started
+## 11. The Bestiary (Layer 5) — built: `/bestiary/`
 
-The valley is full of creatures. Most are spoken of rather than met: the cook warns of nagas and yakshas in the forest, Viraat reels off banmanus, pichhal peris, pishachas, kimpurushas and kinnars as the van climbs into the dark, Bhavi explains the boulder field with a rakshasa riding a mountain, and vyalas are carved on the temple steps. A section where a reader can browse them, see them, and read what tradition says about them is the last of the book-world layers.
+The valley is full of creatures. Most are spoken of rather than met: the cook warns of yakshas hiding in the trees, Viraat reels off banmanus, pichhal peris, pishachas, kimpurushas and kinnars as the van climbs into the dark, Bhavi explains the boulder field with a rakshasa riding a mountain, and vyalas are carved on the temple steps. The Bestiary is where a reader can browse them, see them, and read what tradition says about them.
+
+**Built:** 14 creatures, 10 of them illustrated with crops from the comic's own art, 11 `beast:` hotspots, the gallery at `/bestiary/` and an entry page each. The Nagas are deliberately *not* among them and have a Codex entry instead (§11.5).
 
 ### 11.1 What is in the book
 
-Gathered from the lettering and the reviewed panel descriptions. "Named" means the word is in a caption or balloon; "drawn" means the art shows the creature, whether or not it is named.
+Gathered by scanning all 171 pages of lettering and the reviewed panel descriptions. "Named" means the word is in a caption or balloon; "drawn" means the art shows the creature, whether or not it is named.
 
 | Creature | Named at | Drawn at | Note |
 |---|---|---|---|
-| **Vyala** | b1-p039 (×2) | b1-p039, b3-p022 | The strongest entry: the book defines them itself — "composite creatures controlling cosmic energy" — and draws them twice, as elephant-headed lions on high plinths, then in close-up as a lion-faced guardian with horns and a carved mane |
-| **Naga** | b1-p011 | b2-p003 (a golden figure reclining on a serpent couch) | Three different things share the name in this book — see §11.5 |
-| **Yaksha** | b1-p011 | b1-p011 (the painted forest scene behind the cook: a tiger, a lion and horned figures half hidden among the trees) | |
-| **Rakshasa — Vraktaasura** | b1-p030 | b1-p030 (horned, riding a mountain through the sky as Indra looses the vajra) | Named, with his own myth, on the page |
-| **Giants** | b1-p030 | b1-p030 (heaving boulders over the fort walls) | The scattered boulders are their work — or a meteor's. The page argues both |
-| **Banmanus** | b1-p018 | b1-p018 (huge shaggy man-figures in the dark forest) | |
-| **Pishacha** | b1-p018 | b1-p018 (crouching ghouls) | |
-| **Kimpurusha / Kinnara** | b1-p018 | b1-p018 (a horse-headed being) | Two names in one breath; one entry or two is an authoring call |
-| **Pichhal peri** | b1-p018 | — | The backwards-footed woman of North Indian folklore; the book only names her |
-| **Bhoot / Pret** | b1-p036, b1-p039, b3-p034 | — | "Bhoots, prets prey on unsuspecting souls, not forlorn ones." The abandoned Forest Officer's bungalow is a *bhoot* bungalow, and the Kaal Bhairava temple floats on *Bhootnath* taal |
-| **Gandharva** | b4-p017 | — | Bhavi's aside: "you are what my uncle would call 'a gandharva's incarnation'" |
-| **Apsara** | b5-p028 | — | Bhavi recalls the stories of the apsara and the ascetic rishi |
-| **Ashtomi** | b4-p019 | b4-p019 (the hillside ablaze with flowering trees that Kurup points at) | A race, not a beast: "they survive by smelling flowers… any unpleasant smell causes instant death" |
+| **Vyala** | b1-p039 | b1-p039, b3-p022 | The strongest entry: the book defines it itself — "composite creatures controlling cosmic energy" — and draws it twice, as elephant-headed lions on the temple steps, then in close-up as a lion-faced guardian. The second one is never named, so it is an `alsoOn` mark |
+| **Yaksha** | b1-p011 | b1-p011 | Crowned, jewelled figures in the painted forest scene behind the cook |
+| **Banmanus** | b1-p018 | b1-p018 | The shaggy giant in the headlights |
+| **Pishacha** | b1-p018 | b1-p018 | The crouching ghoul |
+| **Kimpurusha** | b1-p018 | b1-p018 | The horse-headed figure at the edge of the panel — the only creature on Viraat's list drawn clearly enough to identify |
+| **Kinnara** | b1-p018 | — | Split from the kimpurusha at the author's request. The panel draws one hybrid and it goes to the kimpurusha, so this entry has no picture rather than a borrowed one. Both entries carry the same caution: the two names are the same question ("is it a man?"), the Amarakosha lists them as synonyms, and the later accounts that separate them contradict one another about which gets which body |
+| **Pichhal peri** | b1-p018 | b1-p018 | The two pale, long-haired women in the undergrowth — the art has them, which the first pass missed |
+| **Giants** | b1-p030 | b1-p030 | Heaving boulders over the fort wall |
+| **Rakshasa — Vraktaasura** | b1-p030 | b1-p030 | Crowned, riding his mountain, with Indra's vajra coming at him |
+| **Bhoot / Pret** | b1-p036, b3-p034 | — | The *bhoot* bungalow, and the yogini's correction. *Bhootnath* taal on b1-p039 is a place name and does not link |
+| **Shesha** | — | b2-p003 | **Drawn only.** Vishnu asleep on the serpent couch on the milk-ocean, in the Shayani Ekadashi vignette. `firstSeen` is set by hand because no alias can find it |
+| **Gandharva** | b4-p017 | — | Bhavi's aside about "a gandharva's incarnation" |
+| **The Ashtomis** | b4-p019 | b4-p019 | A race, not a beast. The vignette draws them — four women breathing flowers |
+| **Apsara** | b5-p028 | — | The apsara and the ascetic rishi, remembered from childhood |
 
-Thirteen entries, the same order of magnitude as the Codex's 21. More will surface while the entries are written; the table above is what a first pass over all 171 pages of lettering and panel descriptions found, and `pipeline/find_page.py` locates any further ones in the manuscript.
+Thirteen are named in the lettering; Shesha is in the art alone. Ten have card images.
 
 ### 11.2 Editorial stance — the book debunks its own monsters
 
-This layer cannot be a straight monster manual, because the book will not let it be one. The creature roll-call on b1-p018 is answered in the very next balloon:
+This layer is not a monster manual, because the book will not let it be one. The creature roll-call on b1-p018 is answered in the very next balloon:
 
 > Age-old legends, fabricated to scare children from straying into forests. Now used by Mahant to scare peasants from escaping.
 
-The same move happens on b1-p030, where the giants' boulders become an asteroid, and again on b3-p034, where the yogini's line about bhoots and prets is a correction rather than a warning. So each entry carries three registers, in this order:
+The same move happens on b1-p030, where the giants' boulders become an asteroid, and on b3-p034, where the yogini's line about bhoots and prets is a correction rather than a warning. So every entry carries three registers, in this order:
 
 1. **In the book** — the panel, the quote, the page link. What is actually on the page.
 2. **In tradition** — where the creature comes from, what it is in the texts and in folk telling.
 3. **And yet** — who in the book doubts it, and why. This is the Charvaka thread (§9.1) running through the bestiary, and it is what keeps the section honest with the story.
 
-A reader who works through the bestiary should come away with the Professor's habit of mind, not with a list of monsters.
+The best of them is the Ashtomis: a race that dies of a bad smell, pointed out one panel before the party finds the drain pipe spewing effluent into the stream that is making people sick.
 
 ### 11.3 Mechanics
 
 Reuses the Codex machinery end to end (§6) rather than inventing a parallel one:
 
-- **Collection:** `src/content/bestiary/<id>.md`, a second Astro content collection with the Codex schema (`title`, `aliases`, `summary`, `related`, `images`, `source`, `firstSeen`) plus `class` (naga · yaksha-class · rakshasa-class · bhoot-class · composite-carving · race), `appearance` (what it looks like, for the gallery caption) and `alsoKnownAs`.
-- **A separate collection, not a Codex flag.** The two differ in presentation — the Codex is a text wiki, the bestiary an image-first gallery — and keeping the aliases in their own namespace is what makes the disambiguation in §11.5 tractable. The cost is a second collection to author and validate. `related:` links cross the two freely, so a creature can point at `codex:kaula` and back.
-- **Hotspot target:** a new `beast:` prefix in the existing scheme (§6.3). One mechanism still serves every layer.
-- **Auto-linking:** a `link_bestiary.py` alongside `link_codex.py`, with a per-entry `exclude` list of contexts that must not fire (§11.5). The earliest mention sets `firstSeen`, so the same spoiler veil applies (§5.5).
-- **Validation:** `validate_content.py` gains the collection, its images and its hotspot targets.
+- **Collection:** `src/content/bestiary/<id>.md`, a second Astro content collection with the Codex fields (`title`, `aliases`, `summary`, `related`, `source`, `firstSeen`) plus `class`, `appearance`, `alsoKnownAs`, `kin` (other creatures), `exclude`, `art` and `alsoOn`.
+- **Classes**, which drive the gallery's filter: `nature-spirit` · `wild-folk` · `demon` · `restless-dead` · `serpent` · `carving` · `legendary-race`.
+- **A separate collection, not a Codex flag.** The two differ in presentation — the Codex is a text wiki, the bestiary an image-first gallery — and the aliases need their own namespace. `related:` crosses to the Codex and is validated against it; `kin:` links within the bestiary.
+- **Hotspot target:** `beast:`, alongside `codex:`, `puzzle:`, `voice:` and `fragment:` (§6.3). Hotspots sharing a rect still merge, so Viraat's balloon is one mark that opens four creatures.
+- **`pipeline/link_bestiary.py`** (`npm run bestiary`) does the alias scan with per-entry exclusions, cuts the card images out of the page masters, and writes `generated/bestiary-links.json` and `hotspots/bestiary.json`. `--sheet` writes a contact sheet of the cards for checking the crops.
+- **Ordering:** the gallery is sorted by `firstSeen`, so the veil lifts front to back as the reader advances rather than scattering across the grid.
+- **Validation:** `validate_content.py` checks every codex link, kin, art page, exclusion and `beast:` target.
 
 ### 11.4 Images
 
-Three sources, in order of preference:
+Ten of the thirteen are cropped straight from the comic: an `art: {page, box}` (or `{page, panel}`) is cut out of the page master at build time, exactly as the Voice portraits are. No licensing to chase, and the gallery looks like the book instead of like a stock-photo wall. Each crop was checked against the art by eye; the contact sheet is at `site-assets/data/bestiary-cards.png`.
 
-1. **Crops from the comic itself.** Eight of the thirteen are drawn — everything above except pichhal peri, bhoot/pret, gandharva, apsara and the Ashtomis, whose panel shows the flowering hillside rather than the race itself — and every panel already has a reviewed box, so a `portrait: {page, box}` crop works exactly as the Voice portraits do (§9) — `link_companions.py` already has the cropping code. No licensing to chase, and the gallery then looks like the book instead of like a stock-photo wall.
-2. **`images/artifacts/` diagrams**, where one illustrates an entry.
-3. **Public-domain or CC photographs of the real carvings** for the "in tradition" register — vyalas and makaras on temple plinths are photographed everywhere. Licence and credit recorded per image, the same discipline the Real India layer needs (§10).
+Where a creature is drawn but never named — Shesha, and the lion-faced vyala on b3-p022 — the entry carries an `alsoOn` box, which places a hotspot the alias scan could never find.
 
-The five entries with no art (pichhal peri, bhoot/pret, gandharva, apsara, Ashtomi) get a typographic card rather than a placeholder image. A quiet gap is better than a stand-in that contradicts the book's own pictures.
+The three with no art (bhoot/pret, gandharva, apsara) get a hatched card marked **Never drawn** and a line of text saying what the book gives instead. A quiet gap is better than a stand-in that contradicts the book's own pictures.
 
-### 11.5 Disambiguation — where auto-linking will go wrong
+### 11.5 Disambiguation — where auto-linking would have gone wrong
 
-Every one of these is a real string in the manifests, and each would otherwise produce a false hotspot:
+Every one of these is a real string in the lettering, and each would have produced a false hotspot.
+
+**The Nagas are not in the bestiary, and that is deliberate.** The alias scan found "naga" on seven pages, and on six of them it is a *people*: "home of the violent Nagas" (b4-p005), "she is a Naga tribal" (b1-p042), "the Nagas are ardent aghori followers… butchered and abused" (b2-p002). The seventh is *Naga hill* (b1-p039). The cook's "Nagas in the forests" (b1-p011) is the same tribe, feared. There is no serpent-being anywhere in the book's text — the forest's most dangerous animal, when Kurup names it, is a tiger. Listing a living people among mythological creatures would be both wrong and offensive.
+
+They are instead a **Codex** entry, `/codex/nagas/`, which is where the site's real-world cultural material lives. It covers the four passages, separates the book's fiction from the real Naga peoples of the north-east (the aghori connection is the novel's invention), and notes that the Professor's speech indicts the dispossession while Kurup's "violent Nagas" reproduces the stereotype the same book had just dismantled. Its aliases are `Nagas` and `Naga tribal` — plural and qualified — which catch all seven people-mentions and leave *Naga hill* alone without needing an exclusion. The bestiary gallery carries a footnote pointing there, and at Shesha for the serpent.
 
 | Word | The trap |
 |---|---|
-| **Naga** | *Naga hill* (b1-p039), the *Naga tribesmen* in the smoky frames (b2-p002) and the serpent-being are three different things |
-| **Makara, Simha, Mina, Vrishabha** | Zodiac signs on the star chart (b3-p025) and the zodiac-body table (b5-p022), not creatures |
+| **Naga** | A hill and a people, never a serpent — see above |
+| **Makara, Simha, Mina, Vrishabha** | Zodiac signs on the star chart (b3-p025) and the zodiac-body table (b5-p022) |
 | **Matsya** | One of the five M's — madya, matsya, mamsa, mudra, maithuna (b4-p017) — not the avatar |
 | **Yogini** | A character in the party throughout, not the class of deity |
 | **Varaha** | The *Varaha Purana* (b4-p030), cited as a text |
-| **Nandi, Hanuman** | Deities and their images, not bestiary creatures. They belong in the Codex; the bestiary `related:` links across |
+| **Bhootnath** | A lake, not a bhoot. Word boundaries handle this one without an exclusion |
+| **Nandi, Hanuman** | Deities and their images. They belong in the Codex; the bestiary `related:` links across |
+
+Each entry's `exclude` list names the pages where its aliases must not fire, and `validate_content.py` checks those pages exist.
 
 ### 11.6 Site map
 
 | URL | Page |
 |---|---|
-| `/bestiary/` | Gallery index — a card per creature, filterable by `class`, veiled by `firstSeen` |
-| `/bestiary/<slug>` | One creature: the three registers, its panels, its Codex cross-links |
+| `/bestiary/` | Gallery — a card per creature, filterable by class, veiled by `firstSeen`, ordered by first appearance |
+| `/bestiary/<slug>` | One creature: the three registers, its card image, the pages it appears on, its kin and its Codex links |
 
-Whether it earns its own nav entry or sits under the Codex is a presentation call to make once the gallery exists.
+It has its own nav entry, next to the Codex.
 
 ---
 
-## 12. The Memory Hall (Avadhana) — planned, not started
+## 12. The Memory Hall (Avadhana) — built: `/avadhana/`
 
-Dvij walks out of a labyrinth nobody returns from because of a party trick he watched at a foundation ceremony. That is the book's best argument for its own subject matter, and the site currently only shows the *end* of it: `/caves/` hands the reader the verse and the katapayadi table, and the technique that made the verse stick — the thing the Professor actually explained — is never taught. This section teaches it, and it is the most naturally interactive material in the book, because the technique *is* a procedure.
+Dvij walks out of a labyrinth nobody returns from because of a party trick he watched at a foundation ceremony. The site used to show only the *end* of that: `/caves/` handed the reader the verse and the katapayadi table, and the technique that made the verse stick — the thing the Professor actually explained — was never taught. The Memory Hall teaches it.
+
+**Built:** the pāṭha ladder over two verses, the corruption demonstration, the avadhana ring, an honest retention check, one `memory:` hotspot, and two new Codex entries.
 
 ### 12.1 What the book shows
 
@@ -566,65 +578,64 @@ Dvij walks out of a labyrinth nobody returns from because of a party trick he wa
 |---|---|
 | **b2-p008** | The avadhan show at the ceremony. Caption: "numerous people throwing challenging questions at an expert who responded rapidly… The expert formed verses at will, tracking all questions." The Professor names it: "**Avadhan.** That's what this is called. Many people ask questions. Expert has to remember all of them, then respond to each in verses following rules of rasa and alankara." Then the technique: "**Techniques of memorization!** The entire Vedas handed down orally through millenniums! Students learned **forward sequence, backward, skipping syllables** — remember it forever!" |
 | **b2-p008, drawn** | Two panels do the teaching. One shows the expert seated inside **a ring of ten numbered questioners**. The next is a held-up **chart**: *1. Forward sequence*, one to ten with arrows; *2. Backward sequence*, ten to one; *3. Skipping syllables*, with alternate numbers dropped |
-| **b2-p025** | The payoff, three books' worth of setup later: "Professor explained their memorization technique to me. **I tried it on a shloka and it worked.**" — "This shloka gave you some magical powers?" — "**No**, but it did help me remember the value of pi" |
-| **b2-p026** | The digits become the route through the caves (§7.4, built) |
+| **b2-p025** | The payoff, three books later: "Professor explained their memorization technique to me. **I tried it on a shloka and it worked.**" — "This shloka gave you some magical powers?" — "**No**, but it did help me remember the value of pi" |
+| **b2-p026** | The digits become the route through the caves (§7.4) |
 | **b5-p009–p010** | The same thing in its own setting: the udgatrus' Samaveda chanting, and "they are shrauta texts, **preserved by oral recitation**" |
 
-So the book supplies the technique, the drawn chart, the worked application and the reason to care — and the site already owns the last link in that chain.
+### 12.2 The real technique, and why it earns a section
 
-### 12.2 The real technique, and why it is worth a section
+The chart on b2-p008 is a simplified drawing of the Vedic **pāṭhas**, generated in `src/lib/pathas.ts` from a word list:
 
-The chart on b2-p008 is a simplified drawing of the Vedic **pāṭhas**: the recitation schemes that carried the Veda for millennia without writing. The ladder runs
-
-| Pāṭha | Pattern over words 1 2 3 … |
+| Pāṭha | Over words 1 2 3 … |
 |---|---|
 | *saṃhitā* | the line as it is spoken |
-| *pada* | 1 · 2 · 3 — each word alone |
+| *pada* | 1 · 2 · 3 |
 | *krama* | 1‑2, 2‑3, 3‑4 |
 | *jaṭā* | 1‑2 2‑1 1‑2, 2‑3 3‑2 2‑3 |
 | *ghana* | 1‑2 2‑1 1‑2‑3 3‑2‑1 1‑2‑3, 2‑3 3‑2 2‑3‑4 4‑3‑2 2‑3‑4 |
 
-The book's "forward, backward, skipping syllables" is exactly *krama*, *jaṭā* and the interleaving of *ghana*, drawn for a reader who is not going to be given the Sanskrit names.
+The book's "forward, backward, skipping syllables" is exactly *krama*, *jaṭā* and the interleaving of *ghana*.
 
-The hook for a modern reader is that **this is an error-correcting code**. Every word is recited inside several different neighbourhoods, so a syllable that drifts in one pass contradicts itself in another and the mistake is audible. An oral tradition solved redundancy checking a long time before checksums, and a browser can demonstrate it in about fifteen seconds: corrupt one word and let the reader watch the *ghana* pattern light up in three places at once. That demonstration is the section's centrepiece, and nothing else on the site does it.
+The hook is that **this is an error-correcting code**. Every word is recited inside several different neighbourhoods, so a syllable that drifts in one pass contradicts itself in another and the mistake is audible. On the six-word pi verse the numbers make the argument by themselves: a word said **once** in *pada* is said **13 times across 3 different groups** in *ghana*. That comparison is the section's centrepiece, and §12.3b is where the reader watches it happen.
 
 ### 12.3 What the reader does
 
-Three pieces, in the book's own order.
+**a. The pāṭha ladder.** Word chips in Devanagari with IAST and a gloss. The reader builds each pattern by tapping, climbing *pada → krama → jaṭā → ghana*, with a wrong tap answered by the rule rather than a buzzer. The number of groups built by hand is tuned to length — every group for *pada*, two for *krama* and *jaṭā*, one for *ghana*, whose groups run thirteen words each — and the full pattern is then rendered out to the end of the line. Guided mode marks the next correct chip.
 
-**a. The pāṭha ladder.** One verse, shown as word chips in Devanagari with IAST beneath. The reader builds each pattern by placing chips, climbing *pada → krama → jaṭā → ghana*; the app checks each utterance against the rule and shows where a wrong chip breaks the interlock. Patterns are **generated from the word list by rule**, not typed out per verse, so a verse is pure data and any verse can be dropped in. Then the corruption demo of §12.2.
+**b. The corruption demonstration.** Pick a word, pick a pattern, and the app lights every group that word appears in and counts how often it is spoken. In *pada* one group lights and the text says so plainly: a slip there has nothing to contradict it and simply becomes the text. In *ghana* three light at once.
 
-**b. The avadhana ring.** The drawn panel, made playable: questioners around a circle, each handing over one short item, delivered out of order and interleaved with an interrupting task — because that interleaving is what makes it *avadhāna* and not a memory game. The reader then answers in the original order. Start at four, build to ten, which is the ring the book draws. (Eight is *aṣṭāvadhāna*; a hundred is *śatāvadhāna*. The book's ten sits between them, and the entry can say so.) The Professor being shushed mid-explanation on the same page is the obvious model for the interrupting task.
+**c. The avadhana ring.** The drawn panel made playable. Questioners hand over one item each, the ring is interrupted by the **apraṣṭuta-prasaṅga** — the questioner whose job is to have no question, modelled on the dignitaries shushing the Professor mid-sentence on that very page — and the reader gives the items back in order. It starts at four and grows by two on a perfect round, up to the ten the book draws. The items are objects from the ceremony on the same page, so nothing in the drill is a spoiler for a reader who has only just unlocked it.
 
-**c. The verse that pays off.** *gopī bhāgya madhuvrāta…* is already on the site, so the chain closes: drill it in the Hall, decode it with the katapayadi table, walk the caves on the digits. Note for whoever builds it — **the two halves read the verse differently.** The pāṭhas segment it into *words*; the katapayadi decode reads it by *consonant*. Same verse, two segmentations, and the UI has to keep them visibly apart or it will teach a muddle. The decode step stays where it is, in `Caves.tsx`; the Hall links to it rather than duplicating it.
+**d. The verse that pays off.** The ladder's default is *gopī bhāgya madhuvrāta…*, so the chain closes: drill it here, decode it at `/caves/`, walk the labyrinth on the digits. **The two halves read the verse differently** — the pāṭhas segment it into *words*, the katapayadi decode reads it by *consonant* — and the two never share a screen. The decode stays in `Caves.tsx`; the Hall links to it.
 
 ### 12.4 Retention, claimed honestly
 
-The manuscript's claim is strong — the shloka "got stuck in my mind permanently" — and the site can *test* it instead of repeating it. On a later visit, once at a day and once at a week, the Hall offers a single optional recall check and reports the plain result, including a failure. One interval, no streaks, no scores, no nagging.
+Completing the ladder records the time. One day later the page offers a single recall check, and once more a week later. No hints, no second go, no streaks, and a failure is reported as a failure: *"It has faded — which is the ordinary result, and worth saying plainly rather than pretending otherwise."*
 
-This matters for the same reason §11.2 does: Dvij is asked point-blank whether the shloka gave him magical powers and says **no**. A memory section that oversells itself would be the one page on the site the book itself contradicts.
+This matters for the same reason §11.2 does: Dvij is asked point-blank whether the shloka gave him magical powers and says **no**. A memory section that oversold itself would be the one page on the site the book contradicts.
 
 ### 12.5 Mechanics
 
-- **Page:** `/avadhana/`, a new island `src/islands/Memory.tsx`, in the shape of `Caves.tsx` — phases, `localStorage` progress (§5.3), Guided and Hard modes.
-- **Content:** `src/content/memory.yaml` — `{id, title, verse: [{deva, iast, gloss}], source, note}`, plus the ring drill's item pools. Verses are data; the pāṭha generator is code.
-- **Unlocking:** the existing `availableQuote` mechanism (§4.8) pinned to **b2-p008**, where the Professor explains it. That is earlier than the caves' b2-p026, so the site's order matches the book's: learn it, then use it.
-- **Codex:** two entries to write — `avadhana` and `vedic-pathas` — with aliases (`avadhan`, `avadhana`, `krama`, `jata`, `ghana`, `patha`, `shrauta`). `link_codex.py` then auto-links the b2-p008 balloons and the b5-p010 caption, and `firstSeen` lands on b2-p008 by itself.
-- **Validation:** `validate_content.py` gains the verse file and the new page reference.
-- **Script:** Devanagari and IAST at chip size, side by side. §13 already flags the font requirement; here it becomes load-bearing rather than decorative.
-- **Accessibility:** chip placement needs a keyboard path and sensible announcements, and the recall check must not be the only way through (§5.6).
+- **Page:** `/avadhana/`, island `src/islands/Memory.tsx`, phases and `localStorage` in the shape of `Caves.tsx`, gated by `VeilNotice` at **b2-p008** — earlier than the caves' b2-p026, so the site's order matches the book's.
+- **Pattern generator:** `src/lib/pathas.ts`. `utterances(patha, n)` returns index groups; `utterancesTouching` and `timesSpoken` drive the demonstration. Verses are pure data.
+- **Content:** `src/content/memory.yaml` — anchors, verses (`{deva, iast, gloss}` per word), ring items and interruptions.
+- **`pipeline/link_memory.py`** (`npm run memory`). The anchors are comic *lettering*, not manuscript prose, so `find_page.py` is the wrong tool — it searches the manuscript, and these lines are the art's own wording. Each anchor names its page and a fragment, and the script resolves the fragment to that line's box by fuzzy match, failing loudly under 80 %. All three anchors resolve at 100 %.
+- **Hotspot:** a new `memory:` target over "Techniques of memorization!". It shares a rect with the automatic Codex hotspot for the same balloon, so the existing merge puts both in one mark: the Codex entry and the link into the Hall.
+- **Codex:** two entries, `avadhana` and `vedic-pathas`, with aliases chosen against a scan of the lettering so they auto-link without false positives (`avadhan`, `memorization`, `shrauta`, `oral recitation`, `samaveda`). `firstSeen` lands on b2-p008 by itself.
+- **Validation:** `validate_content.py` checks the anchors' pages, duplicate verse ids, a minimum verse length, every word's three fields, each verse's codex link and page, and that the ring pool can fill the ring of ten.
+- **Tests:** six in `tests/e2e/memory.spec.ts` — the veil, the full ladder, the *pada* vs *ghana* contrast, a complete ring round, the hotspot, and the Codex cross-links.
 
-### 12.6 Audio — the gap worth naming
+### 12.6 Audio — still the gap
 
-This is an **oral** technique. A silent trainer teaches the permutation pattern but not the thing itself, which is a sound. Three options: ship v1 silent, with the patterns set in Devanagari and IAST; add CC-licensed recordings of ghanapāṭha recitation with credit recorded per file; or record a reciter. Speech synthesis is not an option — TTS mangles Sanskrit prosody and would teach a wrong reading, which is worse than silence.
-
-Recommendation: silent v1, recordings as a follow-up, because the pattern is what carries the section and a bad reading would undermine it. This is an open question (§18).
+This is an **oral** technique, and the Hall ships **silent**, with the patterns set in Devanagari and IAST. A silent trainer teaches the permutation but not the thing itself, which is a sound. Adding CC-licensed ghanapāṭha recitation with credit recorded per file is the obvious follow-up. Speech synthesis is not an option: TTS mangles Sanskrit prosody and would teach a wrong reading, which is worse than silence. Still open (§18).
 
 ### 12.7 Site map
 
 | URL | Page |
 |---|---|
-| `/avadhana/` | The Memory Hall — the pāṭha ladder, the avadhana ring, the link into the caves |
+| `/avadhana/` | The Memory Hall — the ladder, the demonstration, the ring, and the way into the caves |
+
+It has its own nav entry, **Memory**, next to Puzzles.
 
 ---
 
@@ -755,8 +766,8 @@ If per-question cost is too high even with caching, fall back to **retrieval**: 
 | 3 | Parchment of Puzzles (Guided + Hard), Bhoodara caves | **Done.** 5 puzzles |
 | 4 | Journey rail (three lenses), Council of Voices, Charvaka thread | **Done.** 10 beats, 8 voices, 5 fragments |
 | 5 | Valley map + Real India layer | **Blocked** on pairings confirmed + photos ([real-india-pairings.md](real-india-pairings.md)) |
-| 6 | **Bestiary** — 13 creature entries, gallery, `beast:` hotspots (§11) | **Not started.** Ready to author: the roll-call is gathered and 8 of 13 can be illustrated from the comic art |
-| 7 | **Memory Hall** — pāṭha ladder, avadhana ring, recall check (§12) | **Not started.** The pattern generator is the whole build; verses are data. Audio undecided |
+| 6 | **Bestiary** — 13 creature entries, gallery, `beast:` hotspots (§11) | **Done.** 10 illustrated from the comic art, 11 hotspots |
+| 7 | **Memory Hall** — pāṭha ladder, avadhana ring, recall check (§12) | **Done.** 2 verses, 2 Codex entries. Ships silent; audio still open |
 | 8 (v2) | Ask the Codex, Talk to a Voice | Not started; needs a cost review |
 
 Phase 1 alone is a complete, shippable comic site. Each later phase adds a layer without reworking earlier ones, because they all share the manifest + hotspot + `firstSeen` pattern.
@@ -793,8 +804,8 @@ Verified against the manuscript and the PDFs:
 5. **Review the authored companion text**: 21 Codex entries, 5 puzzle chains, 8 Voice cards, 10 rail beats. The quotes are the book's; the framing is not.
 6. **Voice portraits.** Three of the eight are loose automatic crops — the Mahant's is visibly the wrong figure. Each can be replaced with a hand-picked `portrait: {page, box}`.
 7. **Covers for Books 2–5**, for the book picker and share cards. Only Book 1 has a front page.
-8. **Bestiary (§11).** Confirm the 13 creatures in §11.1 — add any the scan missed, drop any you do not want a page for — and say whether *kimpurusha* and *kinnara* are one entry or two. The "in tradition" register is written from outside the book, so it needs the same review as the Codex framing (item 5). Blocks Phase 6.
-9. **Memory Hall audio (§12.6).** The technique is oral. Silent v1, CC-licensed ghanapatha recordings with credit, or a reciter you record? And which verse the ladder drills besides *gopī bhāgya* — one is enough to ship, but a second makes the pattern generator prove itself.
+8. **Bestiary (§11), now built.** Both of the calls made while building have since been revisited at your request: *kimpurusha* and *kinnara* are now **two** entries (each carrying the caution that the sources which split them disagree about which is which), and the **Nagas** have a Codex entry of their own rather than a place in the bestiary, since in this book the word names a people and a hill, never a serpent (§11.5). One thing still needs you: the Naga drawing's **source and licence** are unrecorded — `imageCredit` in `codex/nagas.md` says so on the page until you supply them. Otherwise: confirm the 13 creatures, and review the "in tradition" register, which is written from outside the book and needs the same read-through as the Codex framing (item 5).
+9. **Memory Hall audio (§12.6), now built and silent.** The technique is oral and the Hall has no sound. CC-licensed ghanapatha recordings with credit, or a reciter you record? (Not TTS — it would teach a wrong reading.) Separately: the second verse in the ladder is **Rigveda 1.164.46**, *ekaṃ sad viprā bahudhā vadanti*, picked because the book reaches for the same idea when it wonders how the Rigveda's 33 gods became thirty-three *koti* (b3-p014). Confirm or replace it.
 
 **Still to decide:**
 

@@ -14,7 +14,9 @@
     "manifests": "python pipeline/build_manifests.py",
     "build:local": "node scripts/build-local.mjs",
     "validate": "python pipeline/validate_content.py",
-    "codex": "python pipeline/link_codex.py"
+    "codex": "python pipeline/link_codex.py",
+    "bestiary": "python pipeline/link_bestiary.py",
+    "memory": "python pipeline/link_memory.py"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",

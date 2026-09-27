@@ -1,11 +1,14 @@
 // Codex entries joined with their comic links, plus the hotspot set
 // (automatic Codex hotspots from link_codex.py, puzzle hotspots from
-// link_parchment.py, adjusted by the dev tool's manual.json).
+// link_parchment.py, creature hotspots from link_bestiary.py, adjusted by the
+// dev tool's manual.json).
 import { getCollection, type CollectionEntry } from "astro:content";
 import links from "../content/generated/codex-links.json";
 import autoHotspots from "../content/hotspots/auto.json";
 import manualHotspots from "../content/hotspots/manual.json";
 import puzzleHotspots from "../content/hotspots/puzzles.json";
+import bestiaryHotspots from "../content/hotspots/bestiary.json";
+import memoryHotspots from "../content/hotspots/memory.json";
 import companionHotspots from "../content/hotspots/companions.json";
 import { artFile, type Box } from "./manifest";
 
@@ -51,6 +54,8 @@ export function allHotspots(): Hotspot[] {
   return [
     ...(autoHotspots as Hotspot[]).filter((h) => !removed.has(h.id)),
     ...(puzzleHotspots as Hotspot[]).filter((h) => !removed.has(h.id)),
+    ...(bestiaryHotspots as Hotspot[]).filter((h) => !removed.has(h.id)),
+    ...(memoryHotspots as Hotspot[]).filter((h) => !removed.has(h.id)),
     ...(companionHotspots as Hotspot[]).filter((h) => !removed.has(h.id)),
     ...manual.add,
   ];

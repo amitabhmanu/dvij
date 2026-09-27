@@ -37,7 +37,10 @@ const Diagram = diagramFor(entry.data.diagram);
           <aside class="figures">
             {Diagram && <Diagram />}
             {entry.data.images.map((img) => (
-              <figure><img src={artFile(`${img}.webp`)} alt={`Diagram: ${entry.data.title}`} loading="lazy" /></figure>
+              <figure>
+                <img src={artFile(`${img}.webp`)} alt={entry.data.imageAlt ?? `Diagram: ${entry.data.title}`} loading="lazy" />
+                {entry.data.imageCredit && <figcaption>{entry.data.imageCredit}</figcaption>}
+              </figure>
             ))}
           </aside>
         )}
@@ -86,6 +89,7 @@ const Diagram = diagramFor(entry.data.diagram);
   .layout > * { min-width: 0; }
   .figures figure { margin: 0 0 16px; background: #fff; border: 1px solid var(--paper-3); border-radius: var(--radius); padding: 10px; }
   .figures img { margin: 0 auto; max-height: 420px; width: auto; }
+  .figures figcaption { font: 0.78rem/1.45 var(--font-ui); color: var(--ink-3); margin-top: 8px; }
   .body :global(table) { border-collapse: collapse; font-family: var(--font-ui); font-size: 0.85rem; margin: 16px 0; display: block; overflow-x: auto; max-width: 100%; }
   .body :global(th), .body :global(td) { border: 1px solid var(--paper-3); padding: 5px 8px; text-align: left; vertical-align: top; }
   .body :global(th) { background: var(--paper-2); }
