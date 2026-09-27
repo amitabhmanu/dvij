@@ -459,7 +459,7 @@ Each chakra beat sits on the page where the art marks the rise, not where the ma
 
 ---
 
-## 10. The Valley Map & Real India (Layer 4)
+## 10. The Valley Map & Real India (Layer 4) — built: `/valley/`
 
 - **Base map:** `/valley/` uses `images/artifacts/map.jpg` with pan and zoom. Each location is a `place:` hotspot linking to its card and the comic pages where it appears.
 - **Places:** fort ruins (mint, "royal gym", the math), two pushkarinis, the chain-gated stepwell, the Bhoodara caves, the rock-cut caves near Vidgati's shrine, and the temple clusters.
@@ -468,7 +468,26 @@ Each chakra beat sits on the page where the art marks the rise, not where the ma
 - **Pairings:** [real-india-pairings.md](real-india-pairings.md) proposes real counterparts for 16 places, each with its reasoning, a confidence level and sources. Examples: Daundagarh → Daulatabad Fort, Gaumukh hill + Kamal Taal → Anjanadri hill + Pampa Sarovar, the Mahavidya temples → Kamakhya, Bhoodara → Bhimbetka's paintings in a Belum-like labyrinth, Dronagiri → Dronagiri Parvat, the final valley → the Valley of Flowers.
 - **A second view:** the pairings span the whole country (Deccan, central India, Odisha, Assam, the Himalaya). So besides the label toggle, the layer gets a small **India map** with a line from each valley location to its real site, a visual form of the Professor's "it could have been anywhere."
 - **Places left fictional:** Madangi Van, the tavern and bazaar, and the lodge stay fictional on purpose. Some of the valley should remain *nowhere*.
-- **Still needed:** your confirmation of each pairing, plus photos with licences (your own, public domain, or CC with credit, recorded in `places.json`).
+**Built:** 17 places at `/valley/`, 8 of them labelled on the map, 15 linked to the pages of the comic that name
+them, with 25 freely licensed photographs. Six more places carry a note saying they are left fictional on purpose.
+
+- **Data:** `src/content/places.yaml` holds the authored half - the map rects, what the book says, the pairing and
+  its reasoning. `pipeline/fetch_real_india.py` downloads each photograph from Wikimedia Commons and reads the
+  photographer, licence, licence URL and file page **off Commons itself** into `generated/places-images.json`, so an
+  attribution cannot drift from its source or be mistyped. `link_places.py` joins the two, finds the comic pages that
+  name each place, and refuses to write if a place points at an image that was never fetched.
+- **Credits:** every photograph carries photographer, licence (linked to the deed) and a link back to the file.
+  CC0 images say the credit is a courtesy rather than an obligation. Images are reproduced whole at reduced size and
+  never cropped, which keeps the CC BY-SA share-alike question from arising. `validate_content.py` fails the build
+  if any of it is missing.
+- **The toggle:** on, each labelled place gets a pin with its real counterpart; on a phone the pins become numbers
+  and the names move to a legend. Cards below carry the reasoning, the confidence, the photographs and links to the
+  comic pages, and are veiled by reading progress like every other layer.
+- **Honesty:** the page says in as many words that these are resemblances, not the author's sources.
+- **Still needed:** your confirmation of each pairing. Three have no usable free photograph (docs/real-india-images.md):
+  Nagdwari, which carries a note in place of a picture; Halebidu's lakeside setting; and the falcon altar at usable size.
+- **Not built:** the small India map with a line from each valley place to its real site. The pairings' coordinates are
+  in `places.yaml`, so it is a drawing job rather than a data one.
 
 ---
 
@@ -765,7 +784,7 @@ If per-question cost is too high even with caching, fall back to **retrieval**: 
 | 2 | Codex (21 entries), drawer, hotspot authoring, spoiler policy | **Done.** 91 hotspots |
 | 3 | Parchment of Puzzles (Guided + Hard), Bhoodara caves | **Done.** 5 puzzles |
 | 4 | Journey rail (three lenses), Council of Voices, Charvaka thread | **Done.** 10 beats, 8 voices, 5 fragments |
-| 5 | Valley map + Real India layer | **Blocked** on pairings confirmed + photos ([real-india-pairings.md](real-india-pairings.md)) |
+| 5 | Valley map + Real India layer | **Done.** 17 places, 25 credited photographs, 8 map pins. Pairings still need your confirmation ([real-india-pairings.md](real-india-pairings.md)); the India-wide map is not drawn |
 | 6 | **Bestiary** — 13 creature entries, gallery, `beast:` hotspots (§11) | **Done.** 10 illustrated from the comic art, 11 hotspots |
 | 7 | **Memory Hall** — pāṭha ladder, avadhana ring, recall check (§12) | **Done.** 2 verses, 2 Codex entries. Ships silent; audio still open |
 | 8 (v2) | Ask the Codex, Talk to a Voice | Not started; needs a cost review |
@@ -798,7 +817,7 @@ Verified against the manuscript and the PDFs:
 **For you:**
 
 1. **Domain name** (you'll specify later). It also names the asset subdomain (§14.3), which is on the rate-limited `r2.dev` URL until then and should not carry launch traffic.
-2. **Real India:** confirm or replace each pairing in [real-india-pairings.md](real-india-pairings.md), and source licensed photos. Blocks Phase 5.
+2. **Real India, now built at `/valley/`.** Confirm or replace each pairing in [real-india-pairings.md](real-india-pairings.md); the page is live on your suggestions and says so. The photographs are found and credited ([real-india-images.md](real-india-images.md)); three pairings still have none, and the India-wide map with a line per place is not drawn.
 3. **B1 p1's black half** (§2.1): leave the page as printed, crop it to the map, or fix the source PDF?
 4. **Spot-check the chart pages.** The descriptions on the diagram pages state what each chart says, so a misreading is now in the site's accessible text. The ones worth checking: B2 p25–26, B3 p3–4, B4 p29–32, B5 p22.
 5. **Review the authored companion text**: 21 Codex entries, 5 puzzle chains, 8 Voice cards, 10 rail beats. The quotes are the book's; the framing is not.

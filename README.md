@@ -15,9 +15,11 @@ are served from a Cloudflare R2 bucket.
 all 81 chapter starts confirmed. The companion layers are built: a Codex of 24
 entries, a Bestiary of 14 creatures, the Parchment's 5 puzzles, the Bhoodara caves,
 the Memory Hall, a journey rail of 10 beats, 8 Council of Voices cards and 5 hidden
-Charvaka fragments, linked by 115 hotspots. Still open: the valley map and Real India
-layer, which need the place pairings confirmed; audio for the Memory Hall, which
-ships silent (design §12.6); and the v2 AI features.
+Charvaka fragments, linked by 115 hotspots. The valley map and its Real India layer
+are built too: 17 places, 25 freely licensed photographs, each credited as its licence
+requires. Still open: your confirmation of the place pairings, which that page is built
+on and says so; audio for the Memory Hall, which ships silent (design §12.6); and the
+v2 AI features.
 
 ## Layout
 
@@ -29,6 +31,8 @@ ships silent (design §12.6); and the v2 AI features.
 | `src/content/codex/` | Codex (glossary) entries, one Markdown file each |
 | `src/content/bestiary/` | Bestiary entries — the book's creatures, one Markdown file each |
 | `src/content/memory.yaml` | The Memory Hall: anchors, verses and the avadhana ring's items |
+| `src/content/places.yaml` | The valley map's places and their Real India pairings |
+| `src/content/generated/places-images.json` | Each photograph's photographer, licence and Commons page, read off Commons (generated) |
 | `src/content/generated/codex-links.json` | Where each Codex entry appears in the comic (generated) |
 | `src/content/generated/bestiary-links.json` | Where each creature is named or drawn, and its card crop (generated) |
 | `src/content/generated/memory.json` | The Memory Hall's content with its anchors resolved to pages (generated) |
@@ -70,7 +74,9 @@ Steps (see each script's docstring):
 12. `link_memory.py` — pins the Memory Hall's anchors to the lettering that carries them and places the `memory:` hotspot.
 13. `link_parchment.py` — resolves each puzzle's "starts" and "solved" quotes (in `src/content/parchment.yaml`) to comic pages, and adds a "Puzzle" badge hotspot where each puzzle begins.
 14. `link_companions.py` — locates the Journey rail beats, crops each Voice's portrait from the panel where they speak, and places the `voice:` and hidden `fragment:` hotspots. `--sheet` also writes a portrait contact sheet.
-15. `validate_content.py` — checks every Codex, Bestiary and Memory Hall link, image, hotspot, puzzle answer, voice, rail beat, fragment and page reference resolves (`npm run validate`).
+15. `fetch_real_india.py` — downloads the Real India layer's photographs from Wikimedia Commons, refuses anything that is not freely licensed, and records each one's photographer, licence and file page.
+16. `link_places.py` — joins `src/content/places.yaml` to those credits and to the comic pages that name each place.
+17. `validate_content.py` — checks every Codex, Bestiary, Memory Hall and place link, image, credit, hotspot, puzzle answer, voice, rail beat, fragment and page reference resolves (`npm run validate`).
 
 Helper: `python pipeline/find_page.py "a manuscript quote"` → book, page and chapter where it appears in the comic.
 
@@ -193,6 +199,21 @@ fragment to match inside it; `link_memory.py` fails loudly if a fragment no long
 Run `npm run memory` after editing, then `npm run validate`.
 
 The Hall ships **silent** (design §12.6).
+
+## The valley map and Real India
+
+`src/content/places.yaml` holds each place on the valley map, what the book says about it, and the real Indian
+site it most resembles, with the map rect measured off `images/artifacts/map.jpg`. The pairings are researched
+resemblances rather than your sources, and the page says so in as many words.
+
+Credits are **not** written by hand. `python pipeline/fetch_real_india.py` downloads each photograph from
+Wikimedia Commons, refuses any file that is not freely licensed, and writes the photographer, licence, licence
+URL and file page into `src/content/generated/places-images.json`. `npm run places` joins the two, and
+`npm run validate` fails if a photograph is missing its alt text, artist, licence or source. Photographs are
+shown whole at reduced size and never cropped, which keeps a CC BY-SA crop from having to be relicensed.
+
+New photographs mean new files in `site-assets/art/`, so they need `npm run upload -- --only art` before they
+appear on the deployed site.
 
 ## Companion layers
 

@@ -178,6 +178,35 @@ def main() -> int:
             elif kind not in ("codex", "puzzle", "voice", "place", "fragment", "beast", "memory"):
                 errors.append(f"hotspot {h['id']}: unknown target kind '{kind}'")
 
+    # The valley map and the Real India layer (design §10). Every photograph must
+    # have been fetched, must be on disk, and must carry the credit its licence
+    # asks for - a missing attribution is a licence breach, not a typo.
+    places = json.loads((CONTENT / "generated" / "places.json").read_text(encoding="utf-8"))
+    if places["map"]["art"] not in art:
+        errors.append(f"places: map art '{places['map']['art']}' not in site-assets/art")
+    photos = 0
+    for pl in places["places"]:
+        for r in pl["rects"] + [f for fic in places["fictional"] for f in fic["rects"]]:
+            x0, y0, x1, y1 = r
+            if not (0 <= x0 < x1 <= 1 and 0 <= y0 < y1 <= 1):
+                errors.append(f"place {pl['id']}: bad map rect {r}")
+        for pg in pl["pages"]:
+            if pg["id"] not in pages:
+                errors.append(f"place {pl['id']}: page {pg['id']} does not exist")
+        if not pl["real"]["images"] and not pl["real"]["noPhoto"]:
+            errors.append(f"place {pl['id']}: no photograph and no note saying why")
+        for pic in pl["real"]["images"]:
+            photos += 1
+            if pic["file"].removesuffix(".webp") not in art:
+                errors.append(f"place {pl['id']}: image {pic['file']} not in site-assets/art")
+            if not pic["alt"]:
+                errors.append(f"place {pl['id']}: image {pic['id']} has no alt text")
+            for field in ("artist", "license", "source"):
+                if not pic[field]:
+                    errors.append(f"place {pl['id']}: image {pic['id']} has no {field} - it cannot be published")
+            if not pic["licenseUrl"] and not pic["license"].upper().startswith(("CC0", "PUBLIC")):
+                errors.append(f"place {pl['id']}: image {pic['id']} ({pic['license']}) has no licence URL")
+
     total = (len(auto) + len(puzzle_hs) + len(companion_hs) + len(beast_hs) + len(memory_hs)
              - len(manual.get("remove", [])) + len(manual.get("add", [])))
     if errors:
@@ -187,7 +216,8 @@ def main() -> int:
         return 1
     print(f"OK: {len(entries)} codex entries, {len(beasts)} creatures, {len(parchment['puzzles'])} puzzles, "
           f"{len(memory['verses'])} memory verses, {len(voices)} voices, {len(rail['nodes'])} rail beats, "
-          f"{len(frags)} fragments, {total} hotspots, all references resolve.")
+          f"{len(frags)} fragments, {len(places['places'])} places with {photos} credited photographs, "
+          f"{total} hotspots, all references resolve.")
     return 0
 
 
