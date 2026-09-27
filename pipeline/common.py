@@ -19,6 +19,26 @@ BOOKS = {
 }
 
 
+# Pages published cropped, as the fraction of the page height kept from the top.
+#
+# B1 p1 is the only one, and it is a defect in the source PDF rather than a
+# design choice: the page holds the valley map across the top (0 to 840 pt) and
+# a 1536x1024 pure-black PNG across the bottom (847.5 to 1687.5 pt), which is in
+# book/B1.pdf itself and so in the printed book (design §2.1). The author chose
+# to crop the page to the map (§18.3). The cut is at the map image's own bottom
+# edge, 840 / 1687.5 = 0.497778, so no black pixel and no white margin survives.
+#
+# The crop is applied at the source - rendering, panel detection and text
+# extraction all work inside it - so everything downstream, including the stored
+# panel boxes and the reader, only ever sees the published page.
+PAGE_CROPS = {"b1-p001": 0.497778}
+
+
+def crop_box(page_id: str, width: float, height: float) -> tuple[float, float, float, float]:
+    """The published area of a page, in that page's own units."""
+    return (0.0, 0.0, width, height * PAGE_CROPS.get(page_id, 1.0))
+
+
 def source_pdf(book: int) -> Path:
     return BOOK_DIR / f"B{book}.pdf"
 

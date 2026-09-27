@@ -16,7 +16,7 @@ import json
 import fitz
 import numpy as np
 
-from common import ASSETS, BOOKS, compressed_pdf, parse_books
+from common import ASSETS, BOOKS, compressed_pdf, crop_box, parse_books
 
 MIN_AREA = 0.01      # fraction of page; smaller images are decorations
 BACKGROUND = 0.92    # fraction of page; a box this big behind others is a background
@@ -27,14 +27,16 @@ def area(r: fitz.Rect) -> float:
     return max(r.width, 0) * max(r.height, 0)
 
 
-def page_panels(page: fitz.Page) -> list[fitz.Rect]:
+def page_panels(page: fitz.Page, page_id: str = "") -> list[fitz.Rect]:
     """Visible panel boxes, allowing for paint order.
 
     Panels are not clipped: later images are simply painted over earlier ones.
     So paint every image, in drawing order, onto a coarse grid ("last painter
     wins") and take the bounding box of the cells each image still owns.
     """
-    pr = page.rect
+    # a cropped page (common.PAGE_CROPS) is detected inside its published area,
+    # so a panel that was cut away cannot come back as a box
+    pr = fitz.Rect(*crop_box(page_id, page.rect.width, page.rect.height))
     cols, rows = int(pr.width / CELL), int(pr.height / CELL)
     grid = np.full((rows, cols), -1, dtype=np.int32)
     for n, info in enumerate(page.get_image_info()):  # drawing order
@@ -96,8 +98,8 @@ def main() -> None:
         counts = []
         for i, page in enumerate(doc):
             pid = f"{slug}-p{i + 1:03d}"
-            boxes = page_panels(page)
-            w, h = page.rect.width, page.rect.height
+            boxes = page_panels(page, pid)
+            _, _, w, h = crop_box(pid, page.rect.width, page.rect.height)
             data[pid] = [[round(b.x0 / w, 4), round(b.y0 / h, 4), round(b.x1 / w, 4), round(b.y1 / h, 4)]
                          for b in boxes]
             counts.append(len(boxes))

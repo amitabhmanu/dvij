@@ -192,19 +192,19 @@
    "n": 1,
    "id": "b1-p001",
    "w": 2115,
-   "h": 3375,
+   "h": 1680,
    "src": {
     "avif": {
-     "240": "b1-p001-240.c2819d9463.avif",
-     "900": "b1-p001-900.3cc784acd1.avif",
-     "1400": "b1-p001-1400.366a207442.avif",
-     "2115": "b1-p001-2115.68cca2ff19.avif"
+     "240": "b1-p001-240.f839dffa4c.avif",
+     "900": "b1-p001-900.17f7bb181c.avif",
+     "1400": "b1-p001-1400.9a43e88bbf.avif",
+     "2115": "b1-p001-2115.623cd4b6f0.avif"
     },
     "webp": {
-     "240": "b1-p001-240.4b6df4fc27.webp",
-     "900": "b1-p001-900.94ce6de77a.webp",
-     "1400": "b1-p001-1400.7a28be310f.webp",
-     "2115": "b1-p001-2115.618ef377e7.webp"
+     "240": "b1-p001-240.95a3d39e3c.webp",
+     "900": "b1-p001-900.501c80aca1.webp",
+     "1400": "b1-p001-1400.4f40cddbef.webp",
+     "2115": "b1-p001-2115.2f82180a57.webp"
     }
    },
    "panels": [
@@ -212,8 +212,8 @@
      "box": [
       0.0,
       0.0,
-      1.0,
-      0.4978
+      0.9986,
+      1.0
      ],
      "alt": "A hand-drawn map of the valley on aged parchment. Forested ridges ring a central plain: Gaumukh Hill and the Fort Ruins west, Nagadvaja Hill and Mount Dronagiri east, Naga Forest along the north. Between them lie the Village Bazaar and huts, Sheetal Lake, the Mahavidya Temples, Bhoothnath Temple, the Tavern, the Forest Officer's Bungalow and the Professor's Lodge, linked by dashed tracks and the Access Road. A compass rose sits in the lower right."
     }

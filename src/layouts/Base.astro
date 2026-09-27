@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Analytics from "../components/Analytics.astro";
 
 interface Props {
   title?: string;
@@ -52,6 +53,7 @@ const nav = [
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Noto+Serif+Devanagari:wght@400;600&family=Yatra+One&display=swap"
     />
     <slot name="head" />
+    <Analytics />
   </head>
   <body class={bodyClass}>
     <a class="skip-link" href="#main">Skip to content</a>

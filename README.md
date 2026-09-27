@@ -60,6 +60,7 @@ python pipeline/run_all.py --from text   # resume from a later step
 
 Steps (see each script's docstring):
 
+0. `common.py` holds `PAGE_CROPS`, the one page published cropped: B1 p1, whose bottom half is a pure-black image in the source PDF (design §2.1). The crop is applied at the source, so every later step works in the published page's coordinates.
 1. `compress.py` — compresses `book/B*.pdf` (JPEG q80, 4:2:0) into `site-assets/pdf/` and checks page counts, identical text and visual similarity (SSIM ≥ 0.97). Report: `pipeline/reports/compress.json`.
 2. `render_pages.py` — 2× PNG masters of every page (local only).
 3. `make_variants.mjs` — AVIF + WebP at 2115/1400/900/240 px, content-hashed (≈1.5 h on a 4-core laptop).
@@ -225,6 +226,18 @@ appear on the deployed site.
 
 `python pipeline/author_voices.py` regenerates the Voice entries from scratch (it overwrites hand edits).
 After editing any of these, run `python pipeline/link_companions.py` then `npm run validate`.
+
+## Downloads and analytics
+
+The PDF on a book's page sits behind a **read-online-first** flow (design §18.13): until the reader has read
+three pages of that book, the button invites them to read it online and says what it is waiting for. The real
+link is in the served HTML, so JavaScript-off readers and crawlers keep it; the gate is applied by
+`src/components/PdfDownload.astro` from the reader's own progress.
+
+**Analytics** are off unless configured, and must never set a cookie or identify a reader. Netlify Analytics
+needs no code — it counts server-side, so there is nothing to add and no consent banner to show. For a
+privacy-friendly script instead, set `PUBLIC_ANALYTICS_SRC` (and `PUBLIC_ANALYTICS_DOMAIN`) and
+`src/components/Analytics.astro` emits the tag.
 
 ## Build, test, deploy
 

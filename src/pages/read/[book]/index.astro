@@ -1,6 +1,7 @@
 ---
 import Base from "../../../layouts/Base.astro";
-import { books, formatMB, nextBook, pdfUrl, pick } from "../../../lib/manifest";
+import PdfDownload from "../../../components/PdfDownload.astro";
+import { books, nextBook, pick } from "../../../lib/manifest";
 
 export function getStaticPaths() {
   return books.map((book) => ({ params: { book: book.slug }, props: { book } }));
@@ -16,7 +17,7 @@ const partOf = (page: number) => book.parts.find((p) => page >= p.startPage && p
     <h1>{book.title}</h1>
     <p class="actions">
       <a class="btn" href={`/read/${book.slug}/1`} data-continue={book.slug}>Start reading</a>
-      {book.pdf.bytes && <a class="btn secondary" href={pdfUrl(book)} download>Download PDF ({formatMB(book.pdf.bytes)})</a>}
+      <PdfDownload book={book} />
     </p>
 
     <h2>Chapters</h2>
@@ -31,7 +32,7 @@ const partOf = (page: number) => book.parts.find((p) => page >= p.startPage && p
       {book.pages.map((p) => (
         <li>
           <a href={`/read/${book.slug}/${p.n}`} aria-label={`Page ${p.n}`}>
-            <img src={pick(p.src.webp, 240)} width={120} height={191} alt="" loading="lazy" />
+            <img src={pick(p.src.webp, 240)} width={120} height={Math.round((120 * p.h) / p.w)} alt="" loading="lazy" />
             <span>{p.n}</span>
           </a>
         </li>
