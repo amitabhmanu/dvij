@@ -37,7 +37,7 @@ const CONFIDENCE: Record<string, string> = {
     <figure class="mapfig">
       <div class="map" id="map">
         <img src={artFile("valley-map.webp")} alt={valley.map.alt} width="686" height="465" />
-        {located.map((p) => p.rects.map((r, i) => (
+        {located.map((p) => p.rects.map((r) => (
           <a class="spot" href={`#${p.id}`} style={rectStyle(r)}
              aria-label={`${p.name} — ${p.real.name}`} data-place={p.id}>
             <span class="sr">{p.name}</span>
