@@ -172,6 +172,10 @@ body.reader-body { background: var(--reader-bg); color: var(--reader-text); over
 }
 .reader .chrome.top { top: 0; flex-wrap: wrap; }
 .reader .chrome.bottom { bottom: 0; }
+/* Room for the host's badge in the bottom-right corner, which otherwise sits on
+   Next and the zoom controls. Reader.tsx measures it into --badge-w; with no
+   badge it is 0 and this is the bar's usual 16px. */
+.reader .chrome.bottom { padding-right: calc(16px + var(--badge-w, 0px)); }
 .reader:not(.chrome-on) .chrome.top { transform: translateY(-100%); opacity: 0; pointer-events: none; }
 .reader:not(.chrome-on) .chrome.bottom { transform: translateY(100%); opacity: 0; pointer-events: none; }
 .reader .chrome:focus-within { transform: none; opacity: 1; pointer-events: auto; }
@@ -330,4 +334,6 @@ body.reader-body { background: var(--reader-bg); color: var(--reader-text); over
   .reader .chrome.bottom { justify-content: space-between; }
   .reader .transcript { top: 90px; bottom: 60px; }
   .reader .codex-drawer { top: auto; bottom: 0; max-height: 62%; width: 100%; border-radius: 14px 14px 0 0; box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.35); }
+  /* As a bottom sheet it runs under the badge too: let its last links scroll clear. */
+  .reader .codex-drawer { padding-bottom: calc(20px + var(--badge-h, 0px)); }
 }

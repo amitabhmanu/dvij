@@ -168,6 +168,40 @@ export default function Reader(props: Props) {
     return () => ro.disconnect();
   }, []);
 
+  // ---- the host's badge -----------------------------------------------------------
+  // Netlify injects a "Powered by Netlify" badge (#nl-badge-frame) into every
+  // production page, fixed to the bottom-right corner - exactly where the bar
+  // keeps Next and the zoom controls, which it covered. On the free tier it is
+  // part of the plan and cannot be hidden, so the bar makes room for it instead.
+  // It arrives after load and resizes itself (full card, collapsed after Close),
+  // so it is measured live rather than assumed; with no badge both stay 0.
+  const [badge, setBadge] = useState({ w: 0, h: 0 });
+  useEffect(() => {
+    let frame: HTMLElement | null = null;
+    let ro: ResizeObserver | null = null;
+    const measure = () => {
+      const r = frame?.getBoundingClientRect();
+      const inCorner = !!r && r.width > 0 && r.height > 0 &&
+        r.right >= window.innerWidth - 2 && r.bottom >= window.innerHeight - 2;
+      const next = inCorner ? { w: Math.ceil(r!.width), h: Math.ceil(r!.height) } : { w: 0, h: 0 };
+      setBadge((b) => (b.w === next.w && b.h === next.h ? b : next));
+    };
+    const attach = () => {
+      const f = document.getElementById("nl-badge-frame");
+      if (f === frame) return;
+      ro?.disconnect();
+      frame = f;
+      ro = f ? new ResizeObserver(measure) : null;
+      if (f) ro!.observe(f);
+      measure();
+    };
+    const mo = new MutationObserver(attach); // the frame is appended to, and removed from, <body>
+    mo.observe(document.body, { childList: true });
+    attach();
+    window.addEventListener("resize", measure);
+    return () => { mo.disconnect(); ro?.disconnect(); window.removeEventListener("resize", measure); };
+  }, []);
+
   // ---- URL, title, progress, preloading -----------------------------------------
   useEffect(() => {
     const url = `/read/${slug}/${page}${effective === "panel" ? `#p${panel + 1}` : ""}`;
@@ -373,7 +407,11 @@ export default function Reader(props: Props) {
     : visible.length === 2 ? `Pages ${visible[0]}–${visible[1]} of ${pageCount}` : `Page ${page} of ${pageCount}`;
 
   return (
-    <div class={`reader mode-${effective}${chrome ? " chrome-on" : ""}${transcript ? " with-text" : ""}`} data-hydrated={hydrated ? "true" : undefined}>
+    <div
+      class={`reader mode-${effective}${chrome ? " chrome-on" : ""}${transcript ? " with-text" : ""}`}
+      style={`--badge-w:${badge.w}px;--badge-h:${badge.h}px`}
+      data-hydrated={hydrated ? "true" : undefined}
+    >
       <header class="chrome top" ref={headerRef}>
         <a class="back" href={`/read/${slug}/`} aria-label={`Book ${bookNo} contents`}>← Book {bookNo}: {title}</a>
         <label class="chapter-select">

@@ -126,6 +126,39 @@ test("zoomed in, a drag pans and a click doesn't turn the page", async ({ page, 
   await expect(page.locator(".reader .zoom .level")).toHaveText("125%");
 });
 
+test("the bottom bar keeps its controls clear of the host's badge", async ({ page }) => {
+  await open(page, "/read/b2/6");
+  // A stand-in for the badge Netlify injects into every production page: same
+  // id, same corner, the size it measured on the live site. Like the real one
+  // it arrives after the reader has loaded.
+  await page.evaluate(() => {
+    const f = document.createElement("iframe");
+    f.id = "nl-badge-frame";
+    f.style.cssText = "position:fixed;right:0;bottom:0;width:197px;height:64px;border:0;z-index:2147483645";
+    document.body.appendChild(f);
+  });
+  const bar = page.locator(".reader .chrome.bottom");
+  await expect(bar).toHaveCSS("padding-right", "213px"); // the usual 16px, plus the badge
+  const covered = await page.locator(".reader .chrome.bottom .nav, .reader .chrome.bottom .zoom button")
+    .evaluateAll((els) => els
+      .filter((el) => el.getBoundingClientRect().width > 0)
+      .filter((el) => {
+        const r = el.getBoundingClientRect();
+        return document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2)?.id === "nl-badge-frame";
+      })
+      .map((el) => el.getAttribute("aria-label")));
+  expect(covered).toEqual([]);
+  // Next really takes the click: Playwright refuses one an overlay would intercept
+  await page.getByRole("button", { name: "Next", exact: true }).click();
+  await expect(page).not.toHaveURL(/\/read\/b2\/6$/);
+  // after Close the badge collapses, and the room shrinks with it
+  await page.evaluate(() => { document.getElementById("nl-badge-frame")!.style.width = "60px"; });
+  await expect(bar).toHaveCSS("padding-right", "76px");
+  // and with no badge the bar is exactly as it was
+  await page.evaluate(() => document.getElementById("nl-badge-frame")!.remove());
+  await expect(bar).toHaveCSS("padding-right", "16px");
+});
+
 test("panel mode frames the panel's balloons, not just the panel", async ({ page }) => {
   // b1 p23 panel 6: four of its balloons cross the panel border
   await open(page, "/read/b1/23#p6");
