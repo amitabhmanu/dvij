@@ -270,7 +270,7 @@ export default function Reader(props: Props) {
     : visible.length === 2 ? `Pages ${visible[0]}–${visible[1]} of ${pageCount}` : `Page ${page} of ${pageCount}`;
 
   return (
-    <div class={`reader mode-${effective}${chrome ? " chrome-on" : ""}`} data-hydrated={hydrated ? "true" : undefined}>
+    <div class={`reader mode-${effective}${chrome ? " chrome-on" : ""}${transcript ? " with-text" : ""}`} data-hydrated={hydrated ? "true" : undefined}>
       <header class="chrome top">
         <a class="back" href={`/read/${slug}/`} aria-label={`Book ${bookNo} contents`}>← Book {bookNo}: {title}</a>
         <label class="chapter-select">

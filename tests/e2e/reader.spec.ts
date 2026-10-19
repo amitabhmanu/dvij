@@ -9,6 +9,17 @@ async function open(page: Page, url: string) {
   await page.locator('.reader[data-hydrated="true"]').waitFor();
 }
 
+/** How far the art runs under the Text sidebar, in px; 0 when it sits clear. */
+function artUnderText(page: Page) {
+  return page.evaluate(() => {
+    const text = document.querySelector(".reader .transcript")!.getBoundingClientRect();
+    const art = [...document.querySelectorAll(".reader .page-frame, .reader .panel-focus")]
+      .map((el) => el.getBoundingClientRect())
+      .filter((r) => r.width > 0);
+    return Math.max(0, ...art.map((r) => Math.round(r.right - text.left)));
+  });
+}
+
 test("deep link opens the requested page", async ({ page }) => {
   await open(page, "/read/b1/7");
   await expect(page.locator(".reader .pages img").first()).toHaveAttribute("src", /b1-p00[67]-/);
@@ -41,6 +52,31 @@ test("phones show single pages and panel mode steps through panels", async ({ pa
   await page.getByRole("button", { name: "Next" }).click();
   await expect(page).toHaveURL(/#p2$/);
   await expect(status(page)).toContainText("panel 2 of");
+});
+
+test("the Text sidebar sits beside the art, not over it", async ({ page, isMobile }) => {
+  test.skip(isMobile, "desktop only");
+  // 1280 is where it was worst: the sidebar hid 47% of a spread's right-hand page
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await open(page, "/read/b2/6");
+  await expect(page.locator(".reader .pages img")).toHaveCount(2);
+  await page.getByRole("button", { name: "Text", exact: true }).click();
+  await expect.poll(() => artUnderText(page)).toBe(0);
+  // panel mode sizes itself from the stage too, so it moves over as well
+  await page.getByRole("button", { name: "Panels", exact: true }).click();
+  await expect.poll(() => artUnderText(page)).toBe(0);
+  // and closing the text gives the art its width back
+  await page.getByRole("button", { name: "Spread", exact: true }).click();
+  await page.getByRole("button", { name: "Text", exact: true }).click();
+  await expect(page.locator(".reader .stage")).toHaveCSS("padding-right", "0px");
+});
+
+test("on a phone, Text stays an overlay with no gutter", async ({ page, isMobile }) => {
+  test.skip(!isMobile, "phone only");
+  await open(page, "/read/b3/10");
+  await page.getByRole("button", { name: "Text", exact: true }).click();
+  await expect(page.locator(".reader .transcript")).toBeVisible();
+  await expect(page.locator(".reader .stage")).toHaveCSS("padding-right", "0px");
 });
 
 test("panel deep link opens panel mode", async ({ page }) => {

@@ -180,13 +180,14 @@ body.reader-body { background: var(--reader-bg); color: var(--reader-text); over
 .reader .thumbs button.current img, .reader .thumbs button:hover img { opacity: 1; }
 
 /* ---- transcript ---- */
+.reader { --transcript-w: 380px; }
 .reader .transcript {
   position: absolute;
   z-index: 6;
   right: 0;
   top: 56px;
   bottom: 88px;
-  width: min(380px, 100%);
+  width: min(var(--transcript-w), 100%);
   overflow-y: auto;
   padding: 16px 20px;
   background: var(--reader-chrome);
@@ -199,6 +200,16 @@ body.reader-body { background: var(--reader-bg); color: var(--reader-text); over
 .reader .transcript li { margin: 0 0 10px; }
 .reader .transcript .kind { font-family: var(--font-ui); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); margin-right: 4px; }
 .reader .transcript .kind-caption { font-style: italic; }
+/* With room to spare, the art moves over for the text instead of sitting under
+   it: in a spread the sidebar used to cover 47% of the right-hand page at
+   1280px. Padding the stage shrinks its content box, which the page frames
+   (container units on .pages) and the panel view (the stage's ResizeObserver)
+   both size against, so every mode reflows from this one rule. Narrower than
+   this, Text stays an overlay - on a phone it is a full-screen reading view,
+   and a fixed gutter would leave a tablet too little width for the art. */
+@media (min-width: 900px) {
+  .reader.with-text .stage { padding-right: var(--transcript-w); }
+}
 
 /* ---- codex drawer ---- */
 .reader .codex-drawer {
