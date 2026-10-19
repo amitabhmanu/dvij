@@ -79,6 +79,73 @@ test("on a phone, Text stays an overlay with no gutter", async ({ page, isMobile
   await expect(page.locator(".reader .stage")).toHaveCSS("padding-right", "0px");
 });
 
+test("zoom steps in and out by button and key, and a page turn resets it", async ({ page, isMobile }) => {
+  test.skip(isMobile, "phones pinch instead; the zoom buttons are hidden there");
+  await open(page, "/read/b2/6");
+  const level = page.locator(".reader .zoom .level");
+  await expect(level).toHaveText("100%");
+  await page.getByRole("button", { name: "Zoom in" }).click();
+  await expect(level).toHaveText("125%");
+  await page.keyboard.press("=");
+  await expect(level).toHaveText("156%");
+  await page.keyboard.press("-");
+  await expect(level).toHaveText("125%");
+  await page.keyboard.press("0");
+  await expect(level).toHaveText("100%");
+  await expect(page.locator(".reader .zoom-layer")).not.toHaveClass(/zoomed/);
+  for (let i = 0; i < 12; i++) await page.keyboard.press("=");
+  await expect(level).toHaveText("600%"); // capped
+  await page.keyboard.press("ArrowRight");
+  await expect(page).toHaveURL(/\/read\/b2\/8$/);
+  await expect(level).toHaveText("100%");
+});
+
+test("zoomed in, a drag pans and a click doesn't turn the page", async ({ page, isMobile }) => {
+  test.skip(isMobile, "mouse panning is a desktop feature");
+  await open(page, "/read/b2/6");
+  await page.getByRole("button", { name: "Notes", exact: true }).click(); // keep clicks off hotspots
+  const box = (await page.locator(".reader .stage").boundingBox())!;
+  const rightThird = { x: box.x + box.width * 0.85, y: box.y + box.height / 2 };
+  // at fit, a click in the right third turns the page
+  await page.mouse.click(rightThird.x, rightThird.y);
+  await expect(page).toHaveURL(/\/read\/b2\/8$/);
+  await page.keyboard.press("="); // the bars hide on a page turn, so zoom by key
+  await expect(page.locator(".reader .zoom .level")).toHaveText("125%");
+  const layer = page.locator(".reader .zoom-layer");
+  // a drag pans instead of swiping to the next page
+  const before = await layer.getAttribute("style");
+  await page.mouse.move(rightThird.x, rightThird.y);
+  await page.mouse.down();
+  await page.mouse.move(rightThird.x - 160, rightThird.y + 20, { steps: 8 });
+  await page.mouse.up();
+  await expect(page).toHaveURL(/\/read\/b2\/8$/);
+  expect(await layer.getAttribute("style")).not.toBe(before);
+  // and a click where the page would turn leaves both the page and the zoom alone
+  await page.mouse.click(rightThird.x, rightThird.y);
+  await expect(page).toHaveURL(/\/read\/b2\/8$/);
+  await expect(page.locator(".reader .zoom .level")).toHaveText("125%");
+});
+
+test("panel mode frames the panel's balloons, not just the panel", async ({ page }) => {
+  // b1 p23 panel 6: four of its balloons cross the panel border
+  await open(page, "/read/b1/23#p6");
+  const cut = await page.evaluate(async () => {
+    const res = await fetch("/data/b1.json");
+    const book = await res.json();
+    const p = (book.pages ?? book).find((x: { n: number }) => x.n === 23);
+    const focus = document.querySelector(".reader .panel-focus")!.getBoundingClientRect();
+    const world = document.querySelector(".reader .panel-world")!.getBoundingClientRect();
+    // balloons assigned to panel 6, in screen space, that fall outside the framed view
+    return (p.text as { panel: number; bbox: number[] }[])
+      .filter((u) => u.panel === 5)
+      .filter(({ bbox: [a, b, c, d] }) =>
+        world.left + a * world.width < focus.left - 1 || world.top + b * world.height < focus.top - 1 ||
+        world.left + c * world.width > focus.right + 1 || world.top + d * world.height > focus.bottom + 1)
+      .length;
+  });
+  expect(cut).toBe(0);
+});
+
 test("panel deep link opens panel mode", async ({ page }) => {
   await open(page, "/read/b1/4#p3");
   await expect(status(page)).toContainText("panel 3 of");

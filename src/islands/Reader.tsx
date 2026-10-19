@@ -2,7 +2,7 @@
 // The comic reader (design §5): spreads on wide screens, single pages on
 // phones, and a panel-by-panel mode that zooms to each panel box.
 import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
-import type { Chapter, Page, PageHotspot } from "../lib/manifest";
+import type { Box, Chapter, Page, PageHotspot } from "../lib/manifest";
 import { pick, srcset } from "../lib/manifest";
 import { getProgress, recordPage, setJourney, setMode, setNotes, type ReaderMode } from "../lib/progress";
 import CodexDrawer from "./CodexDrawer";
@@ -28,6 +28,28 @@ const KIND_LABEL = { caption: "Caption", balloon: "Speech", sfx: "Sound" } as co
 
 /** In a spread, page 1 stands alone (the cover side); then 2-3, 4-5, ... */
 const spreadStart = (p: number) => (p === 1 ? 1 : p % 2 === 0 ? p : p - 1);
+
+/** What panel mode frames: the panel box grown to take in its lettering.
+ * Balloons often spill over the panel border, so a bare panel crop cuts them
+ * off. A text unit counts if it was assigned to the panel or overlaps it by
+ * 40% of its area (straddling balloons are tagged to only one side; a smaller
+ * overlap is usually the next panel's balloon grazing the border). Text
+ * bboxes hug the glyphs, so they are padded out to roughly the balloon edge. */
+function panelViewBox(page: Page, i: number): Box {
+  const box = page.panels[i]?.box ?? [0, 0, 1, 1];
+  let [x0, y0, x1, y1] = box;
+  const padX = 0.035, padY = 0.035 * (page.w / page.h); // same distance in pixels
+  for (const u of page.text ?? []) {
+    const [a, b, c, d] = u.bbox;
+    const ix = Math.max(0, Math.min(c, box[2]) - Math.max(a, box[0]));
+    const iy = Math.max(0, Math.min(d, box[3]) - Math.max(b, box[1]));
+    const area = (c - a) * (d - b);
+    if (u.panel !== i && !(area > 0 && (ix * iy) / area >= 0.4)) continue;
+    x0 = Math.min(x0, a - padX); y0 = Math.min(y0, b - padY);
+    x1 = Math.max(x1, c + padX); y1 = Math.max(y1, d + padY);
+  }
+  return [Math.max(0, x0), Math.max(0, y0), Math.min(1, x1), Math.min(1, y1)];
+}
 
 function PageImage({ page, sizes, eager }: { page: Page; sizes: string; eager?: boolean }) {
   const alt = page.panels.map((p) => p.alt).filter(Boolean).join(" ") || `Page ${page.n}`;
@@ -92,6 +114,8 @@ export default function Reader(props: Props) {
   const [journey, setJourneyState] = useState(false);
   const [stage, setStage] = useState({ w: 0, h: 0 });
   const stageRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const footerRef = useRef<HTMLElement>(null);
   const pointer = useRef<{ x: number; y: number; t: number } | null>(null);
 
   const effective: ReaderMode = mode === "spread" && !wide ? "single" : mode;
@@ -235,15 +259,88 @@ export default function Reader(props: Props) {
     return () => window.removeEventListener("keydown", onKey);
   }, [forward, back, goTo, pageCount, effective, wide, drawer, notes, journey, journeyHere]);
 
+  // ---- zoom: wheel / trackpad pinch / buttons / + - 0, drag to pan --------------
+  // A user zoom over whatever the stage shows (page, spread or framed panel),
+  // anchored where it is aimed. Turning a page or panel goes back to the fit.
+  const [zoom, setZoom] = useState({ z: 1, x: 0, y: 0 });
+  const [panning, setPanning] = useState(false);
+  const zoomed = zoom.z !== 1 || zoom.x !== 0 || zoom.y !== 0;
+  const zoomAt = useCallback((factor: number, cx?: number, cy?: number) => {
+    const el = stageRef.current;
+    if (!el) return;
+    const px = cx ?? el.clientWidth / 2, py = cy ?? el.clientHeight / 2;
+    setZoom(({ z, x, y }) => {
+      const nz = Math.min(6, Math.max(0.5, z * factor));
+      if (Math.abs(nz - 1) < 0.02) return { z: 1, x: 0, y: 0 }; // snap back to the fit
+      const k = nz / z;
+      return { z: nz, x: px - (px - x) * k, y: py - (py - y) * k };
+    });
+  }, []);
+  const resetZoom = useCallback(() => setZoom({ z: 1, x: 0, y: 0 }), []);
+  useEffect(resetZoom, [page, panel, effective]);
+
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      if ((e.target as HTMLElement).closest(".end-card")) return;
+      e.preventDefault();
+      const r = el.getBoundingClientRect();
+      // Trackpad pinches arrive as ctrl+wheel with small deltas.
+      zoomAt(Math.exp(-e.deltaY * (e.ctrlKey ? 0.01 : 0.0015)), e.clientX - r.left, e.clientY - r.top);
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [zoomAt]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement;
+      if (t && (t.tagName === "SELECT" || t.tagName === "INPUT" || t.isContentEditable)) return;
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+      if (e.key === "+" || e.key === "=") zoomAt(1.25);
+      else if (e.key === "-" || e.key === "_") zoomAt(0.8);
+      else if (e.key === "0") resetZoom();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [zoomAt, resetZoom]);
+
   // ---- pointer: swipe, or tap zones (left third back, right third forward) --------
-  const onPointerDown = (e: PointerEvent) => { pointer.current = { x: e.clientX, y: e.clientY, t: Date.now() }; };
+  // While zoomed, a drag pans the view and a tap only toggles the bars; neither
+  // turns the page.
+  const drag = useRef<{ x: number; y: number; moved: boolean } | null>(null);
+  const onPointerDown = (e: PointerEvent) => {
+    pointer.current = { x: e.clientX, y: e.clientY, t: Date.now() };
+    if (zoomed && e.pointerType === "mouse" && !(e.target as HTMLElement).closest("button, a, select")) {
+      drag.current = { x: e.clientX, y: e.clientY, moved: false };
+      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    }
+  };
+  const onPointerMove = (e: PointerEvent) => {
+    const d = drag.current;
+    if (!d) return;
+    const dx = e.clientX - d.x, dy = e.clientY - d.y;
+    if (!d.moved && Math.hypot(dx, dy) < 4) return;
+    if (!d.moved) { d.moved = true; setPanning(true); }
+    d.x = e.clientX; d.y = e.clientY;
+    setZoom((v) => ({ ...v, x: v.x + dx, y: v.y + dy }));
+  };
   const onPointerUp = (e: PointerEvent) => {
     const start = pointer.current;
+    const panned = drag.current?.moved;
     pointer.current = null;
+    drag.current = null;
+    setPanning(false);
+    if (panned) return;
     if (!start || (e.target as HTMLElement).closest("button, a, select")) return;
     const dx = e.clientX - start.x, dy = e.clientY - start.y;
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) return dx < 0 ? forward() : back();
     if (Math.abs(dx) > 10 || Math.abs(dy) > 10) return;
+    // Zoomed in, a tap must not turn the page - that throws the zoom away, and a
+    // press that starts a pan but never moves 4px would do it by accident. It
+    // still toggles the bars, which carry the zoom controls.
+    if (zoomed) return setChrome((c) => !c);
     const rect = stageRef.current!.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width;
     if (x < 1 / 3) back();
@@ -254,15 +351,21 @@ export default function Reader(props: Props) {
   // ---- panel mode geometry ----------------------------------------------------------
   const panelView = useMemo(() => {
     if (effective !== "panel" || !current || !stage.w) return null;
-    const [x0, y0, x1, y1] = panelBoxes[Math.min(panel, panelBoxes.length - 1)].box;
+    const [x0, y0, x1, y1] = current.panels.length
+      ? panelViewBox(current, Math.min(panel, current.panels.length - 1))
+      : [0, 0, 1, 1];
+    // The bars overlay the stage, so while they show, fit the panel between them.
+    const top = chrome ? (headerRef.current?.offsetHeight ?? 0) : 0;
+    const bottom = chrome ? (footerRef.current?.offsetHeight ?? 0) : 0;
+    const availH = Math.max(1, stage.h - top - bottom);
     const baseW = stage.w;
     const baseH = baseW * (current.h / current.w);
     const bw = (x1 - x0) * baseW, bh = (y1 - y0) * baseH;
-    const s = Math.min(stage.w / bw, stage.h / bh) * 0.94;
+    const s = Math.min(stage.w / bw, availH / bh) * 0.96;
     const tx = stage.w / 2 - s * (x0 * baseW + bw / 2);
-    const ty = stage.h / 2 - s * (y0 * baseH + bh / 2);
+    const ty = top + availH / 2 - s * (y0 * baseH + bh / 2);
     return { baseW, baseH, s, tx, ty, box: [x0, y0, x1, y1] };
-  }, [effective, current, stage, panel, panelBoxes]);
+  }, [effective, current, stage, panel, chrome]);
 
   const pageList = useMemo(() => Object.values(pages).sort((a, b) => a.n - b.n), [pages]);
   const status = effective === "panel"
@@ -271,7 +374,7 @@ export default function Reader(props: Props) {
 
   return (
     <div class={`reader mode-${effective}${chrome ? " chrome-on" : ""}${transcript ? " with-text" : ""}`} data-hydrated={hydrated ? "true" : undefined}>
-      <header class="chrome top">
+      <header class="chrome top" ref={headerRef}>
         <a class="back" href={`/read/${slug}/`} aria-label={`Book ${bookNo} contents`}>← Book {bookNo}: {title}</a>
         <label class="chapter-select">
           <span class="visually-hidden">Jump to chapter</span>
@@ -298,8 +401,14 @@ export default function Reader(props: Props) {
         tabIndex={0}
         aria-label="Comic page. Use arrow keys to turn pages."
         onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
       >
+        <div
+          class={`zoom-layer${zoomed ? " zoomed" : ""}${panning ? " panning" : ""}`}
+          style={{ transform: zoomed ? `translate(${zoom.x}px, ${zoom.y}px) scale(${zoom.z})` : undefined }}
+        >
         {effective === "panel" && current ? (
           panelView && (
             <div
@@ -320,7 +429,7 @@ export default function Reader(props: Props) {
                   height: `${(panelView.box[3] - panelView.box[1]) * 100}%`,
                 }}
               />
-              {notes && <Hotspots hotspots={current.hotspots} onOpen={openHotspot} scale={panelView.s} />}
+              {notes && <Hotspots hotspots={current.hotspots} onOpen={openHotspot} scale={panelView.s * zoom.z} />}
             </div>
           )
         ) : (
@@ -333,7 +442,7 @@ export default function Reader(props: Props) {
                     sizes={visible.length === 2 ? "min(50vw, 63vh)" : "min(100vw, 63vh)"}
                     eager
                   />
-                  {notes && <Hotspots hotspots={pages[n].hotspots} onOpen={openHotspot} />}
+                  {notes && <Hotspots hotspots={pages[n].hotspots} onOpen={openHotspot} scale={zoom.z} />}
                 </div>
               ) : (
                 <div class="page-placeholder" key={n} aria-hidden="true" />
@@ -341,6 +450,7 @@ export default function Reader(props: Props) {
             )}
           </div>
         )}
+        </div>
 
         {atEnd && (
           <div class="end-card" role="dialog" aria-label="End of book">
@@ -356,7 +466,7 @@ export default function Reader(props: Props) {
         )}
       </div>
 
-      <footer class="chrome bottom">
+      <footer class="chrome bottom" ref={footerRef}>
         <button type="button" class="nav prev" onClick={back} disabled={page <= 1 && panel === 0} aria-label="Previous">‹</button>
         <ol class="thumbs" aria-label="Pages">
           {pageList.map((p) => (
@@ -373,6 +483,11 @@ export default function Reader(props: Props) {
             </li>
           ))}
         </ol>
+        <div class="zoom" role="group" aria-label="Zoom">
+          <button type="button" onClick={() => zoomAt(0.8)} aria-label="Zoom out" title="Zoom out (-)">−</button>
+          <button type="button" class="level" onClick={resetZoom} aria-label="Reset zoom" title="Fit to screen (0)">{Math.round(zoom.z * 100)}%</button>
+          <button type="button" onClick={() => zoomAt(1.25)} aria-label="Zoom in" title="Zoom in (+)">+</button>
+        </div>
         <button type="button" class="nav next" onClick={forward} aria-label="Next">›</button>
       </footer>
 
