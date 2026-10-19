@@ -8,6 +8,14 @@
 // re-running this after a partial upload costs one listing and nothing else.
 //
 //   node pipeline/upload_assets.mjs [--dry-run] [--force] [--only pages,art,pdf]
+//   node pipeline/upload_assets.mjs --verify      (npm run verify-assets)
+//
+// --verify uploads nothing. It reads the built site in dist/ and checks that
+// every asset it links to is already in the bucket. Run it after a build and
+// before pushing: the site deploys from main and serves straight from R2, so
+// an artifact that was committed but never uploaded ships as a broken image.
+// That is how B1 p1 and the 25 Real India photographs reached main without
+// ever reaching the bucket.
 //
 // Credentials come from site/.env (see .env.example) or the environment.
 import { HeadBucketCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
@@ -17,6 +25,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ASSETS = fileURLToPath(new URL("../../site-assets/", import.meta.url));
+const DIST = fileURLToPath(new URL("../dist/", import.meta.url));
+const NETLIFY_TOML = fileURLToPath(new URL("../netlify.toml", import.meta.url));
 const FOREVER = "public, max-age=31536000, immutable";
 // pdf/ names are not hashed: a recompressed book keeps its filename, so it gets
 // a week rather than a year. The <a download> on the book pages is ignored by
@@ -79,6 +89,59 @@ async function listRemote(s3, bucket, prefix) {
 
 const mb = (bytes) => `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 
+// The public base the build links assets under: the environment (site/.env for
+// a local build), else the value Netlify builds with, from netlify.toml.
+function assetBase() {
+  if (process.env.PUBLIC_ASSET_BASE) return process.env.PUBLIC_ASSET_BASE.replace(/\/$/, "");
+  const m = /^\s*PUBLIC_ASSET_BASE\s*=\s*"([^"]+)"/m.exec(readFileSync(NETLIFY_TOML, "utf8"));
+  if (!m) throw new Error("PUBLIC_ASSET_BASE is not set and not found in netlify.toml");
+  return m[1].replace(/\/$/, "");
+}
+
+async function verify(s3, bucket) {
+  const base = assetBase();
+  const escaped = base.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  // Stops at quote, space, comma (srcset) and & (an HTML-escaped attribute), so
+  // "art&quot;]}" fragments inside data attributes never pass for a filename.
+  const ref = new RegExp(`${escaped}/((?:${Object.keys(FOLDERS).join("|")})/[^"'\\s,)<>&\\\\]+)`, "g");
+
+  let files;
+  try {
+    files = (await walk(DIST)).filter((f) => /\.(html|json)$/.test(f));
+  } catch {
+    console.error(`No dist/ to check. Run a build first (npm run build).`);
+    process.exit(1);
+  }
+  const keys = new Set();
+  for (const f of files) {
+    for (const m of readFileSync(path.join(DIST, f), "utf8").matchAll(ref)) keys.add(m[1]);
+  }
+  // Zero references is not a pass: it means dist/ was built against another
+  // base (a BUNDLE_ASSETS build links /_assets), so nothing here was checked.
+  if (!keys.size) {
+    console.error(`dist/ links no assets under ${base}. Was it built with a different PUBLIC_ASSET_BASE?`);
+    process.exit(1);
+  }
+
+  const missing = [];
+  const counts = {};
+  for (const folder of Object.keys(FOLDERS)) {
+    const wanted = [...keys].filter((k) => k.startsWith(`${folder}/`));
+    if (!wanted.length) continue;
+    counts[folder] = wanted.length;
+    const remote = await listRemote(s3, bucket, `${folder}/`);
+    missing.push(...wanted.filter((k) => !remote.has(k)));
+  }
+  const summary = Object.entries(counts).map(([f, n]) => `${f} ${n}`).join(", ");
+  if (missing.length) {
+    console.error(`${missing.length} of ${keys.size} assets linked by dist/ are not in ${bucket}:`);
+    for (const k of missing.sort()) console.error(`  ${k}`);
+    console.error(`Upload them (node pipeline/upload_assets.mjs) before pushing.`);
+    process.exit(1);
+  }
+  console.log(`All ${keys.size} assets linked by dist/ are in ${bucket} (${summary}).`);
+}
+
 async function main() {
   loadEnv();
   const args = process.argv.slice(2);
@@ -103,6 +166,8 @@ async function main() {
     credentials: { accessKeyId: R2_ACCESS_KEY_ID, secretAccessKey: R2_SECRET_ACCESS_KEY },
   });
   await s3.send(new HeadBucketCommand({ Bucket: R2_BUCKET })); // fail early on bad keys or bucket name
+
+  if (args.includes("--verify")) return verify(s3, R2_BUCKET);
 
   let uploaded = 0;
   let skipped = 0;

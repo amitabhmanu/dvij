@@ -255,6 +255,27 @@ Environment variables:
 | `SITE_URL` | Canonical site URL (once the domain is chosen). |
 | `BUNDLE_ASSETS=1` | Copy `site-assets` into the build (option B). `build:local` sets it. |
 
+### Releasing
+
+Netlify builds and publishes every push to `main`, and the built site links its
+images straight to the R2 bucket. Code and artifacts travel separately, so the
+order matters:
+
+```bash
+npm run upload                            # 1. new artifacts into the bucket first
+npm run build                             # 2. the build Netlify will make
+npm run verify-assets                     # 3. everything that build links is in the bucket
+npm run build:local && npm run test:e2e   # 4. the full suite
+git push                                  # 5. one push, one production build
+```
+
+`verify-assets` names any file the build links that is not in the bucket, and
+exits non-zero. That is the failure that shipped B1 p1 (the home page's hero)
+and all 25 Real India photographs as broken images: committed and pushed, never
+uploaded. With `PUBLIC_ASSET_BASE` set in `.env`, step 4 also loads every image
+from the real bucket. Push once at the end rather than after each commit: every
+push is a production build.
+
 ## Hosting the assets (Cloudflare R2)
 
 The 742 MB of page images, art and PDFs are build output, not source, so they

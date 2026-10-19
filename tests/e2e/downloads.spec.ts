@@ -29,7 +29,11 @@ test("B1 p1 is the map alone, with the source's black half cropped away", async 
   // 2115x1680: the page cut at the map image's own bottom edge, not 2115x3375
   await expect(img).toHaveAttribute("width", "2115");
   await expect(img).toHaveAttribute("height", "1680");
-  // and the file served really is that shape, whichever variant the viewport picked
+  // and the file served really is that shape, whichever variant the viewport picked.
+  // Wait for it to arrive: before it loads both sizes are 0 and the ratio is NaN,
+  // which is also what a file missing from the bucket looks like.
+  await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0),
+    { message: "B1 p1 never loaded - is it in the bucket?" }).toBe(true);
   const ratio = await img.evaluate((el: HTMLImageElement) => el.naturalHeight / el.naturalWidth);
   expect(ratio).toBeLessThan(0.85); // landscape; the uncropped page was 1.6
 });

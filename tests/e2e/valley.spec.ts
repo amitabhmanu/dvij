@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { unloadedImages } from "./images";
 
 test("the Real India toggle puts a real name on each labelled place", async ({ page }) => {
   await page.goto("/valley/");
@@ -28,6 +29,9 @@ test("every photograph carries its photographer, licence and source", async ({ p
   await expect(dolmen.getByRole("link", { name: "CC BY-SA 4.0" }))
     .toHaveAttribute("href", /creativecommons\.org\/licenses\/by-sa\/4\.0/);
   await expect(page.locator("#vidgati-shrine .credit").first()).toContainText("credited by choice");
+  // and every photograph actually arrives. The credits above all passed while
+  // the 25 files were missing from the bucket and every one was a broken image.
+  await expect.poll(() => unloadedImages(page, ".shots img"), { timeout: 30_000 }).toEqual([]);
 });
 
 test("a pairing links to the pages of the comic that name it", async ({ page }) => {

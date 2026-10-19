@@ -11,6 +11,7 @@
     "pipeline": "python pipeline/run_all.py",
     "variants": "node pipeline/make_variants.mjs",
     "upload": "node pipeline/upload_assets.mjs",
+    "verify-assets": "node pipeline/upload_assets.mjs --verify",
     "manifests": "python pipeline/build_manifests.py",
     "build:local": "node scripts/build-local.mjs",
     "validate": "python pipeline/validate_content.py",
